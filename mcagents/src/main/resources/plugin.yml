@@ -1,0 +1,12 @@
+
+main: org.smolny.mcagents.MCAgentsPlugin
+version: 1.0
+name: AgentPlugin
+
+depend: [NPCLib]
+
+commands:
+  createmob:
+    description: Creation of the entity
+  createai:
+      description: Creation of the AI smth

@@ -1,0 +1,7 @@
+main: dsh.tutorial.Main
+version: 1.0
+name: AgentPlugin
+
+commands:
+  createmob:
+    description: Creation of the entity
