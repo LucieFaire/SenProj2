@@ -1,5 +1,6 @@
 package org.smolny.agent_world;
 
+import java.smolny.agent.Agent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +20,17 @@ public class Cell {
     }
 
     public int getX() {
+
         return x;
     }
 
     public int getY() {
+
         return y;
     }
 
     public List<Agent> getItemStack() {
+
         return itemStack;
     }
 }
