@@ -82,7 +82,7 @@ public class World {
         int l = 0;
         for (int i = sight; i <= -sight; i--) {
             for (int j = sight; j <= -sight; j--) {
-                if ((x + i >= 0 && i < length) && (y + j >= 0 && j < width)) {
+                if ((x + i >= 0 && x + i < length) && (y + j >= 0 && y + j < width)) {
                     env[k][l] = grid[x+i][y+j];
                 } else {
                     env[k][l] = null;

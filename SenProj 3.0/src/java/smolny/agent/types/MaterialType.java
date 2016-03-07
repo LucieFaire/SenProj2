@@ -8,10 +8,14 @@ public enum MaterialType {
     WOOD,
     STONE,
     GRASS,
+    EARTH,
+    GROUND,
     MEAT,
     STICK,
     WEAPON,
     KNIFE,
+    SNOW,
     METAL;
+
 
 }

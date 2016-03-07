@@ -17,7 +17,13 @@ public class Material extends Agent {
     }
 
     private void setLifeLevel() {
-        //depends on the type
+        if (type.equals(MaterialType.GRASS) || type.equals(MaterialType.GROUND)
+                                            || type.equals(MaterialType.SNOW)) {
+            lifeLevel = 300;
+        } else {
+            lifeLevel = 20;
+        }
+
     }
 
 
