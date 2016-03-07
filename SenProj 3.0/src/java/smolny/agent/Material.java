@@ -17,6 +17,7 @@ public class Material extends Agent {
     }
 
     private void setLifeLevel() {
+        //these 3 covers the whole grid according to the season
         if (type.equals(MaterialType.GRASS) || type.equals(MaterialType.GROUND)
                                             || type.equals(MaterialType.SNOW)) {
             lifeLevel = 300;

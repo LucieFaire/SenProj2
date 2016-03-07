@@ -16,6 +16,7 @@ public class LivingEntity extends Agent {
     private double lifeTime;
 
 
+
     public LivingEntity() {
         super();
         this.age = "Adult";
@@ -25,6 +26,16 @@ public class LivingEntity extends Agent {
         }
         this.inventory = new ArrayList<Material>(20);
         this.lifeTime = 0.0;
+        this.hungerLevel = 50;
+    }
+
+    public void eat() {
+
+    }
+
+    public double starve() {
+        this.hungerLevel -= 0.5; // once per tick
+         return hungerLevel;
     }
 
     public double increaseLifeTime() {
@@ -51,6 +62,10 @@ public class LivingEntity extends Agent {
 
     public void move() {
 
+    }
+
+    public void damage() {
+        //depends on the type of the damage
     }
 
     public List<Material> getInventory() {

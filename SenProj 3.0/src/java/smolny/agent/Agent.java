@@ -17,6 +17,8 @@ public class Agent {
     public static int lifeLevel;
     private int id;
 
+    static double hungerLevel;
+
     public Agent() {
         this.x = rand.nextInt(World.length);
         this.y = rand.nextInt(World.length);
