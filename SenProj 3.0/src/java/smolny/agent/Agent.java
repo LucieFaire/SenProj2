@@ -15,12 +15,14 @@ public class Agent {
     private int y;
     Random rand = new Random();
     public static int lifeLevel;
+    private int id;
 
     public Agent() {
         this.x = rand.nextInt(World.length);
         this.y = rand.nextInt(World.length);
         this.location = new Cell(this.x, this.y);
-        this.lifeLevel = 100;
+        lifeLevel = 100;
+
     }
 
     public Cell getLocation() {
@@ -28,8 +30,16 @@ public class Agent {
     }
 
     public int getLifeLevel() {
+
         return lifeLevel;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
 
 }

@@ -2,6 +2,7 @@ package org.smolny.agent_world;
 
 import java.smolny.agent.Agent;
 import java.smolny.agent.LivingEntity;
+import java.smolny.agent.Material;
 import java.util.Set;
 
 /**
@@ -39,19 +40,23 @@ public class World {
         Cell[][] env = new Cell[q][q];
         switch (sight) {
             case 1:
-                env = env1(q);
+                env = env(q, agent);
                 break;
             case 2:
-                env = env2(q);
+                env = env(q, agent);
                 break;
             case 3:
-                env = env3(q);
+                env = env(q, agent);
                 break;
         }
 
         return env;
     }
 
+    public Material drop() {
+        // randomly drop items
+        return null;
+    }
 
     //    private Agent createAgents() {
 //        Agent agent = new Agent(); //????? method from Agent class
@@ -62,35 +67,30 @@ public class World {
 
     }
 
-    private World updateWorld() {
-        return null;
-    }
-
-
     //-----------------------------------------------
     //-----------------------------------------------
     //---------- helper methods ---------------------
     //-----------------------------------------------
     //-----------------------------------------------
 
-    // environment for the sight = 1, grid 3x3
-    private Cell[][] env1(int q) {
+     private Cell[][] env(int q, Agent agent) {
         Cell[][] env = new Cell[q][q];
-        //fill in
-
-        return env;
-    }
-
-    private Cell[][] env2(int q) {
-        Cell[][] env = new Cell[q][q];
-        //fill in
-
-        return env;
-    }
-
-    private Cell[][] env3(int q) {
-        Cell[][] env = new Cell[q][q];
-        //fill in
+        int sight = ((LivingEntity) agent).getSight();
+        int x = agent.getLocation().getX();
+        int y = agent.getLocation().getY();
+        int k = 0;
+        int l = 0;
+        for (int i = sight; i <= -sight; i--) {
+            for (int j = sight; j <= -sight; j--) {
+                if ((x + i >= 0 && i < length) && (y + j >= 0 && j < width)) {
+                    env[k][l] = grid[x+i][y+j];
+                } else {
+                    env[k][l] = null;
+                }
+                k++;
+                l++;
+            }
+        }
 
         return env;
     }

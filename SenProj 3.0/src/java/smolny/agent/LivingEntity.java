@@ -13,6 +13,7 @@ public class LivingEntity extends Agent {
     private int sight;
     Random rand = new Random();
     private List<Material> inventory;
+    private double lifeTime;
 
 
     public LivingEntity() {
@@ -23,13 +24,22 @@ public class LivingEntity extends Agent {
             this.sight += 1;
         }
         this.inventory = new ArrayList<Material>(20);
+        this.lifeTime = 0.0;
     }
 
+    public double increaseLifeTime() {
+        this.lifeTime += 0.5; // run once per tick
+        return lifeTime;
+    }
+
+
     public String getAge() {
+
         return age;
     }
 
     public int getSight() {
+
         return sight;
     }
 
@@ -44,7 +54,20 @@ public class LivingEntity extends Agent {
     }
 
     public List<Material> getInventory() {
+
         return inventory;
+    }
+
+    public Material HoldInHand() {
+        return null;
+    }
+
+    public void dropItem() {
+
+    }
+
+    public void putInInventory(Material item) {
+
     }
 
 }
