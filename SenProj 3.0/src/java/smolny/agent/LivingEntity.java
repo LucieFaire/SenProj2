@@ -1,5 +1,6 @@
 package java.smolny.agent;
 
+import java.smolny.agent.types.MaterialType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,10 +28,17 @@ public class LivingEntity extends Agent {
         this.inventory = new ArrayList<Material>(20);
         this.lifeTime = 0.0;
         this.hungerLevel = 50;
+        hit();
     }
 
-    public void eat() {
-
+    public void eat(Material item) {
+        if (isInHand(item)) {
+            if (type.equals(MaterialType.BERRIES) || type.equals(MaterialType.MEAT)
+                                                  || type.equals(MaterialType.MUSHROOM)) {
+                lifeLevel += 25;
+                //do smth about the item - has to despawn
+            }
+        }
     }
 
     public double starve() {
@@ -74,6 +82,7 @@ public class LivingEntity extends Agent {
     }
 
     public Material HoldInHand() {
+
         return null;
     }
 
@@ -85,4 +94,12 @@ public class LivingEntity extends Agent {
 
     }
 
+    public boolean isInInventory(Material item) {
+        return false;
+    }
+
+    public boolean isInHand(Material item) {
+        return false;
+        //variable for material to hold the value?
+    }
 }

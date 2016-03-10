@@ -15,6 +15,8 @@ public enum MaterialType {
     WEAPON,
     KNIFE,
     SNOW,
+    BERRIES,
+    MUSHROOM,
     METAL;
 
 

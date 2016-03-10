@@ -58,12 +58,9 @@ public class World {
         return null;
     }
 
-    //    private Agent createAgents() {
-//        Agent agent = new Agent(); //????? method from Agent class
-//        return agent;
-//    }
-
     private void initialize() {
+
+        createAgents();
 
     }
 
@@ -93,5 +90,11 @@ public class World {
         }
 
         return env;
+    }
+
+
+    private Agent createAgents() {
+        Agent agent = new Agent(); //
+        return agent;
     }
 }

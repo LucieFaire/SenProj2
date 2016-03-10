@@ -7,9 +7,6 @@ import java.smolny.agent.types.MaterialType;
  */
 public class Material extends Agent {
 
-    static MaterialType type;
-
-
     public Material() {
         super();
         setLifeLevel();
@@ -27,6 +24,8 @@ public class Material extends Agent {
 
     }
 
+    public void deleteItem() {
 
+    }
 
 }

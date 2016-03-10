@@ -7,13 +7,12 @@ import java.smolny.agent.types.AnimalType;
  */
 public class Animal extends Agent{
 
-        AnimalType type;
-
-    public Animal() {
+    public Animal(AnimalType t) {
         super();
+        this.type = t;
         lifeLevel = 70;
         hungerLevel = 100;
-
+        hit();
     }
 
     public void move() {
@@ -30,6 +29,9 @@ public class Animal extends Agent{
     }
 
     public void damage() {
-        
+
     }
+
+
 }
+
