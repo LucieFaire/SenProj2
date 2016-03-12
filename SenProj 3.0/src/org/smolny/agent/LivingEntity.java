@@ -27,7 +27,7 @@ public class LivingEntity extends Agent {
         }
         this.inventory = new ArrayList<Material>(20);
         this.lifeTime = 0.0;
-        this.hungerLevel = 50;  
+        this.hungerLevel = 50;
         hit();
     }
 
