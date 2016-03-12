@@ -155,16 +155,16 @@ public class World {
         Cell[][] env = new Cell[q][q];
         switch (sight) {
             case 1:
-                env = setEnv(q, agent);
+                env = setEnv(env, agent);
                 break;
             case 2:
-                env = setEnv(q, agent);
+                env = setEnv(env, agent);
                 break;
             case 3:
-                env = setEnv(q, agent);
+                env = setEnv(env, agent);
                 break;
             case 4:
-                env = setEnv(q, agent);
+                env = setEnv(env, agent);
                 break;
         }
 
@@ -192,16 +192,16 @@ public class World {
     }
 
 
-     private Cell[][] setEnv(int q, Agent agent) {
-         Cell[][] env = new Cell[q][q];
+     private Cell[][] setEnv(Cell[][] env, Agent agent) {
+         //Cell[][] env = new Cell[q][q];
          int sight = agent.getSight();
          Cell location = agentLocations.get(agent);
          int x = location.getX();
          int y = location.getY();
          int k = 0;
-         int l = 0;
-         for (int i = -sight; i <= sight; i++) {
-            for (int j = -sight; j <= sight; j++) {
+         for (int i = (-sight); i <= sight; i++) {
+            int l = 0;
+            for (int j = (-sight); j <= sight; j++) {
                 if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
                     env[k][l] = grid[x+i][y+j];
                 } else {

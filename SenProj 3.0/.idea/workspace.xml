@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c04eaaf6-b29f-4538-b171-a57102fd4aa5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/smolny/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/Cell.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/Cell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/Main.java" afterPath="$PROJECT_DIR$/src/org/smolny/Main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/World.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/World.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -53,25 +50,15 @@
       <file leaf-file-name="World.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/smolny/world/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7328386">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.3713355">
+              <caret line="201" column="36" selection-start-line="201" selection-start-column="36" selection-end-line="201" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1869#1870#0" expanded="true" />
                 <element signature="e#1902#1903#0" expanded="true" />
-                <element signature="e#6553#6554#0" expanded="true" />
-                <element signature="e#6583#6584#0" expanded="true" />
+                <element signature="e#6577#6578#0" expanded="true" />
+                <element signature="e#6607#6608#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Random.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/jdk1.8.0_65/src.zip!/java/util/Random.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="387" column="0" selection-start-line="387" selection-start-column="0" selection-end-line="387" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -90,14 +77,14 @@
         <entry file="file://$PROJECT_DIR$/src/org/smolny/world/Cell.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
               <folding>
-                <element signature="e#396#397#0" expanded="true" />
-                <element signature="e#420#421#0" expanded="true" />
-                <element signature="e#445#446#0" expanded="true" />
-                <element signature="e#469#470#0" expanded="true" />
-                <element signature="e#506#507#0" expanded="true" />
-                <element signature="e#535#536#0" expanded="true" />
+                <element signature="e#384#385#0" expanded="true" />
+                <element signature="e#408#409#0" expanded="true" />
+                <element signature="e#433#434#0" expanded="true" />
+                <element signature="e#457#458#0" expanded="true" />
+                <element signature="e#494#495#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -163,10 +150,10 @@
         <option value="$PROJECT_DIR$/src/java/smolny/agent/LivingEntity.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/Animal.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/Material.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/Main.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/Main.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/world/Cell.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/world/World.java" />
       </list>
@@ -672,7 +659,13 @@
       <option name="project" value="LOCAL" />
       <updated>1457785658811</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="&quot;setEnv doesnt work&quot;">
+      <created>1457816133388</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1457816133388</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -696,7 +689,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32916668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2497332" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -705,7 +698,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40729168" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42395833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -745,40 +738,35 @@
       <path value="$PROJECT_DIR$/.." />
     </ignored-roots>
     <MESSAGE value="&quot;ref&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;ref&quot;" />
+    <MESSAGE value="&quot;setEnv doesnt work&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;setEnv doesnt work&quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/smolny/Main.java</url>
-          <line>10</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java</url>
-          <line>26</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/smolny/world/World.java</url>
-          <line>202</line>
+          <line>205</line>
           <properties />
-          <option name="timeStamp" value="11" />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/smolny/world/World.java</url>
           <line>204</line>
           <properties />
-          <option name="timeStamp" value="12" />
+          <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/org/smolny/world/World.java</url>
-          <line>205</line>
+          <line>157</line>
           <properties />
-          <option name="timeStamp" value="13" />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/org/smolny/world/World.java</url>
+          <line>209</line>
+          <properties />
+          <option name="timeStamp" value="27" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
@@ -788,7 +776,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="14" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -893,16 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/jdk1.8.0_65/src.zip!/java/util/Random.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -911,22 +889,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/world/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <folding>
+            <element signature="e#384#385#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+            <element signature="e#433#434#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+            <element signature="e#494#495#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/smolny/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#594#603#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,31 +930,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/world/Cell.java">
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/HomoErectus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
           <folding>
-            <element signature="e#396#397#0" expanded="true" />
-            <element signature="e#420#421#0" expanded="true" />
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-            <element signature="e#506#507#0" expanded="true" />
-            <element signature="e#535#536#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#594#603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/smolny/world/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7328386">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.3713355">
+          <caret line="201" column="36" selection-start-line="201" selection-start-column="36" selection-end-line="201" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1869#1870#0" expanded="true" />
             <element signature="e#1902#1903#0" expanded="true" />
-            <element signature="e#6553#6554#0" expanded="true" />
-            <element signature="e#6583#6584#0" expanded="true" />
+            <element signature="e#6577#6578#0" expanded="true" />
+            <element signature="e#6607#6608#0" expanded="true" />
           </folding>
         </state>
       </provider>

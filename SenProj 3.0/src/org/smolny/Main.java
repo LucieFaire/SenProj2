@@ -7,7 +7,7 @@ import org.smolny.world.World;
  */
 public class Main {
 
-    public static  void main(String... agrskagrkafyugsr) {
+    public static  void main(String... args) {
         World world = new World(100,100);
         world.start();
     }

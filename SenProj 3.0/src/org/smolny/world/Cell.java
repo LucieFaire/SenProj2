@@ -10,8 +10,8 @@ import java.util.Set;
  */
 public class Cell {
 
-    private final int x;
-    private final int y;
+    private int x;
+    private int y;
     private Set<Agent> agents;
 
     public Cell(int x, int y) {
