@@ -37,7 +37,7 @@ public class World {
                 Agent agent = chooseAgentToTick(agentsToTick);
                 agent.preTick();
                 Cell[][] env = getEnvironment(agent);
-                agent.tick(env);
+                agent.tick(env, new WorldHandleImpl(agent));
                 agentsToTick.remove(agent);
             }
 
@@ -68,6 +68,35 @@ public class World {
         return result;
     }
 
+
+    public class WorldHandleImpl implements WorldHandle {
+
+        private Agent agent;
+
+        public WorldHandleImpl(Agent agent) {
+            this.agent = agent;
+        }
+
+        @Override
+        public void goUp() {
+
+        }
+
+        @Override
+        public void goDown() {
+
+        }
+
+        @Override
+        public void goLeft() {
+
+        }
+
+        @Override
+        public void goRight() {
+
+        }
+    }
 
 
     //------------------------------------------------------------------------------------------------------------------

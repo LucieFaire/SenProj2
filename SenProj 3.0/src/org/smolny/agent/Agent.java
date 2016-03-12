@@ -1,6 +1,8 @@
 package org.smolny.agent;
 
 import org.smolny.world.Cell;
+import org.smolny.world.Direction;
+import org.smolny.world.WorldHandle;
 
 
 /**
@@ -19,6 +21,7 @@ public class Agent {
         return lifeLevel;
     }
 
+
     /**
      * Handle some tick dependent counters and internal processes, e.g. level of "hungry"
      */
@@ -31,8 +34,11 @@ public class Agent {
      * 2*sight + 1 square array where central cell is the agent's location
      * @param environment
      */
-    public void tick(Cell[][] environment) {
+    public void tick(Cell[][] environment, WorldHandle handle) {
 
     }
+
+
+
 
 }
