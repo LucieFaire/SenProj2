@@ -1,4 +1,4 @@
-package java.smolny.agent;
+package org.smolny.agent;
 
 /**
  * Created by dsh on 3/6/16.

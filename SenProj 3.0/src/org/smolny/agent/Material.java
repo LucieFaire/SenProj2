@@ -1,6 +1,6 @@
-package java.smolny.agent;
+package org.smolny.agent;
 
-import java.smolny.agent.types.MaterialType;
+import org.smolny.agent.types.MaterialType;
 
 /**
  * Created by dsh on 3/6/16.

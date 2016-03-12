@@ -1,4 +1,4 @@
-package java.smolny.agent.types;
+package org.smolny.agent.types;
 
 /**
  * Created by dsh on 3/8/16.

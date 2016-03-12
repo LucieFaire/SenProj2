@@ -1,10 +1,10 @@
-package java.smolny.agent;
+package org.smolny.agent;
 
 import org.smolny.agent_world.Cell;
 import org.smolny.agent_world.World;
 
-import java.smolny.agent.types.AnimalType;
-import java.smolny.agent.types.MaterialType;
+import org.smolny.agent.types.AnimalType;
+import org.smolny.agent.types.MaterialType;
 import java.util.Random;
 
 /**

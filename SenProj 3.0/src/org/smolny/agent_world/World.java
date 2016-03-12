@@ -1,8 +1,8 @@
 package org.smolny.agent_world;
 
-import java.smolny.agent.Agent;
-import java.smolny.agent.LivingEntity;
-import java.smolny.agent.Material;
+import org.smolny.agent.Agent;
+import org.smolny.agent.LivingEntity;
+import org.smolny.agent.Material;
 import java.util.Set;
 
 /**

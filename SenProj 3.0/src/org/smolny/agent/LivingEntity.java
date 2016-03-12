@@ -1,6 +1,6 @@
-package java.smolny.agent;
+package org.smolny.agent;
 
-import java.smolny.agent.types.MaterialType;
+import org.smolny.agent.types.MaterialType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -27,12 +27,12 @@ public class LivingEntity extends Agent {
         }
         this.inventory = new ArrayList<Material>(20);
         this.lifeTime = 0.0;
-        this.hungerLevel = 50;
+        this.hungerLevel = 50;  
         hit();
     }
 
     public void eat(Material item) {
-        if (isInHand(item)) {
+        if (isInHand(item) && lifeLevel <= 75) {
             if (type.equals(MaterialType.BERRIES) || type.equals(MaterialType.MEAT)
                                                   || type.equals(MaterialType.MUSHROOM)) {
                 lifeLevel += 25;
@@ -81,9 +81,13 @@ public class LivingEntity extends Agent {
         return inventory;
     }
 
-    public Material HoldInHand() {
+    public Material pickUp() {
 
         return null;
+    }
+
+    public void SetInHand(Material item) {
+
     }
 
     public void dropItem() {

@@ -1,6 +1,6 @@
-package java.smolny.agent;
+package org.smolny.agent;
 
-import java.smolny.agent.types.AnimalType;
+import org.smolny.agent.types.AnimalType;
 
 /**
  * Created by dsh on 3/7/16.

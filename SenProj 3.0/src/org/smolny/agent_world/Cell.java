@@ -1,6 +1,6 @@
 package org.smolny.agent_world;
 
-import java.smolny.agent.Agent;
+import org.smolny.agent.Agent;
 import java.util.ArrayList;
 import java.util.List;
 
