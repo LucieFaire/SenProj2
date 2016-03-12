@@ -10,8 +10,8 @@ import java.util.Set;
  */
 public class Cell {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private Set<Agent> agents;
 
     public Cell(int x, int y) {
@@ -31,4 +31,6 @@ public class Cell {
     public Set<Agent> getAgents() {
         return agents;
     }
+
+
 }

@@ -12,7 +12,6 @@ import java.util.Random;
 public class LivingEntity extends Agent {
 
     //private String age;
-    private int sight;
     Random rand = new Random();
     //private List<Material> inventory;
 
@@ -20,21 +19,9 @@ public class LivingEntity extends Agent {
 
     public LivingEntity() {
         super();
-        this.sight = rand.nextInt(4);
-        if (this.sight == 0) {
-            this.sight += 1;
-        }
 
     }
 
-    public int getSight() {
-        return sight;
-    }
-
-    @Override
-    public void tick(Cell[][] environment) {
-
-    }
 
     @Override
     public void preTick() {

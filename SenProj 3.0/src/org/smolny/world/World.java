@@ -1,6 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
+import org.smolny.agent.HomoErectus;
 import org.smolny.agent.LivingEntity;
 import org.smolny.agent.Material;
 
@@ -18,7 +19,13 @@ public class World {
 
     public World(int l, int w) {
          this.grid = new Cell[l][w];
-         initialize();
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                Cell cell = new Cell(i,j);
+                grid[i][j] = cell;
+            }
+        }
+        initialize();
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -32,6 +39,7 @@ public class World {
 
     public void start() {
         while (isRunning) {
+            printState();
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);
@@ -68,33 +76,70 @@ public class World {
         return result;
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+    //---inner class helper---------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
+
+    public void printState() {
+        String res = "[";
+        for (Agent a : agentLocations.keySet()) {
+            Cell c = agentLocations.get(a);
+            res += a.getName();
+            res += ": (" + c.getX() + "," + c.getY() + ")";
+        }
+        res += "]";
+        System.out.println(res);
+    }
 
     public class WorldHandleImpl implements WorldHandle {
 
         private Agent agent;
+        private Cell cell;
+        private int x;
+        private int y;
 
         public WorldHandleImpl(Agent agent) {
             this.agent = agent;
+            this.cell = agentLocations.get(agent);
+            this.x = cell.getX();
+            this.y = cell.getY();
         }
 
         @Override
         public void goUp() {
-
+            safeExec( () -> {
+                setAgentLocation(agent, x, y--);
+            });
         }
 
         @Override
         public void goDown() {
-
+            safeExec( () -> {
+                setAgentLocation(agent, x, y++);
+            });
         }
 
         @Override
         public void goLeft() {
-
+            safeExec( () -> {
+                setAgentLocation(agent, x++, y);
+            });
         }
 
         @Override
         public void goRight() {
+            safeExec( () -> {
+                setAgentLocation(agent, x++, y);
+            });
+        }
 
+
+        private void safeExec(Runnable action) {
+            try {
+                action.run();
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+            }
         }
     }
 
@@ -105,21 +150,21 @@ public class World {
 
 
     public Cell[][] getEnvironment(Agent agent) {
-        int sight = ((LivingEntity) agent).getSight();
+        int sight = agent.getSight();
         int q = sight * 2 + 1; // the size of each axis of the new grid
         Cell[][] env = new Cell[q][q];
         switch (sight) {
             case 1:
-                env = env(q, agent);
+                env = setEnv(q, agent);
                 break;
             case 2:
-                env = env(q, agent);
+                env = setEnv(q, agent);
                 break;
             case 3:
-                env = env(q, agent);
+                env = setEnv(q, agent);
                 break;
             case 4:
-                env = env(q, agent);
+                env = setEnv(q, agent);
                 break;
         }
 
@@ -147,24 +192,24 @@ public class World {
     }
 
 
-     private Cell[][] env(int q, Agent agent) {
+     private Cell[][] setEnv(int q, Agent agent) {
          Cell[][] env = new Cell[q][q];
-         int sight = ((LivingEntity) agent).getSight();
+         int sight = agent.getSight();
          Cell location = agentLocations.get(agent);
          int x = location.getX();
          int y = location.getY();
          int k = 0;
          int l = 0;
-         for (int i = sight; i <= -sight; i--) {
-            for (int j = sight; j <= -sight; j--) {
-                if ((x + i >= 0 && x + i < grid.length) && (y + j >= 0 && y + j < grid[x].length)) {
+         for (int i = -sight; i <= sight; i++) {
+            for (int j = -sight; j <= sight; j++) {
+                if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
                     env[k][l] = grid[x+i][y+j];
                 } else {
                     env[k][l] = null;
                 }
-                k++;
                 l++;
             }
+            k++;
          }
 
         return env;
@@ -178,7 +223,8 @@ public class World {
     }
 
     private Agent createAgents() {
-        Agent agent = new Agent();
+        Agent agent = new HomoErectus();
+        setAgentLocation(agent, grid.length/2, grid.length/2);
         return agent;
     }
 
