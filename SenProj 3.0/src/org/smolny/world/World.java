@@ -7,11 +7,12 @@ import org.smolny.agent.Material;
 import java.util.*;
 
 /**
- * Created by I326876 on 03.03.2016.
+ * Created by dsh on 03.03.2016.
  */
 public class World {
 
     private Cell[][] grid;
+    private Random rand = new Random();
 
     private Map<Agent, Cell> agentLocations = new HashMap<>();
 
@@ -22,6 +23,7 @@ public class World {
 
     //------------------------------------------------------------------------------------------------------------------
     //--main-cycle------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
 
     private long tickDelay = 100;
     private long currentTick = 0;
@@ -29,10 +31,10 @@ public class World {
     private volatile boolean isRunning = true;
 
     public void start() {
-        while ( isRunning ) {
+        while (isRunning) {
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
-                Agent agent = chooseAgentToTick ( agentsToTick );
+                Agent agent = chooseAgentToTick(agentsToTick);
                 agent.preTick();
                 Cell[][] env = getEnvironment(agent);
                 agent.tick(env);
@@ -53,17 +55,15 @@ public class World {
         isRunning = false;
     }
 
-    private Random rand = new Random();
-
     private Agent chooseAgentToTick(Set<Agent> agents) {
         //in future we will add an initiative parameter, but right now do just stupid random
         int toReturn = rand.nextInt(agents.size());
         int counter = 0;
         Iterator<Agent> it = agents.iterator();
         Agent result = null;
-        while ( it.hasNext() && counter <= toReturn ) {
+        while (it.hasNext() && counter <= toReturn) {
             result = it.next();
-            counter ++;
+            counter++;
         }
         return result;
     }
@@ -89,6 +89,9 @@ public class World {
             case 3:
                 env = env(q, agent);
                 break;
+            case 4:
+                env = env(q, agent);
+                break;
         }
 
         return env;
@@ -98,7 +101,7 @@ public class World {
     private void setAgentLocation(Agent agent, Cell cell) {
         Cell prevCell = agentLocations.get(agent);
 
-        if ( prevCell == cell )
+        if (prevCell == cell)
             return;
 
         if ( prevCell != null ) {
@@ -155,22 +158,5 @@ public class World {
     //--probably-useful-stuff-------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
 
-
-    public Material drop() {
-        // randomly drop items
-        return null;
-    }
-
-    //    public void getGrid() {
-//        for (int i = 0; i < length; i++) {
-//            for (int j = 0; j < width; j++) {
-//
-//            }
-//        }
-//    }
-
-//    public void setGrid() {
-//
-//    }
 
 }

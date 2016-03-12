@@ -29,7 +29,6 @@ public class Cell {
     }
 
     public Set<Agent> getAgents() {
-
         return agents;
     }
 }

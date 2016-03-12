@@ -2,8 +2,6 @@ package org.smolny.agent;
 
 import org.smolny.world.Cell;
 
-import org.smolny.agent.types.AnimalType;
-import org.smolny.agent.types.MaterialType;
 
 /**
  * Created by I326876 on 03.03.2016.
@@ -11,12 +9,13 @@ import org.smolny.agent.types.MaterialType;
 public class Agent {
 
     protected int lifeLevel;
+    protected int lifeTime;
 
     public Agent() {
-        lifeLevel = 100;
+        this.lifeTime = 0;
     }
 
-    public int getLifeLevel() {
+    public long getLifeLevel() {
         return lifeLevel;
     }
 
@@ -24,7 +23,7 @@ public class Agent {
      * Handle some tick dependent counters and internal processes, e.g. level of "hungry"
      */
     public void preTick() {
-
+        lifeTime++; // counts ticks in game
     }
 
 
