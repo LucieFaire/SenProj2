@@ -2,8 +2,6 @@ package org.smolny.world;
 
 import org.smolny.agent.Agent;
 import org.smolny.agent.HomoErectus;
-import org.smolny.agent.LivingEntity;
-import org.smolny.agent.Material;
 
 import java.util.*;
 
@@ -50,7 +48,7 @@ public class World {
             }
 
             currentTick++;
-
+            notifyTick();
             try {
                 Thread.sleep(tickDelay);
             } catch (InterruptedException e) {
@@ -74,6 +72,16 @@ public class World {
             counter++;
         }
         return result;
+    }
+
+
+    private List<Runnable> tickListeners = new ArrayList<>();
+    public void addTickListener(Runnable r) {
+        tickListeners.add(r);
+    }
+
+    public void notifyTick() {
+        tickListeners.forEach(Runnable::run);
     }
 
     //------------------------------------------------------------------------------------------------------------------
@@ -232,6 +240,14 @@ public class World {
     //------------------------------------------------------------------------------------------------------------------
     //--probably-useful-stuff-------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    public Map<Agent, Cell> getAgentLocations() {
+        return agentLocations;
+    }
 
 
 }
