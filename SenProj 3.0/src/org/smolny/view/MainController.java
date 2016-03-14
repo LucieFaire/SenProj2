@@ -4,14 +4,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import org.smolny.agent.Agent;
 import org.smolny.world.Cell;
@@ -28,9 +25,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class MainController implements Initializable {
 
     @FXML
-    private Canvas canvas;
-
-    @FXML
     private Pane pane;
 
     @Override
@@ -40,8 +34,6 @@ public class MainController implements Initializable {
 
 
     private World world = null;
-
-
 
     public void createAndDrawWorld() {
         world = createInitialWorld();
@@ -96,8 +88,6 @@ public class MainController implements Initializable {
         Bounds  paneBounds = pane.getLayoutBounds();
         double yDelta = paneBounds.getHeight() / height;
         double xDelta = paneBounds.getWidth() / width;
-
-
 
         //draw-grid-----------------------------------------------------------------------------------------------------
         Canvas canvas = new Canvas();
