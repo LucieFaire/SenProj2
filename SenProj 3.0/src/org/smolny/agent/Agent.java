@@ -21,13 +21,18 @@ public class Agent {
     protected int lifeLevel;
     protected int lifeTime;
 
+    protected WorldHandle handle;
+
     public Agent() {
         this.lifeTime = 0;
         this.sight = rand.nextInt(4);
         if (this.sight == 0) {
             this.sight += 1;
         }
+    }
 
+    public void setHandle(WorldHandle handle) {
+        this.handle = handle;
     }
 
     public int getSight() {
@@ -54,7 +59,7 @@ public class Agent {
      * 2*sight + 1 square array where central cell is the agent's location
      * @param environment
      */
-    public void tick(Cell[][] environment, WorldHandle handle) {
+    public void tick(Cell[][] environment) {
 
 
 

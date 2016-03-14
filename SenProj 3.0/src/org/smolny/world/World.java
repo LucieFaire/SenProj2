@@ -45,7 +45,7 @@ public class World {
                 Agent agent = chooseAgentToTick(agentsToTick);
                 agent.preTick();
                 Cell[][] env = getEnvironment(agent);
-                agent.tick(env, new WorldHandleImpl(agent));
+                agent.tick(env);
                 agentsToTick.remove(agent);
             }
 
@@ -94,42 +94,40 @@ public class World {
     public class WorldHandleImpl implements WorldHandle {
 
         private Agent agent;
-        private Cell cell;
-        private int x;
-        private int y;
 
         public WorldHandleImpl(Agent agent) {
             this.agent = agent;
-            this.cell = agentLocations.get(agent);
-            this.x = cell.getX();
-            this.y = cell.getY();
         }
 
         @Override
         public void goUp() {
             safeExec( () -> {
-                setAgentLocation(agent, x, y--);
+                Cell location = agentLocations.get(agent);
+                setAgentLocation(agent, location.getX(), location.getY() - 1);
             });
         }
 
         @Override
         public void goDown() {
             safeExec( () -> {
-                setAgentLocation(agent, x, y++);
+                Cell location = agentLocations.get(agent);
+                setAgentLocation(agent, location.getX(), location.getY() + 1);
             });
         }
 
         @Override
         public void goLeft() {
             safeExec( () -> {
-                setAgentLocation(agent, x++, y);
+                Cell location = agentLocations.get(agent);
+                setAgentLocation(agent, location.getX() - 1, location.getY());
             });
         }
 
         @Override
         public void goRight() {
             safeExec( () -> {
-                setAgentLocation(agent, x++, y);
+                Cell location = agentLocations.get(agent);
+                setAgentLocation(agent, location.getX() + 1, location.getY());
             });
         }
 
@@ -224,6 +222,8 @@ public class World {
 
     private Agent createAgents() {
         Agent agent = new HomoErectus();
+        agent.setHandle(new WorldHandleImpl(agent));
+
         setAgentLocation(agent, grid.length/2, grid.length/2);
         return agent;
     }

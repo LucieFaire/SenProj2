@@ -13,7 +13,6 @@ public class HomoErectus extends LivingEntity {
 
     private Random rand = new Random();
 
-
     public HomoErectus() {
         super();
         lifeLevel = 100;
@@ -21,9 +20,9 @@ public class HomoErectus extends LivingEntity {
     }
 
     @Override
-    public void tick(Cell[][] environment, WorldHandle handle) {
+    public void tick(Cell[][] environment) {
         int size = environment.length;
-        int center = (size + 1) / 2;
+        int center = size / 2;
         ArrayList<Integer> options = new ArrayList<Integer>();
         if (environment[center][center--] != null) {
             int goUp = 1;

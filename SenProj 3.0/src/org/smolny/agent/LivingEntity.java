@@ -1,6 +1,7 @@
 package org.smolny.agent;
 
 import org.smolny.world.Cell;
+import org.smolny.world.WorldHandle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ public class LivingEntity extends Agent {
 
     public LivingEntity() {
         super();
-
     }
 
 
