@@ -42,7 +42,7 @@ public class World {
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);
                 agent.preTick();
-                Cell[][] env = getEnvironment(agent);
+                CellProjection[][] env = getEnvironment(agent);
                 agent.tick(env);
                 agentsToTick.remove(agent);
             }
@@ -155,10 +155,11 @@ public class World {
     //------------------------------------------------------------------------------------------------------------------
 
 
-    public Cell[][] getEnvironment(Agent agent) {
+    public CellProjection[][] getEnvironment(Agent agent) {
         int sight = agent.getSight();
         int q = sight * 2 + 1; // the size of each axis of the new grid
-        Cell[][] env = new Cell[q][q];
+        CellProjection[][] env;
+        env = init(q);
         switch (sight) {
             case 1:
                 env = setEnv(env, agent);
@@ -198,7 +199,7 @@ public class World {
     }
 
 
-     private Cell[][] setEnv(Cell[][] env, Agent agent) {
+     private CellProjection[][] setEnv(CellProjection[][] env, Agent agent) {
          //Cell[][] env = new Cell[q][q];
          int sight = agent.getSight();
          Cell location = agentLocations.get(agent);
@@ -209,7 +210,7 @@ public class World {
             int l = 0;
             for (int j = (-sight); j <= sight; j++) {
                 if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
-                    env[k][l] = grid[x+i][y+j];
+                    env[k][l].createCopy(grid[x+i][y+j]);
                 } else {
                     env[k][l] = null;
                 }
@@ -229,11 +230,23 @@ public class World {
     }
 
     private Agent createAgents() {
-        Agent agent = new HomoErectus();
+        Agent agent = new HomoErectus("Lucy");
+
         agent.setHandle(new WorldHandleImpl(agent));
 
-        setAgentLocation(agent, grid.length/2, grid.length/2);
+        setAgentLocation(agent, grid.length / 2, grid.length / 2);
         return agent;
+    }
+
+    public CellProjection[][] init(int q) {
+        CellProjection[][] env = new CellProjection[q][q];
+        for (int i = 0; i < env.length; i++) {
+            for (int j = 0; j < env[i].length; j++) {
+                CellProjection cp = new CellProjection();
+                env[i][j] = cp;
+            }
+        }
+        return env;
     }
 
 

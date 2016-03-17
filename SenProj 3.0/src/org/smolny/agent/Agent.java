@@ -1,6 +1,7 @@
 package org.smolny.agent;
 
 import org.smolny.world.Cell;
+import org.smolny.world.CellProjection;
 import org.smolny.world.Direction;
 import org.smolny.world.WorldHandle;
 
@@ -59,7 +60,7 @@ public class Agent {
      * 2*sight + 1 square array where central cell is the agent's location
      * @param environment
      */
-    public void tick(Cell[][] environment) {
+    public void tick(CellProjection[][] environment) {
 
 
 
