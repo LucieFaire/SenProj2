@@ -200,7 +200,6 @@ public class World {
 
 
      private CellProjection[][] setEnv(CellProjection[][] env, Agent agent) {
-         //Cell[][] env = new Cell[q][q];
          int sight = agent.getSight();
          Cell location = agentLocations.get(agent);
          int x = location.getX();

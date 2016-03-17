@@ -28,8 +28,18 @@ public class CellProjection {
             agents.add(name);
         }
 
-
     }
 
+    public int getX() {
+        return this.x;
+    }
+
+    public int getY() {
+        return this.y;
+    }
+
+    public Set<String> getAgents() {
+        return this.agents;
+    }
 
 }
