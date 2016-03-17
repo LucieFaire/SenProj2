@@ -43,16 +43,17 @@ public class HomoErectus extends LivingEntity {
         }
 
         int choice = rand.nextInt(options.size());
-        if (choice == 0) {
+        choice = options.get(choice);
+        if (choice == 1) {
             handle.goUp();
         } else
-        if (choice == 1) {
+        if (choice == 2) {
             handle.goDown();
         } else
-        if (choice == 2) {
+        if (choice == 3) {
            handle.goLeft();
         } else
-        if (choice == 3) {
+        if (choice == 4) {
             handle.goRight();
         }
 
