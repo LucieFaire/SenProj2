@@ -139,6 +139,16 @@ public class World {
             });
         }
 
+        @Override
+        public void eat() {
+            //TODO
+        }
+
+        @Override
+        public void die() {
+            //TODO
+        }
+
 
         private void safeExec(Runnable action) {
             try {
@@ -158,8 +168,13 @@ public class World {
     public CellProjection[][] getEnvironment(Agent agent) {
         int sight = agent.getSight();
         int q = sight * 2 + 1; // the size of each axis of the new grid
-        CellProjection[][] env;
-        env = init(q);
+        CellProjection[][] env = new CellProjection[q][q];
+        for (int i = 0; i < env.length; i++) {
+            for (int j = 0; j < env[i].length; j++) {
+                CellProjection cp = new CellProjection();
+                env[i][j] = cp;
+            }
+        }
         switch (sight) {
             case 1:
                 env = setEnv(env, agent);
@@ -237,19 +252,8 @@ public class World {
         return agent;
     }
 
-    public CellProjection[][] init(int q) {
-        CellProjection[][] env = new CellProjection[q][q];
-        for (int i = 0; i < env.length; i++) {
-            for (int j = 0; j < env[i].length; j++) {
-                CellProjection cp = new CellProjection();
-                env[i][j] = cp;
-            }
-        }
-        return env;
-    }
 
-
-    //------------------------a------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------
     //--probably-useful-stuff-------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
 

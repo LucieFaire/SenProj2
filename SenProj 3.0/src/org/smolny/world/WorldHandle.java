@@ -13,5 +13,8 @@ public interface WorldHandle {
 
     void goRight();
 
+    void eat();
+
+    void die();
 
 }

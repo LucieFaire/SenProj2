@@ -12,7 +12,7 @@ public class CellProjection {
 
     private int x;
     private int y;
-    private Set<String> agents; // not a good idea, doesn't give the position of the other agents
+    private Set<String> agents;
 
 
     public CellProjection() {

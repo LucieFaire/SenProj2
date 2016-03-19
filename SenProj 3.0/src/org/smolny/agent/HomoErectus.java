@@ -16,47 +16,12 @@ public class HomoErectus extends LivingEntity {
 
     public HomoErectus(String name) {
         super();
-        lifeLevel = 100;
         this.name = name;
     }
 
     @Override
     public void tick(CellProjection[][] environment) {
-        int size = environment.length;
-        int center = size / 2;
-        ArrayList<Integer> options = new ArrayList<Integer>();
-        if (environment[center][center-1] != null) {
-            int goUp = 1;
-            options.add(goUp);
-        }
-        if (environment[center][center+1] != null) {
-            int goDown = 2;
-            options.add(goDown);
-        }
-        if (environment[center-1][center] != null) {
-            int goLeft = 3;
-            options.add(goLeft);
-        }
-        if (environment[center+1][center] != null) {
-            int goRight = 4;
-            options.add(goRight);
-        }
-
-        int choice = rand.nextInt(options.size());
-        choice = options.get(choice);
-        if (choice == 1) {
-            handle.goUp();
-        } else
-        if (choice == 2) {
-            handle.goDown();
-        } else
-        if (choice == 3) {
-           handle.goLeft();
-        } else
-        if (choice == 4) {
-            handle.goRight();
-        }
-
+        randomMove(environment);
     }
 }
 

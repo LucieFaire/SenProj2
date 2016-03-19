@@ -62,8 +62,6 @@ public class Agent {
      */
     public void tick(CellProjection[][] environment) {
 
-
-
     }
 
 
