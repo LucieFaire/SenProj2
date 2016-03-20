@@ -1,7 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
-
+import java.lang.Math;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,10 +13,12 @@ public class CellProjection {
     private int x;
     private int y;
     private Set<String> agents;
+    private int[][] heuristics;
 
 
     public CellProjection() {
         this.agents = new HashSet<>();
+
 
     }
 
@@ -30,6 +32,8 @@ public class CellProjection {
 
     }
 
+
+
     public int getX() {
         return this.x;
     }
@@ -41,5 +45,6 @@ public class CellProjection {
     public Set<String> getAgents() {
         return this.agents;
     }
+
 
 }

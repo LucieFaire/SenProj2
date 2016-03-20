@@ -18,7 +18,6 @@ public class LivingEntity extends Agent {
     //private List<Material> inventory;
 
 
-
     public LivingEntity() {
         super();
         this.lifeLevel = 100;
@@ -40,19 +39,19 @@ public class LivingEntity extends Agent {
         int size = environment.length;
         int center = size / 2;
         ArrayList<Integer> options = new ArrayList<Integer>();
-        if (environment[center][center-1] != null) {
+        if (environment[center][center - 1] != null) {
             int goUp = 1;
             options.add(goUp);
         }
-        if (environment[center][center+1] != null) {
+        if (environment[center][center + 1] != null) {
             int goDown = 2;
             options.add(goDown);
         }
-        if (environment[center-1][center] != null) {
+        if (environment[center - 1][center] != null) {
             int goLeft = 3;
             options.add(goLeft);
         }
-        if (environment[center+1][center] != null) {
+        if (environment[center + 1][center] != null) {
             int goRight = 4;
             options.add(goRight);
         }
@@ -61,19 +60,32 @@ public class LivingEntity extends Agent {
         choice = options.get(choice);
         if (choice == 1) {
             handle.goUp();
-        } else
-        if (choice == 2) {
+        } else if (choice == 2) {
             handle.goDown();
-        } else
-        if (choice == 3) {
+        } else if (choice == 3) {
             handle.goLeft();
-        } else
-        if (choice == 4) {
+        } else if (choice == 4) {
             handle.goRight();
         }
     }
 
-    //------------------------------------------------------------------------------------------
+
+    public void calcHeuristic(CellProjection cp, int[][] heuristics, int pos) {
+        for (int i = 0; i < heuristics.length; i++) {
+            for (int j = 0; j < heuristics[i].length; j++) {
+                heuristics[i][j] = Math.abs(pos - i) + Math.abs(pos - j);
+            }
+        }
+
+    }
+
+    public int getHeuristic(int[][] h, int x, int y) {
+        return h[x][y];
+    }
+
+}
+
+        //------------------------------------------------------------------------------------------
     //---garbage--------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------
 
@@ -144,4 +156,4 @@ public class LivingEntity extends Agent {
 //        return false;
 //        //variable for material to hold the value?
 //    }
-}
+

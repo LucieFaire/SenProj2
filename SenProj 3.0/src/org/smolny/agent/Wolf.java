@@ -11,6 +11,7 @@ import java.util.List;
 public class Wolf extends LivingEntity {
 
 
+    private int MAX = 1000000;
     public Wolf() {
         super();
         this.name = "Wolfy";
@@ -22,8 +23,10 @@ public class Wolf extends LivingEntity {
     public void tick(CellProjection[][] environment) {
         int size = environment.length;
         int center = size / 2; // agent position
-        ArrayList<Coordinates> coor = new ArrayList<>();
-
+        int[][] heuristics = new int[size][size];
+        calcHeuristic(environment[center][center], heuristics, center);
+        int count = MAX;
+        CellProjection prey = new CellProjection();
         if (lifeLevel < 1) {
             handle.die();
         } else
@@ -32,17 +35,17 @@ public class Wolf extends LivingEntity {
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
                     if (environment[i][j].getAgents().contains("Rabbit")) {
-                        Coordinates xy = new Coordinates(i, j);
-                        coor.add(xy);
+                        int h = getHeuristic(heuristics, i, j);
+                      if (h < count) {
+                          count = h;
+                          prey = environment[i][j];
+                      }
                     }
                 }
             }
-            if (coor.isEmpty()) {
-                // no rabbit found
-                randomMove(environment);
-            } else {
+            if (prey != null) {
                 // rabbit found
-                choosePrey(coor);
+                pathFindTo(prey, environment, heuristics);
                 handle.eat();
             }
         } else {
@@ -51,28 +54,14 @@ public class Wolf extends LivingEntity {
     }
 
     /**
-     * look for the closest rabbit if more that one was found and pathFindTo() it
+     * find the shortest path to the prey using A* search
      */
-    private void choosePrey(ArrayList<Coordinates> c) {
+    private void pathFindTo(CellProjection prey, CellProjection[][] env, int[][] h) {
         //TODO
-
     }
+
 
 
 }
 
-
-//----inner class-----------------------------------------------------------------------------------------------------------------
- class Coordinates {
-
-        private int x;
-        private int y;
-
-        public Coordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
-        }
-
-
- }
 

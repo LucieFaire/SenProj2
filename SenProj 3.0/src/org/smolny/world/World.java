@@ -175,6 +175,7 @@ public class World {
                 env[i][j] = cp;
             }
         }
+
         switch (sight) {
             case 1:
                 env = setEnv(env, agent);
