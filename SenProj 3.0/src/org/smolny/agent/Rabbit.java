@@ -14,45 +14,50 @@ public class Rabbit extends LivingEntity {
         this.name = "Rabbit";
     }
 
-//    @Override
-//    public void tick(CellProjection[][] environment) {
-//        int size = environment.length;
-//        int center = size / 2;
-//
-//        if (lifeLevel < 1) {
-//            handle.die();
-//        } else {
-//            // don't know if they should first search for food or check there is no danger and then eat or combine together both
-//            for (int i = 0; i < environment.length; i++) {
-//                for (int j = 0; j < environment[i].length; j++) {
-//                    if (environment[i][j].getAgents().contains("Wolfy")) {
-//
-//                    }
-//                }
-//            }
-//            if (???? && lifeLevel < 75) {
-//                // no danger
-//                searchForFood(environment);
-//            } else
-//            if (????) {
-//                //danger
-//                runAway(????);
-//            } else {
-//                // no hunger and danger
-//                randomMove(environment);
-//            }
-//        }
-//
-//    }
-//
-//
-//    private void runAway(????) {
-//        //TODO
-//    }
-//
-//    private void searchForFood(CellProjection[][] env) {
-//        //TODO
-//    }
+    @Override
+    public void tick(CellProjection[][] environment) {
+        int size = environment.length;
+        int center = size / 2;
+        int x = 0;
+        int y = 0;
+        if (lifeLevel < 1) {
+            handle.die();
+        } else {
+            // don't know if they should first search for food or check there is no danger and then eat or combine together both
+            for (int i = 0; i < environment.length; i++) {
+                for (int j = 0; j < environment[i].length; j++) {
+                    if (environment[i][j].getAgents().contains("Wolfy")) {
+                        x = x + Math.abs(center - i);
+                        y = y + Math.abs(center - j);
+                    }
+                }
+            }
+            x = -x;
+            y = -y;
+
+            if (x == 0 && y == 0 && lifeLevel < 75) {
+                // no danger
+                searchForFood(environment);
+            } else
+            if (x != 0 && y != 0) {
+                //danger
+                pathFindTo(environment[center + x][center + y]);
+            } else {
+                // no hunger and danger
+                randomMove(environment);
+            }
+        }
+
+    }
+
+
+    private void pathFindTo(CellProjection cp) {
+        //TODO
+    }
+
+    private void searchForFood(CellProjection[][] env) {
+        //TODO
+    }
 
 
 }

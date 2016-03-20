@@ -11,7 +11,6 @@ import java.util.List;
 public class Wolf extends LivingEntity {
 
 
-    private int MAX = 1000000;
     public Wolf() {
         super();
         this.name = "Wolfy";
@@ -24,7 +23,7 @@ public class Wolf extends LivingEntity {
         int size = environment.length;
         int center = size / 2; // agent position
         int[][] heuristics = new int[size][size];
-        calcHeuristic(environment[center][center], heuristics, center);
+        calcHeuristic(environment, heuristics, center);
         int count = MAX;
         CellProjection prey = new CellProjection();
         if (lifeLevel < 1) {
@@ -58,6 +57,7 @@ public class Wolf extends LivingEntity {
      */
     private void pathFindTo(CellProjection prey, CellProjection[][] env, int[][] h) {
         //TODO
+
     }
 
 

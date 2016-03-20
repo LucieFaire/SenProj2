@@ -19,7 +19,6 @@ public class CellProjection {
     public CellProjection() {
         this.agents = new HashSet<>();
 
-
     }
 
     public void createCopy(Cell cell) {
@@ -31,7 +30,6 @@ public class CellProjection {
         }
 
     }
-
 
 
     public int getX() {
