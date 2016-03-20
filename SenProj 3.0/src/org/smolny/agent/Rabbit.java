@@ -32,16 +32,13 @@ public class Rabbit extends LivingEntity {
                     }
                 }
             }
-            x = -x;
-            y = -y;
-
             if (x == 0 && y == 0 && lifeLevel < 75) {
                 // no danger
                 searchForFood(environment);
             } else
             if (x != 0 && y != 0) {
                 //danger
-                pathFindTo(environment[center + x][center + y]);
+                pathFindTo(environment[center - x][center - y]);
             } else {
                 // no hunger and danger
                 randomMove(environment);
