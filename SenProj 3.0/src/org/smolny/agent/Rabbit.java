@@ -18,6 +18,7 @@ public class Rabbit extends LivingEntity {
     public void tick(CellProjection[][] environment) {
         int size = environment.length;
         int center = size / 2;
+        CellProjection prey = environment[center][center];
         int x = 0;
         int y = 0;
         if (lifeLevel < 1) {
@@ -38,18 +39,13 @@ public class Rabbit extends LivingEntity {
             } else
             if (x != 0 && y != 0) {
                 //danger
-                pathFindTo(environment[center - x][center - y]);
+                pathFindTo(prey, environment[center - x][center - y], environment);
             } else {
                 // no hunger and danger
                 randomMove(environment);
             }
         }
 
-    }
-
-
-    private void pathFindTo(CellProjection cp) {
-        //TODO
     }
 
     private void searchForFood(CellProjection[][] env) {

@@ -1,9 +1,9 @@
 package org.smolny.agent;
 
+import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by dsh on 3/19/16.
@@ -22,10 +22,9 @@ public class Wolf extends LivingEntity {
     public void tick(CellProjection[][] environment) {
         int size = environment.length;
         int center = size / 2; // agent position
-        int[][] heuristics = new int[size][size];
-        calcHeuristic(environment, heuristics, center);
         int count = MAX;
         CellProjection prey = new CellProjection();
+        CellProjection predator = environment[center][center];
         if (lifeLevel < 1) {
             handle.die();
         } else
@@ -34,7 +33,7 @@ public class Wolf extends LivingEntity {
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
                     if (environment[i][j].getAgents().contains("Rabbit")) {
-                        int h = getHeuristic(heuristics, i, j);
+                        int h = Math.abs(center - i) + Math.abs(center - j);
                       if (h < count) {
                           count = h;
                           prey = environment[i][j];
@@ -44,7 +43,7 @@ public class Wolf extends LivingEntity {
             }
             if (prey != null) {
                 // rabbit found
-                pathFindTo(prey, environment, heuristics);
+                pathFindTo(predator, prey, environment);
                 handle.eat();
             }
         } else {
@@ -52,16 +51,4 @@ public class Wolf extends LivingEntity {
         }
     }
 
-    /**
-     * find the shortest path to the prey using A* search
-     */
-    private void pathFindTo(CellProjection prey, CellProjection[][] env, int[][] h) {
-        //TODO
-
-    }
-
-
-
 }
-
-

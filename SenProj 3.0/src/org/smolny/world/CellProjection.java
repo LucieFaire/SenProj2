@@ -1,6 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
+
 import java.lang.Math;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,15 +11,21 @@ import java.util.Set;
  */
 public class CellProjection {
 
+    public static final int DIAGONAL_COST = 14;
+    public static final int V_H_COST = 10;
+
     private int x;
     private int y;
     private Set<String> agents;
-    private int[][] heuristics;
+    private int hCost;
+    private int cost;
+    private CellProjection parent;
 
 
     public CellProjection() {
         this.agents = new HashSet<>();
-
+        this.cost = 0;
+        this.hCost = 0;
     }
 
     public void createCopy(Cell cell) {
@@ -30,7 +37,6 @@ public class CellProjection {
         }
 
     }
-
 
     public int getX() {
         return this.x;
@@ -44,5 +50,28 @@ public class CellProjection {
         return this.agents;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
+    public int getHCost() {
+        return hCost;
+    }
+
+    public CellProjection getParent() {
+        return parent;
+    }
+
+    public void setCost(int f) {
+        this.cost = f;
+    }
+
+    public void setHCost(int h) {
+        this.hCost = h;
+    }
+
+    public void setParent(CellProjection c) {
+        this.parent = c;
+    }
 
 }
