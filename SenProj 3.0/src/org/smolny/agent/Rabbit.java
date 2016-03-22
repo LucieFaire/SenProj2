@@ -21,7 +21,7 @@ public class Rabbit extends LivingEntity {
         CellProjection prey = environment[center][center];
         int x = 0;
         int y = 0;
-        if (lifeLevel < 1) {
+        if (this.getLifeLevel() < 1) {
             handle.die();
         } else {
             // don't know if they should first search for food or check there is no danger and then eat or combine together both
@@ -31,9 +31,13 @@ public class Rabbit extends LivingEntity {
                         x = x + Math.abs(center - i);
                         y = y + Math.abs(center - j);
                     }
+                    if (environment[i][j].getAgents().contains("Grass")) {
+                        //TODO
+                    }
+
                 }
             }
-            if (x == 0 && y == 0 && lifeLevel < 75) {
+            if (x == 0 && y == 0 && this.getLifeLevel() < 50) {
                 // no danger
                 searchForFood(environment);
             } else

@@ -20,7 +20,7 @@ public class Agent {
     public String name;
 
     protected int lifeLevel;
-    protected int lifeTime;
+    protected long lifeTime;
 
     protected WorldHandle handle;
 
@@ -40,16 +40,20 @@ public class Agent {
         return sight;
     }
 
-    public long getLifeLevel() {
+    public int getLifeLevel() {
         return lifeLevel;
     }
 
+    public void setLifeLevel(int l) {
+        this.lifeLevel += l;
+    }
 
     /**
      * Handle some tick dependent counters and internal processes, e.g. level of "hungry"
      */
     public void preTick() {
         lifeTime++; // counts ticks in game
+        lifeLevel -= 5;
     }
 
     public String getName() {

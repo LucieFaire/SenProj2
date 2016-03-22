@@ -37,7 +37,7 @@ public class World {
 
     public void start() {
         while (isRunning) {
-            printState();
+            //printState();
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);
@@ -140,13 +140,15 @@ public class World {
         }
 
         @Override
-        public void eat() {
-            //TODO
+        public void eat(Agent a) {
+            agent.setLifeLevel(10);
+            dead(a);
+
         }
 
         @Override
         public void die() {
-            //TODO
+            dead(agent);
         }
 
 
@@ -235,6 +237,13 @@ public class World {
          }
 
         return env;
+    }
+
+    private void dead(Agent a) {
+        Cell cell = agentLocations.get(a);
+        cell.getAgents().remove(a);
+        agentLocations.remove(a);
+        a = null;
     }
 
 

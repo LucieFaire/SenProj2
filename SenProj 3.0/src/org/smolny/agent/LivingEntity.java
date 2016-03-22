@@ -24,13 +24,6 @@ public class LivingEntity extends Agent {
     }
 
 
-    @Override
-    public void preTick() {
-        super.preTick();
-        lifeLevel--;
-
-    }
-
     /**
      * inner logic of the agent behavior
      */

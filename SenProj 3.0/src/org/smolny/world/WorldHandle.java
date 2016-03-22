@@ -1,5 +1,7 @@
 package org.smolny.world;
 
+import org.smolny.agent.Agent;
+
 /**
  * Created by Asus on 12.03.2016.
  */
@@ -13,7 +15,7 @@ public interface WorldHandle {
 
     void goRight();
 
-    void eat();
+    void eat(Agent a);
 
     void die();
 

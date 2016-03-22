@@ -25,10 +25,10 @@ public class Wolf extends LivingEntity {
         int count = MAX;
         CellProjection prey = new CellProjection();
         CellProjection predator = environment[center][center];
-        if (lifeLevel < 1) {
+        if (this.getLifeLevel() < 1) {
             handle.die();
         } else
-        if (lifeLevel < 75) {
+        if (this.getLifeLevel() < 50) {
             // search for food
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
@@ -44,7 +44,7 @@ public class Wolf extends LivingEntity {
             if (prey != null) {
                 // rabbit found
                 pathFindTo(predator, prey, environment);
-                handle.eat();
+                //handle.eat();
             }
         } else {
             randomMove(environment);
