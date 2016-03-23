@@ -19,6 +19,7 @@ public class Rabbit extends LivingEntity {
         int size = environment.length;
         int center = size / 2;
         CellProjection prey = environment[center][center];
+        CellProjection grass = new CellProjection();
         int x = 0;
         int y = 0;
         if (this.getLifeLevel() < 1) {
@@ -27,19 +28,22 @@ public class Rabbit extends LivingEntity {
             // don't know if they should first search for food or check there is no danger and then eat or combine together both
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
-                    if (environment[i][j].getAgents().contains("Wolfy")) {
+                    if (environment[i][j].getAgents().containsKey("Wolfy")) {
                         x = x + Math.abs(center - i);
                         y = y + Math.abs(center - j);
                     }
-                    if (environment[i][j].getAgents().contains("Grass")) {
-                        //TODO
+                    if (grass == null) {
+                        if (environment[i][j].getAgents().containsKey("Grass")) {
+                            grass = environment[i][j];
+                        }
                     }
 
                 }
             }
             if (x == 0 && y == 0 && this.getLifeLevel() < 50) {
-                // no danger
-                searchForFood(environment);
+                // no danger and hunger
+                pathFindTo(prey, grass, environment);
+                handle.eat(grass.getAgents().get("Grass"));
             } else
             if (x != 0 && y != 0) {
                 //danger
@@ -52,9 +56,6 @@ public class Rabbit extends LivingEntity {
 
     }
 
-    private void searchForFood(CellProjection[][] env) {
-        //TODO
-    }
 
 
 }

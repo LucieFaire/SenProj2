@@ -83,7 +83,7 @@ public class LivingEntity extends Agent {
     public void pathFindTo(CellProjection predator, CellProjection prey, CellProjection[][] env) {
         calcHeuristic(env, prey.getX(), prey.getY());
         boolean closed[][] = new boolean[env.length][env[0].length];
-        open.add(prey);
+        open.add(predator);
 
         CellProjection current;
 

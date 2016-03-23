@@ -3,7 +3,9 @@ package org.smolny.world;
 import org.smolny.agent.Agent;
 
 import java.lang.Math;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,14 +18,14 @@ public class CellProjection {
 
     private int x;
     private int y;
-    private Set<String> agents;
+    private Map<String, Agent> agents;
     private int hCost;
     private int cost;
     private CellProjection parent;
 
 
     public CellProjection() {
-        this.agents = new HashSet<>();
+        this.agents = new HashMap<>();
         this.cost = 0;
         this.hCost = 0;
     }
@@ -33,7 +35,7 @@ public class CellProjection {
         this.y = cell.getY();
         for (Agent a : cell.getAgents()) {
             String name = a.getName();
-            agents.add(name);
+            agents.put(name, a);
         }
 
     }
@@ -46,7 +48,7 @@ public class CellProjection {
         return this.y;
     }
 
-    public Set<String> getAgents() {
+    public Map<String, Agent> getAgents() {
         return this.agents;
     }
 
@@ -73,5 +75,6 @@ public class CellProjection {
     public void setParent(CellProjection c) {
         this.parent = c;
     }
+
 
 }

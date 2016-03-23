@@ -1,7 +1,6 @@
 package org.smolny.world;
 
-import org.smolny.agent.Agent;
-import org.smolny.agent.HomoErectus;
+import org.smolny.agent.*;
 
 import java.util.*;
 
@@ -151,6 +150,12 @@ public class World {
             dead(agent);
         }
 
+        @Override
+        public void grow(int x, int y) {
+            Agent agent = new Grass();
+            agent.setHandle(new WorldHandleImpl(agent));
+            setAgentLocation(agent, x, y);
+        }
 
         private void safeExec(Runnable action) {
             try {
@@ -253,13 +258,23 @@ public class World {
         createAgents();
     }
 
-    private Agent createAgents() {
+    private void createAgents() {
         Agent agent = new HomoErectus("Lucy");
-
         agent.setHandle(new WorldHandleImpl(agent));
-
         setAgentLocation(agent, grid.length / 2, grid.length / 2);
-        return agent;
+
+        int count = 0;
+        while (count < 10) {
+            Agent w = new Wolf();
+            w.setHandle(new WorldHandleImpl(w));
+            setAgentLocation(w, rand.nextInt(grid.length), rand.nextInt(grid.length));
+
+            Agent r = new Rabbit();
+            r.setHandle(new WorldHandleImpl(r));
+            setAgentLocation(r, rand.nextInt(grid.length), rand.nextInt(grid.length));
+            count++;
+        }
+
     }
 
 

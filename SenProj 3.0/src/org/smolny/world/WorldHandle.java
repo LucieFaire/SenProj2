@@ -19,4 +19,6 @@ public interface WorldHandle {
 
     void die();
 
+    void grow(int x, int y);
+
 }

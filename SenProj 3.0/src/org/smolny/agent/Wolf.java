@@ -32,7 +32,7 @@ public class Wolf extends LivingEntity {
             // search for food
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
-                    if (environment[i][j].getAgents().contains("Rabbit")) {
+                    if (environment[i][j].getAgents().containsKey("Rabbit")) {
                         int h = Math.abs(center - i) + Math.abs(center - j);
                       if (h < count) {
                           count = h;
@@ -44,7 +44,7 @@ public class Wolf extends LivingEntity {
             if (prey != null) {
                 // rabbit found
                 pathFindTo(predator, prey, environment);
-                //handle.eat();
+                handle.eat(prey.getAgents().get("Rabbit"));
             }
         } else {
             randomMove(environment);

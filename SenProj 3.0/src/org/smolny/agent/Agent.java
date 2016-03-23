@@ -16,7 +16,7 @@ import java.util.Random;
 public class Agent {
 
     protected int sight;
-    private Random rand = new Random();
+    protected Random rand = new Random();
     public String name;
 
     protected int lifeLevel;
@@ -53,7 +53,7 @@ public class Agent {
      */
     public void preTick() {
         lifeTime++; // counts ticks in game
-        lifeLevel -= 5;
+        lifeLevel -= 3;
     }
 
     public String getName() {
@@ -68,7 +68,9 @@ public class Agent {
 
     }
 
-
+//    public Agent getAgentByName(CellProjection cp) {
+//        cp.getAgents()
+//    }
 
 
 }
