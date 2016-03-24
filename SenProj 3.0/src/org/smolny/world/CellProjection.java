@@ -1,6 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
+import org.smolny.utils.Point;
 
 import java.lang.Math;
 import java.util.HashMap;
@@ -22,6 +23,8 @@ public class CellProjection {
     private int hCost;
     private int cost;
     private CellProjection parent;
+
+    private Point localPoint = null;
 
 
     public CellProjection() {
@@ -74,6 +77,14 @@ public class CellProjection {
 
     public void setParent(CellProjection c) {
         this.parent = c;
+    }
+
+    public Point getLocalPoint() {
+        return localPoint;
+    }
+
+    public void setLocalPoint(Point point) {
+        this.localPoint = point;
     }
 
 

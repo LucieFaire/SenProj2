@@ -1,5 +1,6 @@
 package org.smolny.agent;
 
+import org.smolny.utils.Point;
 import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
 import org.smolny.world.Direction;
@@ -8,6 +9,7 @@ import org.smolny.world.WorldHandle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 
 /**
@@ -23,6 +25,8 @@ public class Agent {
     protected long lifeTime;
 
     protected WorldHandle handle;
+
+    protected Point localPosition = Point.create(0,0);
 
     public Agent() {
         this.lifeTime = 0;
@@ -46,6 +50,14 @@ public class Agent {
 
     public void setLifeLevel(int l) {
         this.lifeLevel += l;
+    }
+
+    public Point getLocalPosition() {
+        return localPosition;
+    }
+
+    public void setLocalPosition(Point localPosition) {
+        this.localPosition = localPosition;
     }
 
     /**

@@ -1,5 +1,6 @@
 package org.smolny.agent;
 
+import org.smolny.utils.Point;
 import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
 import org.smolny.world.WorldHandle;
@@ -83,6 +84,8 @@ public class LivingEntity extends Agent {
     public void pathFindTo(CellProjection predator, CellProjection prey, CellProjection[][] env) {
         calcHeuristic(env, prey.getX(), prey.getY());
         boolean closed[][] = new boolean[env.length][env[0].length];
+        Set<Point> visited = new HashSet<>();
+
         open.add(predator);
 
         CellProjection current;
@@ -93,6 +96,7 @@ public class LivingEntity extends Agent {
                 break;
             }
             closed[current.getX()][current.getY()] = true;
+            visited.add(current.getLocalPoint());
 
             if (current.equals(prey)) {
                 return;
@@ -100,6 +104,7 @@ public class LivingEntity extends Agent {
 
             CellProjection t;
             if (current.getX() - 1 >= 0) {
+
                 t = env[current.getX() - 1][current.getY()];
                 checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, closed);
 
