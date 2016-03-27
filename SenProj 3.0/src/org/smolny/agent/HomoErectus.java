@@ -14,14 +14,15 @@ public class HomoErectus extends LivingEntity {
 
     private Random rand = new Random();
 
-    public HomoErectus(String name) {
+    public HomoErectus() {
         super();
-        this.name = name;
+
     }
 
     @Override
     public void tick(CellProjection[][] environment) {
-        randomMove(environment);
+        super.tick(environment);
+        randomMove(memory, this.getLocalPosition());
     }
 }
 

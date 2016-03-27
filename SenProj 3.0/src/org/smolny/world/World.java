@@ -243,7 +243,7 @@ public class World {
     }
 
     private void createAgents() {
-        Agent agent = new HomoErectus("Lucy");
+        Agent agent = new HomoErectus();
         agent.setHandle(new WorldHandleImpl(agent));
         setGlobalAgentLocation(agent, grid.length / 2, grid.length / 2);
 
