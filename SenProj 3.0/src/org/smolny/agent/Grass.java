@@ -11,16 +11,15 @@ public class Grass extends Material {
 
     public Grass() {
         super();
-        this.name = "Grass";
     }
 
-    @Override
-    public void tick(CellProjection[][] environment) {
-        if (lifeLevel < 1) {
-            handle.die();
-        } else
-        if (lifeTime > 8) {
-            grow(environment);
-        }
-    }
+//    @Override
+//    public void tick(CellProjection[][] environment) {
+//        if (lifeLevel < 1) {
+//            handle.die();
+//        } else
+//        if (lifeTime > 8) {
+//            //TODO
+//        }
+//    }
 }

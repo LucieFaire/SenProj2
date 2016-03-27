@@ -1,13 +1,9 @@
 package org.smolny.agent;
 
 import org.smolny.utils.Point;
-import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
-import org.smolny.world.Direction;
 import org.smolny.world.WorldHandle;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -19,16 +15,16 @@ public class Agent {
 
     protected int sight;
     protected Random rand = new Random();
-    public String name;
 
     protected int lifeLevel;
     protected long lifeTime;
-
+    private UUID id;
     protected WorldHandle handle;
 
     protected Point localPosition = Point.create(0,0);
 
     public Agent() {
+        this.id = UUID.randomUUID();
         this.lifeTime = 0;
         this.sight = rand.nextInt(4);
         if (this.sight == 0) {
@@ -60,16 +56,16 @@ public class Agent {
         this.localPosition = localPosition;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     /**
      * Handle some tick dependent counters and internal processes, e.g. level of "hungry"
      */
     public void preTick() {
         lifeTime++; // counts ticks in game
         lifeLevel -= 3;
-    }
-
-    public String getName() {
-        return name;
     }
 
     /**
@@ -79,10 +75,5 @@ public class Agent {
     public void tick(CellProjection[][] environment) {
 
     }
-
-//    public Agent getAgentByName(CellProjection cp) {
-//        cp.getAgents()
-//    }
-
 
 }

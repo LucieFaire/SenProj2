@@ -1,13 +1,12 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
+import org.smolny.agent.AgentProjection;
+import org.smolny.agent.Rabbit;
 import org.smolny.utils.Point;
 
 import java.lang.Math;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by dsh on 3/17/16.
@@ -19,16 +18,16 @@ public class CellProjection {
 
     private int x;
     private int y;
-    private Map<String, Agent> agents;
+    private Set<AgentProjection> agents;
     private int hCost;
     private int cost;
-    private CellProjection parent;
+    private CellProjection parent = null;
 
     private Point localPoint = null;
 
 
     public CellProjection() {
-        this.agents = new HashMap<>();
+        this.agents = new HashSet<>();
         this.cost = 0;
         this.hCost = 0;
     }
@@ -37,8 +36,8 @@ public class CellProjection {
         this.x = cell.getX();
         this.y = cell.getY();
         for (Agent a : cell.getAgents()) {
-            String name = a.getName();
-            agents.put(name, a);
+            agents.add(AgentProjection.create(a));
+
         }
 
     }
@@ -51,7 +50,7 @@ public class CellProjection {
         return this.y;
     }
 
-    public Map<String, Agent> getAgents() {
+    public Set<AgentProjection> getAgents() {
         return this.agents;
     }
 
@@ -87,5 +86,14 @@ public class CellProjection {
         this.localPoint = point;
     }
 
+    public UUID getIdOfAgent(Set<AgentProjection> agents, Class c) {
+        for (AgentProjection a : agents) {
+            if (a.getC().equals(c)) {
+                UUID id = a.getId();
+                return id; // first one to choose, until we have will
+            }
+        }
+        return null;
+    }
 
 }

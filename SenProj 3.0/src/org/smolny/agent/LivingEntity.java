@@ -1,5 +1,6 @@
 package org.smolny.agent;
 
+import org.smolny.agent.memory.Memory;
 import org.smolny.utils.Point;
 import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
@@ -12,7 +13,8 @@ import java.util.*;
  */
 public class LivingEntity extends Agent {
 
-    public int MAX = 1000000000;
+    protected int MAX = 1000000000;
+    protected Memory memory = new Memory();
 
     //private String age;
     Random rand = new Random();
@@ -24,27 +26,29 @@ public class LivingEntity extends Agent {
         this.lifeLevel = 100;
     }
 
+    @Override
+    public void tick(CellProjection[][] environment) {
+        memory.update(environment);
+    }
 
     /**
      * inner logic of the agent behavior
      */
-    public void randomMove(CellProjection[][] environment) {
-        int size = environment.length;
-        int center = size / 2;
-        ArrayList<Integer> options = new ArrayList<Integer>();
-        if (environment[center][center - 1] != null) {
+    public void randomMove(Memory memory, Point lp) {
+        ArrayList<Integer> options = new ArrayList<>();
+        if (memory.get(lp.getX(), lp.getY() - 1) != null) {
             int goUp = 1;
             options.add(goUp);
         }
-        if (environment[center][center + 1] != null) {
+        if (memory.get(lp.getX(), lp.getY() + 1) != null) {
             int goDown = 2;
             options.add(goDown);
         }
-        if (environment[center - 1][center] != null) {
+        if (memory.get(lp.getX() - 1, lp.getY()) != null) {
             int goLeft = 3;
             options.add(goLeft);
         }
-        if (environment[center + 1][center] != null) {
+        if (memory.get(lp.getX() + 1, lp.getY()) != null) {
             int goRight = 4;
             options.add(goRight);
         }
@@ -63,119 +67,97 @@ public class LivingEntity extends Agent {
     }
 
 
-    public void calcHeuristic(CellProjection[][] env, int x, int y) {
-        for (int i = 0; i < env.length; i++) {
-            for (int j = 0; j < env[i].length; j++) {
-                if (env[i][j] != null) { // if there will be blocks in future
-                    env[i][j].setHCost(Math.abs(x - i) + Math.abs(y - j));
-                } else {
-                    env[i][j].setHCost(MAX);
-                }
+    public void calcHeuristic(Memory memory, int x, int y) {
+        for (Point lp : memory.getKSet()) {
+            CellProjection cp = memory.get(lp);
+            if (cp != null) { // if there will be blocks in future
+               cp.setHCost(Math.abs(x - lp.getX()) + Math.abs(y - lp.getX()));
+            } else {
+               cp.setHCost(MAX);
             }
         }
-
     }
 
-    public static PriorityQueue<CellProjection> open = new PriorityQueue<CellProjection>(2);
+
 
     /**
      * find the shortest path to the prey using A* search
      */
-    public void pathFindTo(CellProjection predator, CellProjection prey, CellProjection[][] env) {
-        calcHeuristic(env, prey.getX(), prey.getY());
-        boolean closed[][] = new boolean[env.length][env[0].length];
+    public void pathFindTo(Point start, Point goal, Memory memo) {
+        PriorityQueue<CellProjection> open = new PriorityQueue<>(2);
+        calcHeuristic(memo, goal.getX(), goal.getY());
         Set<Point> visited = new HashSet<>();
-
-        open.add(predator);
+        int size = memo.getSize();
+        open.add(memo.get(start));
 
         CellProjection current;
 
         while (true) {
             current = open.poll();
+            Point p = current.getLocalPoint();
             if (current == null) {
                 break;
             }
-            closed[current.getX()][current.getY()] = true;
+
             visited.add(current.getLocalPoint());
 
-            if (current.equals(prey)) {
+            if (current.getLocalPoint().equals(goal)) {
                 return;
             }
 
             CellProjection t;
-            if (current.getX() - 1 >= 0) {
+            if (memo.get(p.getX(), p.getY() - 1) != null) {
 
-                t = env[current.getX() - 1][current.getY()];
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, closed);
-
-                if (current.getY() - 1 >= 0) {
-                    t = env[current.getX() - 1][current.getY() - 1];
-                    checkUpdateCost(current, t, current.getCost() + CellProjection.DIAGONAL_COST, closed);
-                }
-
-                if (current.getY() + 1 < env[0].length) {
-                    t = env[current.getX() - 1][current.getY() + 1];
-                    checkUpdateCost(current, t, current.getCost() + CellProjection.DIAGONAL_COST, closed);
-                }
+                t = memo.get(p.getX(), p.getY() - 1);
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
-            if (current.getY() - 1 >= 0) {
-                t = env[current.getX()][current.getY() - 1];
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, closed);
+            if (memo.get(p.getX() - 1, p.getY()) != null) {
+
+                t = memo.get(p.getX() - 1, p.getY());
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
-            if (current.getY() + 1 < env[0].length) {
-                t = env[current.getX()][current.getY() + 1];
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, closed);
+            if (memo.get(p.getX(), p.getY() + 1) != null) {
+
+                t = memo.get(p.getX(), p.getY() + 1);
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
-            if (current.getX() + 1 < env.length) {
-                t = env[current.getX() + 1][current.getY()];
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, closed);
+            if (memo.get(p.getX() + 1, p.getY()) != null) {
 
-                if (current.getY() - 1 >= 0) {
-                    t = env[current.getX() + 1][current.getY() - 1];
-                    checkUpdateCost(current, t, current.getCost() + CellProjection.DIAGONAL_COST, closed);
-                }
+                t = memo.get(p.getX() + 1, p.getY());
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
 
-                if (current.getY() + 1 < env[0].length) {
-                    t = env[current.getX() + 1][current.getY() + 1];
-                    checkUpdateCost(current, t, current.getCost() + CellProjection.DIAGONAL_COST, closed);
-                }
             }
         }
 
         //backtrack the path
-        ArrayList<Path> path = new ArrayList<>();
-        if (closed[prey.getX()][prey.getY()]) {
-            current = env[prey.getX()][prey.getY()];
-            path.add(new Path(prey.getX(), prey.getY()));
+        ArrayList<Point> path = new ArrayList<>();
+        if (visited.contains(memo.get(goal))) {
+            current = memo.get(goal);
+            path.add(goal);
             while (current.getParent() != null) {
-                path.add(new Path(current.getParent().getX(), current.getParent().getY()));
+                Point p = current.getParent().getLocalPoint();
+                path.add(Point.create(p.getX(), p.getY()));
                 current = current.getParent();
             }
             Collections.reverse(path); // reverse the order: from start to finish
-            Path c = path.get(0);
-            for (Path p : path) {
-                if (p.x > c.x) {
-                    handle.goRight();
-                } else
-                if (p.x < c.x) {
-                    handle.goLeft();
-                } else
-                if (p.y > c.y) {
-                    handle.goDown();
-                } else
-                if (p.y < c.y) {
-                    handle.goUp();
-                }
-                c = p;
+            Point c = path.get(0);
+            if (goal.getX() > c.getX()) {
+                handle.goRight();
+            } else if (goal.getX() < c.getX()) {
+                handle.goLeft();
+            } else if (goal.getY() > c.getY()) {
+                handle.goDown();
+            } else if (goal.getY() < c.getY()) {
+                handle.goUp();
             }
         }
     }
 
-    private void checkUpdateCost(CellProjection current, CellProjection t, int cost, boolean[][] closed) {
-        if (t == null || closed[t.getX()][t.getY()]) {
+    private void checkUpdateCost(CellProjection current, CellProjection t, int cost, Set<Point> visited, PriorityQueue<CellProjection> open) {
+        if (t == null || visited.contains(t.getLocalPoint())) {
             return;
         }
 
@@ -193,17 +175,6 @@ public class LivingEntity extends Agent {
 
 }
 
-
-//-----inner class-----------------------------------------------------------------------------------
-class Path {
-    public int x;
-    public int y;
-
-    public Path(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
 
 
 

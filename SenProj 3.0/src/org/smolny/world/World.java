@@ -92,7 +92,7 @@ public class World {
         String res = "[";
         for (Agent a : agentLocations.keySet()) {
             Cell c = agentLocations.get(a);
-            res += a.getName();
+            res += a.getClass();
             res += ": (" + c.getX() + "," + c.getY() + ")";
         }
         res += "]";
@@ -139,7 +139,7 @@ public class World {
 
         @Override
         public void goRight() {
-            safeExec( () -> {
+            safeExec(() -> {
                 Cell location = agentLocations.get(agent);
                 setGlobalAgentLocation(agent, location.getX() + 1, location.getY());
                 Point p = agent.getLocalPosition();
@@ -148,10 +148,12 @@ public class World {
         }
 
         @Override
-        public void eat(Agent a) {
-            agent.setLifeLevel(10);
-            dead(a);
-
+        public void eat(UUID id) {
+            if (id != null) {
+                Agent a = getAgentById(id);
+                agent.setLifeLevel(10);
+                dead(a);
+            }
         }
 
         @Override
@@ -184,32 +186,24 @@ public class World {
     public CellProjection[][] getEnvironment(Agent agent) {
         Point localPosition = agent.getLocalPosition();
         int sight = agent.getSight();
+        Cell location = agentLocations.get(agent);
+        int x = location.getX();
+        int y = location.getY();
         int q = sight * 2 + 1; // the size of each axis of the new grid
         CellProjection[][] env = new CellProjection[q][q];
         for (int i = 0; i < env.length; i++) {
             for (int j = 0; j < env[i].length; j++) {
                 CellProjection cp = new CellProjection();
                 env[i][j] = cp;
-                Point lp = Point.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
-                cp.setLocalPoint(lp);
+                if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
+                    cp.createCopy(grid[x+i][y+j]);
+                    Point lp = Point.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
+                    cp.setLocalPoint(lp);
+                } else {
+                    cp = null;
+                }
             }
         }
-
-        switch (sight) {
-            case 1:
-                env = setEnv(env, agent);
-                break;
-            case 2:
-                env = setEnv(env, agent);
-                break;
-            case 3:
-                env = setEnv(env, agent);
-                break;
-            case 4:
-                env = setEnv(env, agent);
-                break;
-        }
-
         return env;
     }
 
@@ -233,28 +227,6 @@ public class World {
         setGlobalAgentLocation(agent, cell);
     }
 
-
-     private CellProjection[][] setEnv(CellProjection[][] env, Agent agent) {
-         int sight = agent.getSight();
-         Cell location = agentLocations.get(agent);
-         int x = location.getX();
-         int y = location.getY();
-         int k = 0;
-         for (int i = (-sight); i <= sight; i++) {
-            int l = 0;
-            for (int j = (-sight); j <= sight; j++) {
-                if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
-                    env[k][l].createCopy(grid[x+i][y+j]);
-                } else {
-                    env[k][l] = null;
-                }
-                l++;
-            }
-            k++;
-         }
-
-        return env;
-    }
 
     private void dead(Agent a) {
         Cell cell = agentLocations.get(a);
@@ -291,7 +263,7 @@ public class World {
 
 
     //------------------------------------------------------------------------------------------------------------------
-    //--probably-useful-stuff-------------------------------------------------------------------------------------------
+    //--useful-stuff-------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
 
     public Cell[][] getGrid() {
@@ -302,5 +274,13 @@ public class World {
         return agentLocations;
     }
 
+    private Agent getAgentById(UUID id) {
+        for (Agent a : agentLocations.keySet()) {
+            if (a.getId().equals(id)) {
+                return a;
+            }
+        }
+        return  null;
+    }
 
 }
