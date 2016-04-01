@@ -27,7 +27,7 @@ public class Wolf extends LivingEntity {
         if (this.getLifeLevel() < 1) {
             handle.die();
         } else
-        if (this.getLifeLevel() < 50) {
+        if (this.getLifeLevel() < 75) {
             // search for food
             for (Point p : memory.getKSet()) {
                 CellProjection cp = memory.get(p);
@@ -37,7 +37,7 @@ public class Wolf extends LivingEntity {
                            if (h < count) {
                                count = h;
                                prey = cp;
-                               cid = prey.getIdOfAgent(cp.getAgents(), Rabbit.class);
+                               cid = prey.getIdOfAgent(Rabbit.class);
                            }
                       }
                  }

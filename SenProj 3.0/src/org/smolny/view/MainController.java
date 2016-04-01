@@ -11,6 +11,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import org.smolny.agent.Agent;
+import org.smolny.agent.Rabbit;
+import org.smolny.agent.Wolf;
 import org.smolny.world.Cell;
 import org.smolny.world.World;
 
@@ -115,6 +117,12 @@ public class MainController implements Initializable {
             Cell cell = e.getValue();
             Circle circle = new Circle();
             circle.setRadius(xDelta / 2);
+            if (agent instanceof Wolf) {
+                circle.setFill(Color.RED);
+            }
+            if (agent instanceof Rabbit) {
+                circle.setFill(Color.BLUE);
+            }
             circle.setCenterX(cell.getX() * xDelta + xDelta / 2);
             circle.setCenterY(cell.getY() * yDelta + yDelta / 2);
             pane.getChildren().add(circle);

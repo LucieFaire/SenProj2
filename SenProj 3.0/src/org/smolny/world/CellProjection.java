@@ -16,8 +16,7 @@ public class CellProjection {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
 
-    private int x;
-    private int y;
+    private Point globalPoint = null;
     private Set<AgentProjection> agents;
     private int hCost;
     private int cost;
@@ -33,8 +32,10 @@ public class CellProjection {
     }
 
     public void createCopy(Cell cell) {
-        this.x = cell.getX();
-        this.y = cell.getY();
+        if (cell == null) {
+            return;
+        }
+        this.globalPoint = Point.create(cell.getX(), cell.getY());
         for (Agent a : cell.getAgents()) {
             agents.add(AgentProjection.create(a));
 
@@ -42,12 +43,8 @@ public class CellProjection {
 
     }
 
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY() {
-        return this.y;
+    public Point getGlobalPoint() {
+        return this.globalPoint;
     }
 
     public Set<AgentProjection> getAgents() {
@@ -86,7 +83,7 @@ public class CellProjection {
         this.localPoint = point;
     }
 
-    public UUID getIdOfAgent(Set<AgentProjection> agents, Class c) {
+    public UUID getIdOfAgent(Class c) {
         for (AgentProjection a : agents) {
             if (a.getC().equals(c)) {
                 UUID id = a.getId();

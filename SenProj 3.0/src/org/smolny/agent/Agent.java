@@ -65,7 +65,7 @@ public class Agent {
      */
     public void preTick() {
         lifeTime++; // counts ticks in game
-        lifeLevel -= 3;
+        lifeLevel -= 1;
     }
 
     /**

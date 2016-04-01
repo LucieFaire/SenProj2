@@ -84,52 +84,55 @@ public class LivingEntity extends Agent {
      * find the shortest path to the prey using A* search
      */
     public void pathFindTo(Point start, Point goal, Memory memo) {
-        PriorityQueue<CellProjection> open = new PriorityQueue<>(2);
+        PriorityQueue<CellProjection> open = new PriorityQueue<>((Object o1, Object o2) -> {
+            CellProjection c1 = (CellProjection)o1;
+            CellProjection c2 = (CellProjection)o2;
+
+            return c1.getCost()<c2.getCost()?-1:
+                    c1.getCost()>c2.getCost()?1:0;
+        });
         calcHeuristic(memo, goal.getX(), goal.getY());
         Set<Point> visited = new HashSet<>();
-        int size = memo.getSize();
         open.add(memo.get(start));
+
 
         CellProjection current;
 
         while (true) {
             current = open.poll();
-            Point p = current.getLocalPoint();
+
             if (current == null) {
                 break;
             }
-
+            Point p = current.getLocalPoint();
             visited.add(current.getLocalPoint());
 
             if (current.getLocalPoint().equals(goal)) {
                 return;
             }
 
-            CellProjection t;
+            CellProjection t = new CellProjection();
+
             if (memo.get(p.getX(), p.getY() - 1) != null) {
 
                 t = memo.get(p.getX(), p.getY() - 1);
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX() - 1, p.getY()) != null) {
 
                 t = memo.get(p.getX() - 1, p.getY());
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX(), p.getY() + 1) != null) {
 
                 t = memo.get(p.getX(), p.getY() + 1);
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX() + 1, p.getY()) != null) {
 
                 t = memo.get(p.getX() + 1, p.getY());
-                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
-
             }
+            checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
         }
 
         //backtrack the path

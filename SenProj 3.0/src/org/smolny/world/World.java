@@ -41,9 +41,11 @@ public class World {
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);
-                agent.preTick();
-                CellProjection[][] env = getEnvironment(agent);
-                agent.tick(env);
+                if (agentLocations.containsKey(agent)) {
+                    agent.preTick();
+                    CellProjection[][] env = getEnvironment(agent);
+                    agent.tick(env);
+                }
                 agentsToTick.remove(agent);
             }
 
@@ -195,12 +197,13 @@ public class World {
             for (int j = 0; j < env[i].length; j++) {
                 CellProjection cp = new CellProjection();
                 env[i][j] = cp;
-                if (((x + i) >= 0 && (x + i) < grid.length) && ((y + j) >= 0 && (y + j) < grid[x].length)) {
-                    cp.createCopy(grid[x+i][y+j]);
+                if (((x -sight + i) >= 0 && (x - sight + i) < grid.length)
+                        && ((y - sight + j) >= 0 && (y - sight + j) < grid[x - sight + i].length)) {
+                    cp.createCopy(grid[x-sight+i][y-sight+j]);
                     Point lp = Point.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
                     cp.setLocalPoint(lp);
                 } else {
-                    cp = null;
+                    env[i][j] = null;
                 }
             }
         }
@@ -232,7 +235,7 @@ public class World {
         Cell cell = agentLocations.get(a);
         cell.getAgents().remove(a);
         agentLocations.remove(a);
-        a = null;
+
     }
 
 
@@ -243,21 +246,32 @@ public class World {
     }
 
     private void createAgents() {
-        Agent agent = new HomoErectus();
-        agent.setHandle(new WorldHandleImpl(agent));
-        setGlobalAgentLocation(agent, grid.length / 2, grid.length / 2);
 
-        int count = 0;
-        while (count < 10) {
-            Agent w = new Wolf();
-            w.setHandle(new WorldHandleImpl(w));
-            setGlobalAgentLocation(w, rand.nextInt(grid.length), rand.nextInt(grid.length));
+//        Agent agent = new HomoErectus();
+//        agent.setHandle(new WorldHandleImpl(agent));
+//        setGlobalAgentLocation(agent, 0, 0);
 
-            Agent r = new Rabbit();
-            r.setHandle(new WorldHandleImpl(r));
-            setGlobalAgentLocation(r, rand.nextInt(grid.length), rand.nextInt(grid.length));
-            count++;
-        }
+        Agent w = new Wolf();
+        w.setHandle(new WorldHandleImpl(w));
+        setGlobalAgentLocation(w, 25, 25);
+
+        Agent r = new Rabbit();
+        r.setHandle(new WorldHandleImpl(r));
+        setGlobalAgentLocation(r, 24, 25);
+
+        Agent v = new Rabbit();
+        v.setHandle(new WorldHandleImpl(v));
+        setGlobalAgentLocation(v, 22, 22);
+
+        Agent q = new Rabbit();
+        q.setHandle(new WorldHandleImpl(q));
+        setGlobalAgentLocation(q, 20, 25);
+
+        Agent i = new Rabbit();
+        i.setHandle(new WorldHandleImpl(i));
+        setGlobalAgentLocation(i, 12, 17);
+
+
 
     }
 

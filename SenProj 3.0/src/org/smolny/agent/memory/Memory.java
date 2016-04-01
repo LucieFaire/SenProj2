@@ -25,7 +25,9 @@ public class Memory {
         for(int i = 0; i < env.length; i++) {
             for(int j = 0; j < env[i].length; j++) {
                 CellProjection cell = env[i][j];
-                memoryGrid.put(cell.getLocalPoint(), cell);
+                if (cell != null) {
+                    memoryGrid.put(cell.getLocalPoint(), cell);
+                }
             }
         }
     }
