@@ -29,7 +29,7 @@ public class Grass extends Material {
                     if (!(cp.getAgents().contains(Grass.class))) {
                         //free cell
                         int h = Math.abs(localPosition.getX() - cp.getLocalPoint().getX()) + Math.abs(localPosition.getY() - cp.getLocalPoint().getY());
-                        if (h < count) {
+                        if (h >= 1 && h < count) {
                             count = h;
                             p = cp.getLocalPoint();
                         }

@@ -96,7 +96,7 @@ public class World {
         for (Agent a : agentLocations.keySet()) {
             Cell c = agentLocations.get(a);
             res += a.getClass();
-            res += ": (" + c.getX() + "," + c.getY() + ")";
+            res += ": (" + c.getPoint().getX() + "," + c.getPoint().getY() + ")";
         }
         res += "]";
         System.out.println(res);
@@ -114,7 +114,7 @@ public class World {
         public void goUp() {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
-                setGlobalAgentLocation(agent, location.getX(), location.getY() - 1);
+                setGlobalAgentLocation(agent, location.getPoint().getX(), location.getPoint().getY() - 1);
                 Point p = agent.getLocalPosition();
                 agent.setLocalPosition(Point.create(p.getX(), p.getY() - 1));
             });
@@ -124,7 +124,7 @@ public class World {
         public void goDown() {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
-                setGlobalAgentLocation(agent, location.getX(), location.getY() + 1);
+                setGlobalAgentLocation(agent, location.getPoint().getX(), location.getPoint().getY() + 1);
                 Point p = agent.getLocalPosition();
                 agent.setLocalPosition(Point.create(p.getX(), p.getY() + 1));
             });
@@ -134,7 +134,7 @@ public class World {
         public void goLeft() {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
-                setGlobalAgentLocation(agent, location.getX() - 1, location.getY());
+                setGlobalAgentLocation(agent, location.getPoint().getX() - 1, location.getPoint().getY());
                 Point p = agent.getLocalPosition();
                 agent.setLocalPosition(Point.create(p.getX() - 1, p.getY()));
             });
@@ -144,7 +144,7 @@ public class World {
         public void goRight() {
             safeExec(() -> {
                 Cell location = agentLocations.get(agent);
-                setGlobalAgentLocation(agent, location.getX() + 1, location.getY());
+                setGlobalAgentLocation(agent, location.getPoint().getX() + 1, location.getPoint().getY());
                 Point p = agent.getLocalPosition();
                 agent.setLocalPosition(Point.create(p.getX() + 1, p.getY()));
             });
@@ -166,10 +166,11 @@ public class World {
 
         @Override
         public void createGrass(Agent a, Point lp) {
-            Point p = agentLocations.get(a).getPoint();
+            Point alp = a.getLocalPosition().minus(lp);
+            Point p = agentLocations.get(a).getPoint().plus(alp);
             Agent agent = new Grass();
             agent.setHandle(new WorldHandleImpl(agent));
-            setGlobalAgentLocation(agent, );
+            setGlobalAgentLocation(agent, p.getX(), p.getY());
         }
 
         private void safeExec(Runnable action) {
@@ -191,8 +192,8 @@ public class World {
         Point localPosition = agent.getLocalPosition();
         int sight = agent.getSight();
         Cell location = agentLocations.get(agent);
-        int x = location.getX();
-        int y = location.getY();
+        int x = location.getPoint().getX();
+        int y = location.getPoint().getY();
         int q = sight * 2 + 1; // the size of each axis of the new grid
         CellProjection[][] env = new CellProjection[q][q];
         for (int i = 0; i < env.length; i++) {
@@ -254,28 +255,22 @@ public class World {
 //        agent.setHandle(new WorldHandleImpl(agent));
 //        setGlobalAgentLocation(agent, 0, 0);
 
-        Agent w = new Wolf();
-        w.setHandle(new WorldHandleImpl(w));
-        setGlobalAgentLocation(w, 25, 25);
+        int count = 0;
+        while (count < 8) {
+            Agent w = new Wolf();
+            w.setHandle(new WorldHandleImpl(w));
+            setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-        Agent r = new Rabbit();
-        r.setHandle(new WorldHandleImpl(r));
-        setGlobalAgentLocation(r, 24, 25);
+            Agent r = new Rabbit();
+            r.setHandle(new WorldHandleImpl(r));
+            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-        Agent v = new Rabbit();
-        v.setHandle(new WorldHandleImpl(v));
-        setGlobalAgentLocation(v, 22, 22);
+//            Agent v = new Grass();
+//            v.setHandle(new WorldHandleImpl(v));
+//            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-        Agent q = new Rabbit();
-        q.setHandle(new WorldHandleImpl(q));
-        setGlobalAgentLocation(q, 28, 26);
-
-        Agent i = new Rabbit();
-        i.setHandle(new WorldHandleImpl(i));
-        setGlobalAgentLocation(i, 12, 17);
-
-
-
+            count++;
+        }
     }
 
 

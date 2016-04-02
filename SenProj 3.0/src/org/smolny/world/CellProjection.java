@@ -35,7 +35,7 @@ public class CellProjection {
         if (cell == null) {
             return;
         }
-        this.globalPoint = Point.create(cell.getX(), cell.getY());
+        this.globalPoint = Point.create(cell.getPoint().getX(), cell.getPoint().getY());
         for (Agent a : cell.getAgents()) {
             agents.add(AgentProjection.create(a));
 
