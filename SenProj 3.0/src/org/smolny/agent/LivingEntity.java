@@ -13,7 +13,7 @@ import java.util.*;
  */
 public class LivingEntity extends Agent {
 
-    protected int MAX = 1000000000;
+
     protected Memory memory = new Memory();
 
     //private String age;
@@ -57,12 +57,16 @@ public class LivingEntity extends Agent {
         choice = options.get(choice);
         if (choice == 1) {
             handle.goUp();
+            System.out.println("going up.");
         } else if (choice == 2) {
             handle.goDown();
+            System.out.println("going down.");
         } else if (choice == 3) {
             handle.goLeft();
+            System.out.println("going left.");
         } else if (choice == 4) {
             handle.goRight();
+            System.out.println("going right.");
         }
     }
 
@@ -108,36 +112,40 @@ public class LivingEntity extends Agent {
             visited.add(current.getLocalPoint());
 
             if (current.getLocalPoint().equals(goal)) {
-                return;
+                break;
             }
 
-            CellProjection t = new CellProjection();
+            CellProjection t;
 
             if (memo.get(p.getX(), p.getY() - 1) != null) {
 
                 t = memo.get(p.getX(), p.getY() - 1);
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX() - 1, p.getY()) != null) {
 
                 t = memo.get(p.getX() - 1, p.getY());
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX(), p.getY() + 1) != null) {
 
                 t = memo.get(p.getX(), p.getY() + 1);
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
 
             if (memo.get(p.getX() + 1, p.getY()) != null) {
 
                 t = memo.get(p.getX() + 1, p.getY());
+                checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
             }
-            checkUpdateCost(current, t, current.getCost() + CellProjection.V_H_COST, visited, open);
+
         }
 
         //backtrack the path
         ArrayList<Point> path = new ArrayList<>();
-        if (visited.contains(memo.get(goal))) {
+        if (visited.contains(goal)) {
             current = memo.get(goal);
             path.add(goal);
             while (current.getParent() != null) {
@@ -146,15 +154,24 @@ public class LivingEntity extends Agent {
                 current = current.getParent();
             }
             Collections.reverse(path); // reverse the order: from start to finish
-            Point c = path.get(0);
-            if (goal.getX() > c.getX()) {
-                handle.goRight();
-            } else if (goal.getX() < c.getX()) {
-                handle.goLeft();
-            } else if (goal.getY() > c.getY()) {
-                handle.goDown();
-            } else if (goal.getY() < c.getY()) {
-                handle.goUp();
+            if (path.size() == 1) {
+                return;
+            } else {
+                Point c = path.get(0);
+                Point f = path.get(1);
+                if (f.getX() > c.getX()) {
+                    handle.goRight();
+                    System.out.println("going right.");
+                } else if (f.getX() < c.getX()) {
+                    handle.goLeft();
+                    System.out.println("going left.");
+                } else if (f.getY() > c.getY()) {
+                    handle.goDown();
+                    System.out.println("going down.");
+                } else if (f.getY() < c.getY()) {
+                    handle.goUp();
+                    System.out.println("going up.");
+                }
             }
         }
     }

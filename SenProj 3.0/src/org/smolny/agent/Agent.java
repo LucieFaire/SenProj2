@@ -13,6 +13,8 @@ import java.util.UUID;
  */
 public class Agent {
 
+    protected int MAX = 1000000000;
+
     protected int sight;
     protected Random rand = new Random();
 

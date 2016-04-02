@@ -30,7 +30,7 @@ public class World {
     //--main-cycle------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
 
-    private long tickDelay = 100;
+    private long tickDelay = 1000;
     private long currentTick = 0;
 
     private volatile boolean isRunning = true;
@@ -50,6 +50,7 @@ public class World {
             }
 
             currentTick++;
+            System.out.println("Tick №: " + currentTick);
             notifyTick();
             try {
                 Thread.sleep(tickDelay);
@@ -164,10 +165,11 @@ public class World {
         }
 
         @Override
-        public void grow(int x, int y) {
+        public void createGrass(Agent a, Point lp) {
+            Point p = agentLocations.get(a).getPoint();
             Agent agent = new Grass();
             agent.setHandle(new WorldHandleImpl(agent));
-            setGlobalAgentLocation(agent, x, y);
+            setGlobalAgentLocation(agent, );
         }
 
         private void safeExec(Runnable action) {
@@ -235,6 +237,7 @@ public class World {
         Cell cell = agentLocations.get(a);
         cell.getAgents().remove(a);
         agentLocations.remove(a);
+        a = null;
 
     }
 
@@ -265,7 +268,7 @@ public class World {
 
         Agent q = new Rabbit();
         q.setHandle(new WorldHandleImpl(q));
-        setGlobalAgentLocation(q, 20, 25);
+        setGlobalAgentLocation(q, 28, 26);
 
         Agent i = new Rabbit();
         i.setHandle(new WorldHandleImpl(i));

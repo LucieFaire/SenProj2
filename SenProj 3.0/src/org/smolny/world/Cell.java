@@ -1,6 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
+import org.smolny.utils.Point;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,23 +11,17 @@ import java.util.Set;
  */
 public class Cell {
 
-    private int x;
-    private int y;
+    private Point point;
     private Set<Agent> agents;
 
     public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.point = Point.create(x, y);
         this.agents = new HashSet<>();
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
+   public Point getPoint() {
+       return point;
+   }
 
     public Set<Agent> getAgents() {
         return agents;

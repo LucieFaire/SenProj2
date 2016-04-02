@@ -8,7 +8,7 @@ import org.smolny.world.World;
 public class Main {
 
     public static  void main(String... args) {
-        World world = new World(100,100);
+        World world = new World(30,30);
         world.start();
     }
 

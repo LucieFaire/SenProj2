@@ -20,7 +20,13 @@ public class Rabbit extends LivingEntity {
     @Override
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
-        randomMove(memory, this.getLocalPosition());
+        if (this.lifeLevel < 1) {
+            System.out.println("Rabbit dies.");
+            handle.die();
+        } else {
+            System.out.print("Rabbit takes the random move: ");
+            randomMove(memory, this.getLocalPosition());
+        }
 //        int count = MAX;
 //        UUID cid = null;
 //        Point lp = this.getLocalPosition();
