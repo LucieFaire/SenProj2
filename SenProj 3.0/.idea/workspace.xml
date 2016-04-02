@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c04eaaf6-b29f-4538-b171-a57102fd4aa5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/Cell.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/Cell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Grass.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Grass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/Main.java" afterPath="$PROJECT_DIR$/src/org/smolny/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Material.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Material.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Rabbit.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Rabbit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/Wolf.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/Wolf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/World.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/WorldHandle.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/WorldHandle.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SenProj 3.0.iws" />
@@ -745,7 +735,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459547539156</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="&quot;Prey &amp; Predator : grass  add-on &quot;">
+      <created>1459603369423</created>
+      <option name="number" value="00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1459603369423</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TodoView">
@@ -839,7 +835,8 @@
     <MESSAGE value="&quot;Prey &amp; Predator : neww classes added &quot;" />
     <MESSAGE value="&quot;Prey &amp; Predator : new classes added &quot;" />
     <MESSAGE value="&quot;Prey &amp; Predator : wolf doesnt move at some point &quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;Prey &amp; Predator : wolf doesnt move at some point &quot;" />
+    <MESSAGE value="&quot;Prey &amp; Predator : grass  add-on &quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Prey &amp; Predator : grass  add-on &quot;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
