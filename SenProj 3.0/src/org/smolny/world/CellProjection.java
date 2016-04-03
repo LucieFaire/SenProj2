@@ -2,10 +2,9 @@ package org.smolny.world;
 
 import org.smolny.agent.Agent;
 import org.smolny.agent.AgentProjection;
-import org.smolny.agent.Rabbit;
 import org.smolny.utils.Point;
 
-import java.lang.Math;
+
 import java.util.*;
 
 /**
@@ -13,10 +12,10 @@ import java.util.*;
  */
 public class CellProjection {
 
-    public static final int DIAGONAL_COST = 14;
+   // public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
 
-    private Point globalPoint = null;
+    //private Point globalPoint = null;
     private Set<AgentProjection> agents;
     private int hCost;
     private int cost;
@@ -35,7 +34,7 @@ public class CellProjection {
         if (cell == null) {
             return;
         }
-        this.globalPoint = Point.create(cell.getPoint().getX(), cell.getPoint().getY());
+        //this.globalPoint = Point.create(cell.getPoint().getX(), cell.getPoint().getY());
         for (Agent a : cell.getAgents()) {
             agents.add(AgentProjection.create(a));
 
@@ -43,9 +42,9 @@ public class CellProjection {
 
     }
 
-    public Point getGlobalPoint() {
-        return this.globalPoint;
-    }
+//    public Point getGlobalPoint() {
+//        return this.globalPoint;
+//    }
 
     public Set<AgentProjection> getAgents() {
         return this.agents;

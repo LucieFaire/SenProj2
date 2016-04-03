@@ -250,29 +250,22 @@ public class World {
 
     private void createAgents() {
 
-//        Agent agent = new HomoErectus();
-//        agent.setHandle(new WorldHandleImpl(agent));
-//        setGlobalAgentLocation(agent, 0, 0);
+        int count = 0;
+        while (count < 10) {
+            Agent w = new Wolf();
+            w.setHandle(new WorldHandleImpl(w));
+            setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-//        int count = 0;
-//        while (count < 8) {
-//            Agent w = new Wolf();
-//            w.setHandle(new WorldHandleImpl(w));
-//            setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-//
-//            Agent r = new Rabbit();
-//            r.setHandle(new WorldHandleImpl(r));
-//            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+            Agent r = new Rabbit();
+            r.setHandle(new WorldHandleImpl(r));
+            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-//            Agent v = new Grass();
-//            v.setHandle(new WorldHandleImpl(v));
-//            setGlobalAgentLocation(v, 10, 10);
+            Agent v = new Grass();
+            v.setHandle(new WorldHandleImpl(v));
+            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-             Agent g = new Grass();
-             g.setHandle(new WorldHandleImpl(g));
-             setGlobalAgentLocation(g, 19, 10);
-//            count++;
-//        }
+            count++;
+        }
     }
 
 

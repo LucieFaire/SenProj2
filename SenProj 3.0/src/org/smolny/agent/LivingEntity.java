@@ -2,9 +2,8 @@ package org.smolny.agent;
 
 import org.smolny.agent.memory.Memory;
 import org.smolny.utils.Point;
-import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
-import org.smolny.world.WorldHandle;
+
 
 import java.util.*;
 
@@ -15,6 +14,8 @@ public class LivingEntity extends Agent {
 
 
     protected Memory memory = new Memory();
+    protected char sex;
+    protected double initiative;
 
     //private String age;
     Random rand = new Random();
@@ -24,6 +25,11 @@ public class LivingEntity extends Agent {
     public LivingEntity() {
         super();
         this.lifeLevel = 100;
+        if (rand.nextBoolean()) {
+            this.sex = 'f';
+        } else {
+            this.sex = 'm';
+        }
     }
 
     @Override

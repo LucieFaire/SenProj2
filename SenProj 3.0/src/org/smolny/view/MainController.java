@@ -138,7 +138,7 @@ public class MainController implements Initializable {
     }
 
     private World createInitialWorld() {
-        World world = new World(20, 20);
+        World world = new World(50, 50);
         return world;
     }
 }

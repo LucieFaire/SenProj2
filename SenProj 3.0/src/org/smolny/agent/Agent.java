@@ -47,7 +47,10 @@ public class Agent {
     }
 
     public void setLifeLevel(int l) {
-        this.lifeLevel += l;
+       this.lifeLevel += l;
+        if (lifeLevel > 100) {
+            this.lifeLevel = 100;
+        }
     }
 
     public Point getLocalPosition() {

@@ -1,7 +1,6 @@
 package org.smolny.agent;
 
 import org.smolny.utils.Point;
-import org.smolny.world.Cell;
 import org.smolny.world.CellProjection;
 
 import java.util.*;
