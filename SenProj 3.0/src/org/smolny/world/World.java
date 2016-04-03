@@ -37,7 +37,7 @@ public class World {
 
     public void start() {
         while (isRunning) {
-            printState();
+            //printState();
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);

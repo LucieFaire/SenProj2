@@ -22,7 +22,7 @@ public class Grass extends Material {
         if (lifeLevel < 1) {
             handle.die();
         }
-        if (lifeLevel > 10) {
+        if (lifeLevel < 10) {
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
                     CellProjection cp = environment[i][j];
