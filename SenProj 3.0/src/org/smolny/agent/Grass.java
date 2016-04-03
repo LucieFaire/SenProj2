@@ -17,26 +17,36 @@ public class Grass extends Material {
 
     @Override
     public void tick(CellProjection[][] environment) {
-        int count = MAX;
+        ArrayList<Point> locs = new ArrayList<>();
         Point p = null;
         if (lifeLevel < 1) {
             handle.die();
         }
-        if (lifeTime > 15) {
+        if (lifeLevel > 10) {
             for (int i = 0; i < environment.length; i++) {
                 for (int j = 0; j < environment[i].length; j++) {
                     CellProjection cp = environment[i][j];
-                    if (!(cp.getAgents().contains(Grass.class))) {
-                        //free cell
-                        int h = Math.abs(localPosition.getX() - cp.getLocalPoint().getX()) + Math.abs(localPosition.getY() - cp.getLocalPoint().getY());
-                        if (h >= 1 && h < count) {
-                            count = h;
+                    if (cp != null) {
+                        if ((cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Grass.class)) == false) {
+                            //free cell
                             p = cp.getLocalPoint();
+                            locs.add(p);
+
                         }
                     }
                 }
             }
-            handle.createGrass(this, p);
+            if (!(locs.isEmpty())) {
+                if (locs.size() == 1) {
+                    int r = rand.nextInt(locs.size());
+                    p = locs.get(r);
+                } else {
+                    int size = locs.size() - 1;
+                    int r = rand.nextInt(size);
+                    p = locs.get(r);
+                }
+                handle.createGrass(this, p);
+            }
         }
     }
 }

@@ -37,7 +37,7 @@ public class World {
 
     public void start() {
         while (isRunning) {
-            //printState();
+            printState();
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
                 Agent agent = chooseAgentToTick(agentsToTick);
@@ -166,8 +166,7 @@ public class World {
 
         @Override
         public void createGrass(Agent a, Point lp) {
-            Point alp = a.getLocalPosition().minus(lp);
-            Point p = agentLocations.get(a).getPoint().plus(alp);
+            Point p = agentLocations.get(a).getPoint().plus(lp);
             Agent agent = new Grass();
             agent.setHandle(new WorldHandleImpl(agent));
             setGlobalAgentLocation(agent, p.getX(), p.getY());
@@ -200,7 +199,7 @@ public class World {
             for (int j = 0; j < env[i].length; j++) {
                 CellProjection cp = new CellProjection();
                 env[i][j] = cp;
-                if (((x -sight + i) >= 0 && (x - sight + i) < grid.length)
+                if (((x - sight + i) >= 0 && (x - sight + i) < grid.length)
                         && ((y - sight + j) >= 0 && (y - sight + j) < grid[x - sight + i].length)) {
                     cp.createCopy(grid[x-sight+i][y-sight+j]);
                     Point lp = Point.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
@@ -255,22 +254,25 @@ public class World {
 //        agent.setHandle(new WorldHandleImpl(agent));
 //        setGlobalAgentLocation(agent, 0, 0);
 
-        int count = 0;
-        while (count < 8) {
-            Agent w = new Wolf();
-            w.setHandle(new WorldHandleImpl(w));
-            setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-
-            Agent r = new Rabbit();
-            r.setHandle(new WorldHandleImpl(r));
-            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+//        int count = 0;
+//        while (count < 8) {
+//            Agent w = new Wolf();
+//            w.setHandle(new WorldHandleImpl(w));
+//            setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+//
+//            Agent r = new Rabbit();
+//            r.setHandle(new WorldHandleImpl(r));
+//            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
 //            Agent v = new Grass();
 //            v.setHandle(new WorldHandleImpl(v));
-//            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+//            setGlobalAgentLocation(v, 10, 10);
 
-            count++;
-        }
+             Agent g = new Grass();
+             g.setHandle(new WorldHandleImpl(g));
+             setGlobalAgentLocation(g, 19, 10);
+//            count++;
+//        }
     }
 
 

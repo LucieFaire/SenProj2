@@ -12,7 +12,7 @@ public class Material extends Agent {
 
    public Material() {
       super();
-      this.lifeLevel = 50;
+      this.lifeLevel = 15;
    }
 
 }
