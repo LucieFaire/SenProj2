@@ -54,11 +54,9 @@ public class Wolf extends LivingEntity {
                     handle.eat(cid);
                 }
             } else {
-                System.out.print("Wolf takes the random move: ");
                 randomMove(memory, lp);
             }
         } else {
-            System.out.print("Wolf takes the random move: ");
             randomMove(memory, lp);
         }
 

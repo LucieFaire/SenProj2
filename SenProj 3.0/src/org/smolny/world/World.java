@@ -19,8 +19,13 @@ public class World {
          this.grid = new Cell[l][w];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                Cell cell = new Cell(i,j);
-                grid[i][j] = cell;
+//                if (rand.nextDouble() < 0.05) {
+//                    Cell cell = null;
+//                    grid[i][j] = cell;
+//                } else {
+                    Cell cell = new Cell(i, j);
+                    grid[i][j] = cell;
+//                }
             }
         }
         initialize();

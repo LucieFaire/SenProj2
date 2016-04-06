@@ -43,6 +43,10 @@ public class MainController implements Initializable {
         drawWorld(world);
     }
 
+    public void stopWorld() {
+        //TODO
+    }
+
     public void runWorld() {
 
         if(world == null) {
@@ -118,6 +122,7 @@ public class MainController implements Initializable {
             Cell cell = e.getValue();
             Circle circle = new Circle();
             circle.setRadius(xDelta / 2);
+
             if  (agent instanceof Grass) {
                 circle.setFill(Color.GREENYELLOW);
             }
@@ -141,4 +146,5 @@ public class MainController implements Initializable {
         World world = new World(50, 50);
         return world;
     }
+
 }
