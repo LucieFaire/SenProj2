@@ -71,6 +71,9 @@ public class Agent {
     public void preTick() {
         lifeTime++; // counts ticks in game
         lifeLevel -= 1;
+        if (lifeLevel < 1) {
+            this.handle.die();
+        }
     }
 
     /**

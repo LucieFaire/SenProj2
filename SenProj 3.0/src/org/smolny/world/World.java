@@ -35,7 +35,7 @@ public class World {
     //--main-cycle------------------------------------------------------------------------------------------------------
     //------------------------------------------------------------------------------------------------------------------
 
-    private long tickDelay = 1000;
+    private long tickDelay = 100;
     private long currentTick = 0;
 
     private volatile boolean isRunning = true;
@@ -48,8 +48,10 @@ public class World {
                 Agent agent = chooseAgentToTick(agentsToTick);
                 if (agentLocations.containsKey(agent)) {
                     agent.preTick();
-                    CellProjection[][] env = getEnvironment(agent);
-                    agent.tick(env);
+                    if (agentLocations.containsKey(agent)) {
+                        CellProjection[][] env = getEnvironment(agent);
+                        agent.tick(env);
+                    }
                 }
                 agentsToTick.remove(agent);
             }
@@ -256,7 +258,7 @@ public class World {
     private void createAgents() {
 
         int count = 0;
-        while (count < 10) {
+        while (count < 15) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));

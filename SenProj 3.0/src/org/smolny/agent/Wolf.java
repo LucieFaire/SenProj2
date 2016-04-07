@@ -23,11 +23,6 @@ public class Wolf extends LivingEntity {
         int count = MAX;
         UUID cid = null;
         CellProjection prey = null;
-        if (this.getLifeLevel() < 1) {
-            System.out.println("Wolf dies.");
-            handle.die();
-        }
-
         if (this.getLifeLevel() < 95) {
             // search for food
             for (Point p : memory.getKSet()) {
@@ -46,11 +41,9 @@ public class Wolf extends LivingEntity {
 
             if (prey != null) {
                 // rabbit found
-                System.out.print("Wolf sees rabbit and takes the step ");
-                pathFindTo(lp, prey.getLocalPoint(), memory);
+               pathFindTo(lp, prey.getLocalPoint(), memory);
 
                 if (lp.equals(prey.getLocalPoint())) {
-                    System.out.println("Wolf eats the rabbit.");
                     handle.eat(cid);
                 }
             } else {

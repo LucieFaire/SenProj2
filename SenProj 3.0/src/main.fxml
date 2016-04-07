@@ -45,6 +45,11 @@
                            <effect>
                               <Blend />
                            </effect></Button>
+                        <Button layoutX="10.0" layoutY="35.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Pause">
+                           <effect>
+                              <Blend />
+                           </effect>
+                        </Button>
                         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#stopWorld" text="Stop">
                            <effect>
                               <Blend />

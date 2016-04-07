@@ -63,16 +63,12 @@ public class LivingEntity extends Agent {
         choice = options.get(choice);
         if (choice == 1) {
             handle.goUp();
-            System.out.println("going up.");
         } else if (choice == 2) {
             handle.goDown();
-            System.out.println("going down.");
         } else if (choice == 3) {
             handle.goLeft();
-            System.out.println("going left.");
         } else if (choice == 4) {
             handle.goRight();
-            System.out.println("going right.");
         }
     }
 
@@ -101,6 +97,11 @@ public class LivingEntity extends Agent {
             return c1.getCost()<c2.getCost()?-1:
                     c1.getCost()>c2.getCost()?1:0;
         });
+
+        if (memo.get(goal) == null) {
+            // option for null cells
+            return;
+        }
         calcHeuristic(memo, goal.getX(), goal.getY());
         Set<Point> visited = new HashSet<>();
         open.add(memo.get(start));
@@ -167,16 +168,12 @@ public class LivingEntity extends Agent {
                 Point f = path.get(1);
                 if (f.getX() > c.getX()) {
                     handle.goRight();
-                    System.out.println("going right.");
                 } else if (f.getX() < c.getX()) {
                     handle.goLeft();
-                    System.out.println("going left.");
                 } else if (f.getY() > c.getY()) {
                     handle.goDown();
-                    System.out.println("going down.");
                 } else if (f.getY() < c.getY()) {
                     handle.goUp();
-                    System.out.println("going up.");
                 }
             }
         }

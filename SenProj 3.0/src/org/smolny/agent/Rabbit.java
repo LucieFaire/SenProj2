@@ -26,10 +26,7 @@ public class Rabbit extends LivingEntity {
         Point lp = this.getLocalPosition();
         Point wlf;
         Point grass = null;
-        if (this.getLifeLevel() < 1) {
-            handle.die();
-        } else {
-            for (Point p : memory.getKSet()) {
+           for (Point p : memory.getKSet()) {
                 CellProjection cp = memory.get(p);
                 if (cp != null) {
                     // see wolf
@@ -51,7 +48,7 @@ public class Rabbit extends LivingEntity {
             }
             wlf = superposition(locs, lp);
 
-            if (grass != null && wlf == null) {
+            if (grass != null && wlf == null && lifeLevel < 75) {
                 // no danger, can eat
                 pathFindTo(lp, grass, memory);
                 if (lp.equals(grass)) {
@@ -64,14 +61,15 @@ public class Rabbit extends LivingEntity {
             } else {
                 randomMove(memory, lp);
             }
-        }
     }
+
 
 
     private Point superposition(ArrayList<Point> arr, Point lp) {
         if (arr.isEmpty()) {
             return null;
         }
+
         int x = 0;
         int y = 0;
         for (Point p : arr) {
