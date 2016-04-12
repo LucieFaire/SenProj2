@@ -82,14 +82,26 @@ public class CellProjection {
         this.localPoint = point;
     }
 
-    public UUID getIdOfAgent(Class c) {
+
+    public UUID getRelevantAgent(Class c, char s) {
         for (AgentProjection a : agents) {
-            if (a.getC().equals(c)) {
-                UUID id = a.getId();
-                return id; // first one to choose, until we have will
+            if (a.getC().equals(c) && a.getSex() == s) {
+                return a.getId();
             }
         }
         return null;
     }
+
+    public UUID getRelevantAgent(Class c) {
+        for (AgentProjection a : agents) {
+            if (a.getC().equals(c)) {
+                return a.getId();
+            }
+        }
+        return null;
+    }
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package org.smolny.world;
 
+import com.sun.xml.internal.ws.api.model.CheckedException;
 import org.smolny.agent.*;
 import org.smolny.utils.Point;
 
@@ -172,6 +173,18 @@ public class World {
         }
 
         @Override
+        public <T extends Agent> void createAgent(Class<T> c) {
+            try {
+                Agent agent = c.newInstance();
+                agent.setHandle(new WorldHandleImpl(agent));
+                setGlobalAgentLocation(agent, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
+
+        @Override
         public void createGrass(Agent a, Point lp) {
             Point p = agentLocations.get(a).getPoint().plus(lp);
             Agent agent = new Grass();
@@ -257,22 +270,22 @@ public class World {
 
     private void createAgents() {
 
-        int count = 0;
-        while (count < 15) {
+//        int count = 0;
+//        while (count < 5) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-            Agent r = new Rabbit();
-            r.setHandle(new WorldHandleImpl(r));
-            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-
-            Agent v = new Grass();
-            v.setHandle(new WorldHandleImpl(v));
-            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-
-            count++;
-        }
+//            Agent r = new Rabbit();
+//            r.setHandle(new WorldHandleImpl(r));
+//            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+//
+//            Agent v = new Grass();
+//            v.setHandle(new WorldHandleImpl(v));
+//            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+//
+//            count++;
+//        }
     }
 
 

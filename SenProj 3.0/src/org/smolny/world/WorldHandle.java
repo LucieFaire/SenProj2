@@ -24,4 +24,6 @@ public interface WorldHandle {
 
     void createGrass(Agent a, Point lp);
 
+    <T extends Agent> void createAgent(Class<T> c);
+
 }

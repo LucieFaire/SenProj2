@@ -6,6 +6,7 @@ import org.smolny.world.CellProjection;
 
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by dsh on 3/6/16.
@@ -15,7 +16,7 @@ public class LivingEntity extends Agent {
 
     protected Memory memory = new Memory();
     protected char sex;
-    protected double initiative;
+
 
     //private String age;
     Random rand = new Random();
@@ -30,6 +31,11 @@ public class LivingEntity extends Agent {
         } else {
             this.sex = 'm';
         }
+    }
+
+
+    public char getSex() {
+        return this.sex;
     }
 
     @Override
@@ -196,6 +202,114 @@ public class LivingEntity extends Agent {
         }
     }
 
+
+    public void searchForPartner(Memory memory, Class c, char s) {
+        Point lp = this.getLocalPosition();
+        int count = MAX;
+        UUID cid = null;
+        UUID ccid = null;
+        CellProjection found = null;
+        for (Point p : memory.getKSet()) {
+            CellProjection cp = memory.get(p);
+            if (cp != null) {
+                ccid = cp.getRelevantAgent(c, s);
+                if (ccid != null) {
+                    int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
+                    if (h < count) {
+                        count = h;
+                        found = cp;
+                        cid = ccid;
+                    }
+                }
+            }
+        }
+        if (found != null) {
+            pathFindTo(lp, found.getLocalPoint(), memory);
+
+            if (lp.equals(found.getLocalPoint())) {
+                handle.createAgent(c);
+            }
+        } else {
+            randomMove(memory, lp);
+        }
+
+    }
+
+    public void searchForFood(Memory memory, Class c) {
+        Point lp = this.getLocalPosition();
+        int count = MAX;
+        UUID cid = null;
+        UUID ccid = null;
+        CellProjection found = null;
+        for (Point p : memory.getKSet()) {
+            CellProjection cp = memory.get(p);
+            if (cp != null) {
+                ccid = cp.getRelevantAgent(c);
+                if (ccid != null) {
+                    int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
+                    if (h < count) {
+                        count = h;
+                        found = cp;
+                        cid = ccid;
+                    }
+                }
+            }
+        }
+        if (found != null) {
+            pathFindTo(lp, found.getLocalPoint(), memory);
+
+            if (lp.equals(found.getLocalPoint())) {
+                handle.eat(cid);
+            }
+        } else {
+            randomMove(memory, lp);
+        }
+    }
+
+
+    public void runAway(Memory memory, Class c) {
+        Point lp = this.getLocalPosition();
+        ArrayList<Point> locs = new ArrayList<>();
+        Point wlf;
+        for (Point p : memory.getKSet()) {
+            CellProjection cp = memory.get(p);
+            if (cp != null) {
+                if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
+                    wlf = cp.getLocalPoint(); // collect all the locs of wolves
+                    locs.add(wlf);
+                }
+            }
+        }
+        wlf = superposition(locs, lp);
+        if (wlf != null) {
+            // wolf found, run away
+            pathFindTo(lp, wlf, memory);
+        } else {
+            randomMove(memory, lp);
+        }
+    }
+
+
+    private Point superposition(ArrayList<Point> arr, Point lp) {
+        if (arr.isEmpty()) {
+            return null;
+        }
+
+        int x = 0;
+        int y = 0;
+        for (Point p : arr) {
+            Point vector = lp.minus(p);
+            double length = Math.sqrt(vector.getX()*vector.getX() + vector.getY()*vector.getY());
+            vector = Point.create((int)(vector.getX() / (length * length)),
+                    (int)(vector.getY() / (length * length)));
+
+            x += vector.getX();
+            y += vector.getY();
+
+        }
+        Point target = Point.create(Math.round(lp.getX() + x), Math.round(lp.getY() + y));
+        return target;
+    }
 }
 
 

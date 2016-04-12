@@ -17,6 +17,7 @@ public class Agent {
 
     protected int sight;
     protected Random rand = new Random();
+    protected double initiative;
 
     protected int lifeLevel;
     protected long lifeTime;
@@ -32,6 +33,7 @@ public class Agent {
         if (this.sight == 0) {
             this.sight += 1;
         }
+        this.initiative = rand.nextDouble();
     }
 
     public void setHandle(WorldHandle handle) {

@@ -9,12 +9,18 @@ public class AgentProjection {
 
     private Class c;
     private UUID id;
+    private char sex;
     private AgentProjection() {}
 
     public static AgentProjection create(Agent a) {
         AgentProjection ap = new AgentProjection();
         ap.c = a.getClass(); // what class does it return: Agent or ?
         ap.id = a.getId();
+        if (a.getClass().getSuperclass().equals(LivingEntity.class)) {
+            ap.sex = ((LivingEntity) a).getSex();
+        } else {
+            ap.sex = ' ';
+        }
         return ap;
     }
 
@@ -24,5 +30,9 @@ public class AgentProjection {
 
     public Class getC() {
         return c;
+    }
+
+    public char getSex() {
+        return sex;
     }
 }
