@@ -2,7 +2,7 @@ package org.smolny.world;
 
 import org.smolny.agent.Agent;
 import org.smolny.agent.AgentProjection;
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 
 
 import java.util.*;
@@ -21,7 +21,7 @@ public class CellProjection {
     private int cost;
     private CellProjection parent = null;
 
-    private Point localPoint = null;
+    private IntPoint localPoint = null;
 
 
     public CellProjection() {
@@ -74,11 +74,11 @@ public class CellProjection {
         this.parent = c;
     }
 
-    public Point getLocalPoint() {
+    public IntPoint getLocalPoint() {
         return localPoint;
     }
 
-    public void setLocalPoint(Point point) {
+    public void setLocalPoint(IntPoint point) {
         this.localPoint = point;
     }
 

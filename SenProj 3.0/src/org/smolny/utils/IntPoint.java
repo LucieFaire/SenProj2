@@ -3,7 +3,7 @@ package org.smolny.utils;
 /**
  * Created by Asus on 24.03.2016.
  */
-public class Point {
+public class IntPoint {
 
     private int x;
     private int y;
@@ -16,20 +16,20 @@ public class Point {
         return y;
     }
 
-    private Point() {}
+    private IntPoint() {}
 
-    public static Point create(int x, int y) {
-        Point point = new Point();
+    public static IntPoint create(int x, int y) {
+        IntPoint point = new IntPoint();
         point.x = x;
         point.y = y;
         return point;
     }
 
-    public Point plus(Point point) {
+    public IntPoint plus(IntPoint point) {
         return create(x + point.x, y + point.y);
     }
 
-    public Point minus(Point point) {
+    public IntPoint minus(IntPoint point) {
         return create(x - point.x, y - point.y);
     }
 
@@ -38,7 +38,7 @@ public class Point {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Point point = (Point) o;
+        IntPoint point = (IntPoint) o;
 
         if (x != point.x) return false;
         return y == point.y;

@@ -1,9 +1,7 @@
 package org.smolny.agent.memory;
 
-import org.smolny.utils.Point;
-import org.smolny.world.Cell;
+import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
-import sun.text.CodePointIterator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +12,7 @@ import java.util.Set;
  */
 public class Memory {
 
-    private Map<Point, CellProjection> memoryGrid;
+    private Map<IntPoint, CellProjection> memoryGrid;
 
     public Memory() {
         this.memoryGrid = new HashMap<>();
@@ -32,15 +30,15 @@ public class Memory {
         }
     }
 
-    public CellProjection get(Point p) {
+    public CellProjection get(IntPoint p) {
         return memoryGrid.get(p);
     }
 
     public CellProjection get(int i, int j) {
-        return memoryGrid.get(Point.create(i,j));
+        return memoryGrid.get(IntPoint.create(i,j));
     }
 
-    public Map<Point, CellProjection> getMemory() {
+    public Map<IntPoint, CellProjection> getMemory() {
         return memoryGrid;
     }
 
@@ -48,7 +46,7 @@ public class Memory {
         return memoryGrid.size();
     }
 
-    public Set<Point> getKSet() {
+    public Set<IntPoint> getKSet() {
         return memoryGrid.keySet();
     }
 }

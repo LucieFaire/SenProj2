@@ -1,6 +1,6 @@
 package org.smolny.agent;
 
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
 
 import java.util.ArrayList;
@@ -19,8 +19,8 @@ public class Grass extends Material {
 
     @Override
     public void tick(CellProjection[][] environment) {
-        ArrayList<Point> locs = new ArrayList<>();
-        Point p;
+        ArrayList<IntPoint> locs = new ArrayList<>();
+        IntPoint p;
         int center = this.getSight();
         if (surrounded(environment, center)) {
             handle.die();

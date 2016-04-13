@@ -1,7 +1,7 @@
 package org.smolny.world;
 
 import org.smolny.agent.Agent;
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 
 import java.util.UUID;
 
@@ -22,7 +22,7 @@ public interface WorldHandle {
 
     void die();
 
-    void createGrass(Agent a, Point lp);
+    void createGrass(Agent a, IntPoint lp);
 
     <T extends Agent> void createAgent(Class<T> c);
 

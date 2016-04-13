@@ -1,6 +1,6 @@
 package org.smolny.agent;
 
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
 import org.smolny.world.WorldHandle;
 
@@ -15,16 +15,16 @@ public class Agent {
 
     protected int MAX = 1000000000;
 
-    protected int sight;
     protected Random rand = new Random();
-    protected double initiative;
-
-    protected int lifeLevel;
-    protected long lifeTime;
-    private UUID id;
     protected WorldHandle handle;
 
-    protected Point localPosition = Point.create(0,0);
+    private UUID id;
+    protected int sight;
+    protected double initiative;
+    protected int lifeLevel;
+    protected long lifeTime;
+
+    protected IntPoint localPosition = IntPoint.create(0,0);
 
     public Agent() {
         this.id = UUID.randomUUID();
@@ -55,11 +55,11 @@ public class Agent {
         }
     }
 
-    public Point getLocalPosition() {
+    public IntPoint getLocalPosition() {
         return localPosition;
     }
 
-    public void setLocalPosition(Point localPosition) {
+    public void setLocalPosition(IntPoint localPosition) {
         this.localPosition = localPosition;
     }
 

@@ -1,11 +1,6 @@
 package org.smolny.agent;
 
-import org.smolny.utils.Point;
 import org.smolny.world.CellProjection;
-
-import java.util.ArrayList;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Created by dsh on 3/19/16.

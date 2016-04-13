@@ -1,7 +1,7 @@
 package org.smolny.agent;
 
 import org.smolny.agent.memory.Memory;
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
 
 
@@ -46,7 +46,7 @@ public class LivingEntity extends Agent {
     /**
      * inner logic of the agent behavior
      */
-    public void randomMove(Memory memory, Point lp) {
+    public void randomMove(Memory memory, IntPoint lp) {
         ArrayList<Integer> options = new ArrayList<>();
         if (memory.get(lp.getX(), lp.getY() - 1) != null) {
             int goUp = 1;
@@ -78,24 +78,12 @@ public class LivingEntity extends Agent {
         }
     }
 
-
-    public void calcHeuristic(Memory memory, int x, int y) {
-        for (Point lp : memory.getKSet()) {
-            CellProjection cp = memory.get(lp);
-            if (cp != null) { // if there will be blocks in future
-               cp.setHCost(Math.abs(x - lp.getX()) + Math.abs(y - lp.getX()));
-            } else {
-               cp.setHCost(MAX);
-            }
-        }
-    }
-
-
+    //--path-finding-logic----------------------------------------------------------------------------------------------
 
     /**
      * find the shortest path to the prey using A* search
      */
-    public void pathFindTo(Point start, Point goal, Memory memo) {
+    public void pathFindTo(IntPoint start, IntPoint goal, Memory memo) {
         PriorityQueue<CellProjection> open = new PriorityQueue<>((Object o1, Object o2) -> {
             CellProjection c1 = (CellProjection)o1;
             CellProjection c2 = (CellProjection)o2;
@@ -109,7 +97,7 @@ public class LivingEntity extends Agent {
             return;
         }
         calcHeuristic(memo, goal.getX(), goal.getY());
-        Set<Point> visited = new HashSet<>();
+        Set<IntPoint> visited = new HashSet<>();
         open.add(memo.get(start));
 
 
@@ -121,7 +109,7 @@ public class LivingEntity extends Agent {
             if (current == null) {
                 break;
             }
-            Point p = current.getLocalPoint();
+            IntPoint p = current.getLocalPoint();
             visited.add(current.getLocalPoint());
 
             if (current.getLocalPoint().equals(goal)) {
@@ -157,21 +145,21 @@ public class LivingEntity extends Agent {
         }
 
         //backtrack the path
-        ArrayList<Point> path = new ArrayList<>();
+        ArrayList<IntPoint> path = new ArrayList<>();
         if (visited.contains(goal)) {
             current = memo.get(goal);
             path.add(goal);
             while (current.getParent() != null) {
-                Point p = current.getParent().getLocalPoint();
-                path.add(Point.create(p.getX(), p.getY()));
+                IntPoint p = current.getParent().getLocalPoint();
+                path.add(IntPoint.create(p.getX(), p.getY()));
                 current = current.getParent();
             }
             Collections.reverse(path); // reverse the order: from start to finish
             if (path.size() == 1) {
                 return;
             } else {
-                Point c = path.get(0);
-                Point f = path.get(1);
+                IntPoint c = path.get(0);
+                IntPoint f = path.get(1);
                 if (f.getX() > c.getX()) {
                     handle.goRight();
                 } else if (f.getX() < c.getX()) {
@@ -185,7 +173,19 @@ public class LivingEntity extends Agent {
         }
     }
 
-    private void checkUpdateCost(CellProjection current, CellProjection t, int cost, Set<Point> visited, PriorityQueue<CellProjection> open) {
+    private void calcHeuristic(Memory memory, int x, int y) {
+        for (IntPoint lp : memory.getKSet()) {
+            CellProjection cp = memory.get(lp);
+            if (cp != null) { // if there will be blocks in future
+                cp.setHCost(Math.abs(x - lp.getX()) + Math.abs(y - lp.getX()));
+            } else {
+                cp.setHCost(MAX);
+            }
+        }
+    }
+
+
+    private void checkUpdateCost(CellProjection current, CellProjection t, int cost, Set<IntPoint> visited, PriorityQueue<CellProjection> open) {
         if (t == null || visited.contains(t.getLocalPoint())) {
             return;
         }
@@ -202,14 +202,15 @@ public class LivingEntity extends Agent {
         }
     }
 
+    //--behaviour-logic-------------------------------------------------------------------------------------------------
 
     public void searchForPartner(Memory memory, Class c, char s) {
-        Point lp = this.getLocalPosition();
+        IntPoint lp = this.getLocalPosition();
         int count = MAX;
         UUID cid = null;
         UUID ccid = null;
         CellProjection found = null;
-        for (Point p : memory.getKSet()) {
+        for (IntPoint p : memory.getKSet()) {
             CellProjection cp = memory.get(p);
             if (cp != null) {
                 ccid = cp.getRelevantAgent(c, s);
@@ -236,12 +237,12 @@ public class LivingEntity extends Agent {
     }
 
     public void searchForFood(Memory memory, Class c) {
-        Point lp = this.getLocalPosition();
+        IntPoint lp = this.getLocalPosition();
         int count = MAX;
         UUID cid = null;
         UUID ccid = null;
         CellProjection found = null;
-        for (Point p : memory.getKSet()) {
+        for (IntPoint p : memory.getKSet()) {
             CellProjection cp = memory.get(p);
             if (cp != null) {
                 ccid = cp.getRelevantAgent(c);
@@ -268,10 +269,10 @@ public class LivingEntity extends Agent {
 
 
     public void runAway(Memory memory, Class c) {
-        Point lp = this.getLocalPosition();
-        ArrayList<Point> locs = new ArrayList<>();
-        Point wlf;
-        for (Point p : memory.getKSet()) {
+        IntPoint lp = this.getLocalPosition();
+        ArrayList<IntPoint> locs = new ArrayList<>();
+        IntPoint wlf;
+        for (IntPoint p : memory.getKSet()) {
             CellProjection cp = memory.get(p);
             if (cp != null) {
                 if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
@@ -290,24 +291,24 @@ public class LivingEntity extends Agent {
     }
 
 
-    private Point superposition(ArrayList<Point> arr, Point lp) {
+    private IntPoint superposition(ArrayList<IntPoint> arr, IntPoint lp) {
         if (arr.isEmpty()) {
             return null;
         }
 
         int x = 0;
         int y = 0;
-        for (Point p : arr) {
-            Point vector = lp.minus(p);
+        for (IntPoint p : arr) {
+            IntPoint vector = lp.minus(p);
             double length = Math.sqrt(vector.getX()*vector.getX() + vector.getY()*vector.getY());
-            vector = Point.create((int)(vector.getX() / (length * length)),
+            vector = IntPoint.create((int)(vector.getX() / (length * length)),
                     (int)(vector.getY() / (length * length)));
 
             x += vector.getX();
             y += vector.getY();
 
         }
-        Point target = Point.create(Math.round(lp.getX() + x), Math.round(lp.getY() + y));
+        IntPoint target = IntPoint.create(Math.round(lp.getX() + x), Math.round(lp.getY() + y));
         return target;
     }
 }

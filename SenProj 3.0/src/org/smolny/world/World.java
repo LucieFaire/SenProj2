@@ -1,8 +1,7 @@
 package org.smolny.world;
 
-import com.sun.xml.internal.ws.api.model.CheckedException;
 import org.smolny.agent.*;
-import org.smolny.utils.Point;
+import org.smolny.utils.IntPoint;
 
 import java.util.*;
 
@@ -110,6 +109,11 @@ public class World {
         System.out.println(res);
     }
 
+    //--history-for-view------------------------------------------------------------------------------------------------
+
+    private boolean keepTurnHistory;
+
+
     public class WorldHandleImpl implements WorldHandle {
 
         private Agent agent;
@@ -123,8 +127,8 @@ public class World {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
                 setGlobalAgentLocation(agent, location.getPoint().getX(), location.getPoint().getY() - 1);
-                Point p = agent.getLocalPosition();
-                agent.setLocalPosition(Point.create(p.getX(), p.getY() - 1));
+                IntPoint p = agent.getLocalPosition();
+                agent.setLocalPosition(IntPoint.create(p.getX(), p.getY() - 1));
             });
         }
 
@@ -133,8 +137,8 @@ public class World {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
                 setGlobalAgentLocation(agent, location.getPoint().getX(), location.getPoint().getY() + 1);
-                Point p = agent.getLocalPosition();
-                agent.setLocalPosition(Point.create(p.getX(), p.getY() + 1));
+                IntPoint p = agent.getLocalPosition();
+                agent.setLocalPosition(IntPoint.create(p.getX(), p.getY() + 1));
             });
         }
 
@@ -143,8 +147,8 @@ public class World {
             safeExec( () -> {
                 Cell location = agentLocations.get(agent);
                 setGlobalAgentLocation(agent, location.getPoint().getX() - 1, location.getPoint().getY());
-                Point p = agent.getLocalPosition();
-                agent.setLocalPosition(Point.create(p.getX() - 1, p.getY()));
+                IntPoint p = agent.getLocalPosition();
+                agent.setLocalPosition(IntPoint.create(p.getX() - 1, p.getY()));
             });
         }
 
@@ -153,8 +157,8 @@ public class World {
             safeExec(() -> {
                 Cell location = agentLocations.get(agent);
                 setGlobalAgentLocation(agent, location.getPoint().getX() + 1, location.getPoint().getY());
-                Point p = agent.getLocalPosition();
-                agent.setLocalPosition(Point.create(p.getX() + 1, p.getY()));
+                IntPoint p = agent.getLocalPosition();
+                agent.setLocalPosition(IntPoint.create(p.getX() + 1, p.getY()));
             });
         }
 
@@ -185,8 +189,8 @@ public class World {
         }
 
         @Override
-        public void createGrass(Agent a, Point lp) {
-            Point p = agentLocations.get(a).getPoint().plus(lp);
+        public void createGrass(Agent a, IntPoint lp) {
+            IntPoint p = agentLocations.get(a).getPoint().plus(lp);
             Agent agent = new Grass();
             agent.setHandle(new WorldHandleImpl(agent));
             setGlobalAgentLocation(agent, p.getX(), p.getY());
@@ -208,7 +212,7 @@ public class World {
 
 
     public CellProjection[][] getEnvironment(Agent agent) {
-        Point localPosition = agent.getLocalPosition();
+        IntPoint localPosition = agent.getLocalPosition();
         int sight = agent.getSight();
         Cell location = agentLocations.get(agent);
         int x = location.getPoint().getX();
@@ -222,7 +226,7 @@ public class World {
                 if (((x - sight + i) >= 0 && (x - sight + i) < grid.length)
                         && ((y - sight + j) >= 0 && (y - sight + j) < grid[x - sight + i].length)) {
                     cp.createCopy(grid[x-sight+i][y-sight+j]);
-                    Point lp = Point.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
+                    IntPoint lp = IntPoint.create(localPosition.getX() - sight + i, localPosition.getY() - sight + j);
                     cp.setLocalPoint(lp);
                 } else {
                     env[i][j] = null;
