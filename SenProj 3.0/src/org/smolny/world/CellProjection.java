@@ -85,7 +85,7 @@ public class CellProjection {
 
     public UUID getRelevantAgent(Class c, char s) {
         for (AgentProjection a : agents) {
-            if (a.getC().equals(c) && a.getSex() == s) {
+            if (a.getC().equals(c) && a.getSex() != s) {
                 return a.getId();
             }
         }

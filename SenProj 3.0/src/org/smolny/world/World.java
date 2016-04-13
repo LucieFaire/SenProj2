@@ -270,22 +270,22 @@ public class World {
 
     private void createAgents() {
 
-//        int count = 0;
-//        while (count < 5) {
+        int count = 0;
+        while (count < 5) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
-//            Agent r = new Rabbit();
-//            r.setHandle(new WorldHandleImpl(r));
-//            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-//
-//            Agent v = new Grass();
-//            v.setHandle(new WorldHandleImpl(v));
-//            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-//
-//            count++;
-//        }
+            Agent r = new Rabbit();
+            r.setHandle(new WorldHandleImpl(r));
+            setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+
+            Agent v = new Grass();
+            v.setHandle(new WorldHandleImpl(v));
+            setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+
+            count++;
+        }
     }
 
 
