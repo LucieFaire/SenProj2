@@ -20,12 +20,12 @@ public class Wolf extends LivingEntity {
         if (lifeLevel < 20) {
             // search for food
             searchForFood(memory, Rabbit.class);
-        } else if ( rand.nextDouble() < frequency) {
+        } else if (lifeTime > 35 && rand.nextDouble() < frequency) {
             searchForPartner(memory, Wolf.class, this.getSex());
         } else {
-            if (rand.nextBoolean())
+           // if (rand.nextDouble() > frequency)
                 searchForFood(memory, Rabbit.class);
-            searchForPartner(memory, Wolf.class, this.getSex());
+           // searchForPartner(memory, Wolf.class, this.getSex());
         }
 //
 //        Point lp = this.getLocalPosition(); // position of the wolf

@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Rabbit extends LivingEntity {
 
-    double frequency = 0.39;
+    double frequency = 0.5;
     public Rabbit() {
         super();
 
@@ -21,12 +21,13 @@ public class Rabbit extends LivingEntity {
             searchForFood(memory, Grass.class);
         } else if (r < frequency){
             searchForPartner(memory, Rabbit.class, this.getSex());
-        } else if (r < 0.69 && r > frequency) {
+        } else if (r > frequency) {
             runAway(memory, Wolf.class);
         } else {
             if (rand.nextBoolean())
                 searchForFood(memory, Grass.class);
             runAway(memory, Wolf.class);
+            //searchForPartner(memory, Rabbit.class, this.getSex());
         }
 //        ArrayList<Point> locs = new ArrayList<>();
 //        int count = MAX;
