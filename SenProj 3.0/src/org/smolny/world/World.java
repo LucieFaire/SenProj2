@@ -3,7 +3,9 @@ package org.smolny.world;
 import org.smolny.agent.*;
 import org.smolny.utils.IntPoint;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by dsh on 03.03.2016.
@@ -203,12 +205,12 @@ public class World {
         }
 
         @Override
-        public <T extends Agent> void createAgent(Class<T> c) {
-            //todo set the location close to the parent
+        public <T extends Agent> void createAgent(Class<T> c, Agent a) {
             try {
+                IntPoint p = agentLocations.get(a).getPoint();
                 Agent agent = c.newInstance();
                 agent.setHandle(new WorldHandleImpl(agent));
-                setGlobalAgentLocation(agent, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+                setGlobalAgentLocation(agent, p.getX(), p.getY());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

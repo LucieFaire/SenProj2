@@ -8,12 +8,14 @@ import java.util.UUID;
 public class AgentProjection {
 
     private Class c;
+    private long lifeTime;
     private UUID id;
     private char sex;
     private AgentProjection() {}
 
     public static AgentProjection create(Agent a) {
         AgentProjection ap = new AgentProjection();
+        ap.lifeTime = a.getLifeTime();
         ap.c = a.getClass(); // what class does it return: Agent or ?
         ap.id = a.getId();
         if (a.getClass().getSuperclass().equals(LivingEntity.class)) {
@@ -22,6 +24,10 @@ public class AgentProjection {
             ap.sex = ' ';
         }
         return ap;
+    }
+
+    public long getLifeTime() {
+        return lifeTime;
     }
 
     public UUID getId() {

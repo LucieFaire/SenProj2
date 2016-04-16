@@ -228,7 +228,7 @@ public class LivingEntity extends Agent {
             pathFindTo(lp, found.getLocalPoint(), memory);
 
             if (lp.equals(found.getLocalPoint())) {
-                handle.createAgent(c);
+                handle.createAgent(c, this);
             }
         } else {
             randomMove(memory, lp);

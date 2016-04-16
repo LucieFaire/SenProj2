@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Rabbit extends LivingEntity {
 
-    private double frequency = 0.5;
+    private double frequency = 0.611;
     public Rabbit() {
         super();
 

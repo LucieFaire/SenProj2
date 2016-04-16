@@ -40,6 +40,10 @@ public class Agent {
         return this.initiative;
     }
 
+    public long getLifeTime() {
+        return lifeTime;
+    }
+
     public void setHandle(WorldHandle handle) {
         this.handle = handle;
     }

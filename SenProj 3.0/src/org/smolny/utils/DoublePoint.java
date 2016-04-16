@@ -4,6 +4,7 @@ package org.smolny.utils;
  * Created by Asus on 14.04.2016.
  */
 public class DoublePoint {
+
     private double x;
     private double y;
 
