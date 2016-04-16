@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Wolf extends LivingEntity {
 
-    double frequency = 0.39;
+    double frequency = 0.233;
 
     public Wolf() {
         super();
@@ -20,12 +20,14 @@ public class Wolf extends LivingEntity {
         if (lifeLevel < 20) {
             // search for food
             searchForFood(memory, Rabbit.class);
+            System.out.println("Wolf searches for food");
         } else if (lifeTime > 35 && rand.nextDouble() < frequency) {
             searchForPartner(memory, Wolf.class, this.getSex());
+            System.out.println("Wolf searches for love");
         } else {
-           // if (rand.nextDouble() > frequency)
                 searchForFood(memory, Rabbit.class);
-           // searchForPartner(memory, Wolf.class, this.getSex());
+            System.out.println("Wolf again searches for food");
+
         }
 //
 //        Point lp = this.getLocalPosition(); // position of the wolf

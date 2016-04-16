@@ -42,10 +42,11 @@ public class World {
 
     public void start() {
         while (isRunning) {
+            System.out.println("Tick №: " + currentTick);
             //printState();
             Set<Agent> agentsToTick = new HashSet<>(agentLocations.keySet());
             while( !agentsToTick.isEmpty() ) {
-                Agent agent = chooseAgentToTick(agentsToTick);
+                Agent agent = chooseAgentToTick1(agentsToTick);
                 if (agentLocations.containsKey(agent)) {
                     agent.preTick();
                     if (agentLocations.containsKey(agent)) {
@@ -55,10 +56,9 @@ public class World {
                 }
                 agentsToTick.remove(agent);
             }
-
             currentTick++;
-            System.out.println("Tick №: " + currentTick);
             notifyTick();
+            System.out.println("notify tick is done");
             try {
                 Thread.sleep(tickDelay);
             } catch (InterruptedException e) {
@@ -82,6 +82,32 @@ public class World {
             counter++;
         }
         return result;
+    }
+
+    private Agent chooseAgentToTick1(Set<Agent> agents) {
+        double sum = 0;
+        double count = 0;
+        Map<Double, Agent> initiative = new HashMap<>();
+        ArrayList<Double> ps = new ArrayList<>();
+        for (Agent a : agents) {
+            sum += a.getInitiative();
+        }
+        for (Agent a : agents) {
+            double init = a.getInitiative() / sum;
+            count += init;
+            initiative.put(count, a);
+            ps.add(count);
+        }
+
+        double r = rand.nextDouble();
+        for (double p : ps) {
+            if (r <= p) {
+                return initiative.get(p);
+            }
+
+        }
+        throw new IllegalStateException();
+
     }
 
 
@@ -178,6 +204,7 @@ public class World {
 
         @Override
         public <T extends Agent> void createAgent(Class<T> c) {
+            //todo set the location close to the parent
             try {
                 Agent agent = c.newInstance();
                 agent.setHandle(new WorldHandleImpl(agent));
@@ -275,7 +302,7 @@ public class World {
     private void createAgents() {
 
         int count = 0;
-        while (count < 5) {
+        while (count < 15) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
