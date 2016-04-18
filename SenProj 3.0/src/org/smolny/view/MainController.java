@@ -84,13 +84,16 @@ public class MainController implements Initializable {
                 }
             });
 
-            while ( !done.get() ) {
-                synchronized (lock) {
-                    try { lock.wait(); } catch (InterruptedException e) {
+            synchronized (lock) {
+                while (!done.get()) {
+                    try {
+                        lock.wait();
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
             }
+
         });
 
         Thread t = new Thread( () -> {
