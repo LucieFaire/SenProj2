@@ -47,7 +47,7 @@ public class LivingEntity extends Agent {
      * inner logic of the agent behavior
      */
     public void randomMove(Memory memory, IntPoint lp) {
-        ArrayList<Integer> options = new ArrayList<>();
+        List<Integer> options = new ArrayList<>();
         if (memory.get(lp.getX(), lp.getY() - 1) != null) {
             int goUp = 1;
             options.add(goUp);
@@ -145,7 +145,7 @@ public class LivingEntity extends Agent {
         }
 
         //backtrack the path
-        ArrayList<IntPoint> path = new ArrayList<>();
+        List<IntPoint> path = new ArrayList<>();
         if (visited.contains(goal)) {
             current = memo.get(goal);
             path.add(goal);
@@ -213,22 +213,25 @@ public class LivingEntity extends Agent {
         for (IntPoint p : memory.getKSet()) {
             CellProjection cp = memory.get(p);
             if (cp != null) {
-                ccid = cp.getRelevantAgent(c, s);
-                if (ccid != null) {
-                    int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
-                    if (h < count) {
-                        count = h;
-                        found = cp;
-                        cid = ccid;
-                    }
-                }
+               ccid = cp.getRelevantAgent(c, s);
+               if (ccid != null) {
+                  int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
+                  if (h < count) {
+                     count = h;
+                     found = cp;
+                     cid = ccid;
+                  }
+               }
             }
         }
         if (found != null) {
             pathFindTo(lp, found.getLocalPoint(), memory);
-
+            List<AgentProjection> l;
             if (lp.equals(found.getLocalPoint())) {
-                handle.createAgent(c, this);
+                l = found.agentsoOfTheSameClass(c);
+                if (l.size() < 3) {
+                    handle.createAgent(c, this);
+                }
             }
         } else {
             randomMove(memory, lp);
@@ -270,7 +273,7 @@ public class LivingEntity extends Agent {
 
     public void runAway(Memory memory, Class c) {
         IntPoint lp = this.getLocalPosition();
-        ArrayList<IntPoint> locs = new ArrayList<>();
+        List<IntPoint> locs = new ArrayList<>();
         IntPoint wlf;
         for (IntPoint p : memory.getKSet()) {
             CellProjection cp = memory.get(p);
@@ -291,7 +294,7 @@ public class LivingEntity extends Agent {
     }
 
 
-    private IntPoint superposition(ArrayList<IntPoint> arr, IntPoint lp) {
+    private IntPoint superposition(List<IntPoint> arr, IntPoint lp) {
         if (arr.isEmpty()) {
             return null;
         }

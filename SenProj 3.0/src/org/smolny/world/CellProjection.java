@@ -104,6 +104,17 @@ public class CellProjection {
         return null;
     }
 
+    public List<AgentProjection> agentsoOfTheSameClass(Class c) {
+        List<AgentProjection> l = new ArrayList<>();
+        for (AgentProjection a : agents) {
+            if (a.getC().equals(c)) {
+                l.add(a);
+            }
+        }
+        return l;
+    }
+
+
 
 
 

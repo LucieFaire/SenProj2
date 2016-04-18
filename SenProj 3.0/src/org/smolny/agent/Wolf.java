@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Wolf extends LivingEntity {
 
-    double frequency = 0.233;
+    double frequency = 0.30;
 
     public Wolf() {
         super();

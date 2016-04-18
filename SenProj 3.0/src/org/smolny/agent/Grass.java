@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  */
 public class Grass extends Material {
 
-    double spawnProb = 0.20;
+    double spawnProb = 0.18;
 
     public Grass() {
         super();
@@ -25,7 +25,7 @@ public class Grass extends Material {
         if (surrounded(environment, center)) {
             handle.die();
         } else {
-            if (lifeLevel < 8 && rand.nextDouble() < spawnProb) {
+            if (lifeLevel < 7 && rand.nextDouble() < spawnProb) {
                 for (int i = 0; i < environment.length; i++) {
                     for (int j = 0; j < environment[i].length; j++) {
                         CellProjection cp = environment[i][j];

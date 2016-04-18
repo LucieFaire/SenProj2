@@ -313,12 +313,14 @@ public class World {
             r.setHandle(new WorldHandleImpl(r));
             setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
 
+            count++;
+        }
+        for (int i = 0; i < 20; i++) {
             Agent v = new Grass();
             v.setHandle(new WorldHandleImpl(v));
             setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-
-            count++;
         }
+
     }
 
 
