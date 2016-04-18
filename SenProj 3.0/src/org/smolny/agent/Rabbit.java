@@ -19,13 +19,13 @@ public class Rabbit extends LivingEntity {
         double r = rand.nextDouble();
         if (lifeLevel < 15) {
             searchForFood(memory, Grass.class);
-            System.out.println("Rabbit searches for food");
+            //System.out.println("Rabbit searches for food");
         } else if (lifeTime > 30 && r < frequency){
             searchForPartner(memory, Rabbit.class, this.getSex());
-            System.out.println("Rabbit searches for love");
+            //System.out.println("Rabbit searches for love");
         } else  {
             runAway(memory, Wolf.class);
-            System.out.println("Rabbit runs away");
+            //System.out.println("Rabbit runs away");
         }
 //        ArrayList<Point> locs = new ArrayList<>();
 //        int count = MAX;

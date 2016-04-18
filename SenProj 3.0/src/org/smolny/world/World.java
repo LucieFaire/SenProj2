@@ -60,7 +60,7 @@ public class World {
             }
             currentTick++;
             notifyTick();
-            System.out.println("notify tick is done");
+            //System.out.println("notify tick is done");
             try {
                 Thread.sleep(tickDelay);
             } catch (InterruptedException e) {
@@ -86,19 +86,32 @@ public class World {
         return result;
     }
 
+
+
     private Agent chooseAgentToTick1(Set<Agent> agents) {
         double sum = 0;
+
+        List<Double> ps = new ArrayList<>();
+        for (Agent a : agents) {
+            if (!(a.getClass().equals(Grass.class))) {
+                sum += a.getInitiative();
+            }
+        }
         double count = 0;
         Map<Double, Agent> initiative = new HashMap<>();
-        ArrayList<Double> ps = new ArrayList<>();
+        List<Agent> material = new ArrayList<>();
         for (Agent a : agents) {
-            sum += a.getInitiative();
+            if (!(a.getClass().getSuperclass().equals(Material.class))) {
+                double init = a.getInitiative() / sum;
+                count += init;
+                initiative.put(count, a);
+                ps.add(count);
+            } else {
+                material.add(a);
+            }
         }
-        for (Agent a : agents) {
-            double init = a.getInitiative() / sum;
-            count += init;
-            initiative.put(count, a);
-            ps.add(count);
+        if (material.size() > 0) {
+            return material.get(0);
         }
 
         double r = rand.nextDouble();
