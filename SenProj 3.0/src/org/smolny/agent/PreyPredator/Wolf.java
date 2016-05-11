@@ -1,13 +1,13 @@
-package org.smolny.agent;
+package org.smolny.agent.PreyPredator;
 
 import org.smolny.world.CellProjection;
 
 /**
  * Created by dsh on 3/19/16.
  */
-public class Wolf extends LivingEntity {
+public class Wolf extends PreyPredator {
 
-    double frequency = 0.30;
+    double frequency = 0.05;
 
     public Wolf() {
         super();
@@ -17,7 +17,7 @@ public class Wolf extends LivingEntity {
     @Override
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
-        if (lifeLevel < 20) {
+        if (lifeLevel < 25) {
             // search for food
             searchForFood(memory, Rabbit.class);
             //System.out.println("Wolf searches for food");

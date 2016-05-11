@@ -23,8 +23,10 @@ public interface WorldHandle {
 
     void die();
 
-    void createGrass(Agent a, IntPoint lp);
+    void createMaterial(Agent a, IntPoint lp);
 
     <T extends Agent> void createAgent(Class<T> c, Agent a);
+
+    void addAgent(Agent a, int x, int y);
 
 }

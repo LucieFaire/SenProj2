@@ -19,7 +19,7 @@ public class LivingEntity extends Agent {
 
 
     //private String age;
-    Random rand = new Random();
+    protected Random rand = new Random();
     //private List<Material> inventory;
 
 
@@ -38,6 +38,13 @@ public class LivingEntity extends Agent {
         return this.sex;
     }
 
+    public void setSex(char c) {
+        if (c != 'f' || c != 'm') {
+            throw new RuntimeException("Invalid sex value.");
+        }
+        this.sex = c;
+    }
+
     @Override
     public void tick(CellProjection[][] environment) {
         memory.update(environment);
@@ -46,7 +53,7 @@ public class LivingEntity extends Agent {
     /**
      * inner logic of the agent behavior
      */
-    public void randomMove(Memory memory, IntPoint lp) {
+    public void randomStep(Memory memory, IntPoint lp) {
         List<Integer> options = new ArrayList<>();
         if (memory.get(lp.getX(), lp.getY() - 1) != null) {
             int goUp = 1;
@@ -67,14 +74,19 @@ public class LivingEntity extends Agent {
 
         int choice = rand.nextInt(options.size());
         choice = options.get(choice);
-        if (choice == 1) {
-            handle.goUp();
-        } else if (choice == 2) {
-            handle.goDown();
-        } else if (choice == 3) {
-            handle.goLeft();
-        } else if (choice == 4) {
-            handle.goRight();
+        switch (choice) {
+            case 1:
+                handle.goUp();
+                break;
+            case 2:
+                handle.goDown();
+                break;
+            case 3:
+                handle.goLeft();
+                break;
+            case 4:
+                handle.goRight();
+                break;
         }
     }
 
@@ -202,118 +214,7 @@ public class LivingEntity extends Agent {
         }
     }
 
-    //--behaviour-logic-------------------------------------------------------------------------------------------------
 
-    public void searchForPartner(Memory memory, Class c, char s) {
-        IntPoint lp = this.getLocalPosition();
-        int count = MAX;
-        UUID cid = null;
-        UUID ccid = null;
-        CellProjection found = null;
-        for (IntPoint p : memory.getKSet()) {
-            CellProjection cp = memory.get(p);
-            if (cp != null) {
-               ccid = cp.getRelevantAgent(c, s);
-               if (ccid != null) {
-                  int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
-                  if (h < count) {
-                     count = h;
-                     found = cp;
-                     cid = ccid;
-                  }
-               }
-            }
-        }
-        if (found != null) {
-            pathFindTo(lp, found.getLocalPoint(), memory);
-            List<AgentProjection> l;
-            if (lp.equals(found.getLocalPoint())) {
-                l = found.agentsoOfTheSameClass(c);
-                if (l.size() < 3) {
-                    handle.createAgent(c, this);
-                }
-            }
-        } else {
-            randomMove(memory, lp);
-        }
-
-    }
-
-    public void searchForFood(Memory memory, Class c) {
-        IntPoint lp = this.getLocalPosition();
-        int count = MAX;
-        UUID cid = null;
-        UUID ccid = null;
-        CellProjection found = null;
-        for (IntPoint p : memory.getKSet()) {
-            CellProjection cp = memory.get(p);
-            if (cp != null) {
-                ccid = cp.getRelevantAgent(c);
-                if (ccid != null) {
-                    int h = Math.abs(lp.getX() - p.getX()) + Math.abs(lp.getY() - p.getY());
-                    if (h < count) {
-                        count = h;
-                        found = cp;
-                        cid = ccid;
-                    }
-                }
-            }
-        }
-        if (found != null) {
-            pathFindTo(lp, found.getLocalPoint(), memory);
-
-            if (lp.equals(found.getLocalPoint())) {
-                handle.eat(cid);
-            }
-        } else {
-            randomMove(memory, lp);
-        }
-    }
-
-
-    public void runAway(Memory memory, Class c) {
-        IntPoint lp = this.getLocalPosition();
-        List<IntPoint> locs = new ArrayList<>();
-        IntPoint wlf;
-        for (IntPoint p : memory.getKSet()) {
-            CellProjection cp = memory.get(p);
-            if (cp != null) {
-                if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
-                    wlf = cp.getLocalPoint(); // collect all the locs of wolves
-                    locs.add(wlf);
-                }
-            }
-        }
-        wlf = superposition(locs, lp);
-        if (wlf != null) {
-            // wolf found, run away
-            pathFindTo(lp, wlf, memory);
-        } else {
-            randomMove(memory, lp);
-        }
-    }
-
-
-    private IntPoint superposition(List<IntPoint> arr, IntPoint lp) {
-        if (arr.isEmpty()) {
-            return null;
-        }
-
-        int x = 0;
-        int y = 0;
-        for (IntPoint p : arr) {
-            IntPoint vector = lp.minus(p);
-            double length = Math.sqrt(vector.getX()*vector.getX() + vector.getY()*vector.getY());
-            vector = IntPoint.create((int)(vector.getX() / (length * length)),
-                    (int)(vector.getY() / (length * length)));
-
-            x += vector.getX();
-            y += vector.getY();
-
-        }
-        IntPoint target = IntPoint.create(Math.round(lp.getX() + x), Math.round(lp.getY() + y));
-        return target;
-    }
 }
 
 

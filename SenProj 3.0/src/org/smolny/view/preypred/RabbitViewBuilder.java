@@ -2,10 +2,9 @@ package org.smolny.view.preypred;
 
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
-import org.smolny.agent.Rabbit;
+import org.smolny.agent.PreyPredator.Rabbit;
 import org.smolny.view.agents.AgentView;
 import org.smolny.view.agents.AgentViewBuilder;
-import org.smolny.view.agents.AgentViewFactory;
 
 /**
  * Created by Asus on 12.04.2016.

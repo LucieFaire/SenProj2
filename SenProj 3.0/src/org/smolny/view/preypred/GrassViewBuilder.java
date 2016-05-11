@@ -3,7 +3,7 @@ package org.smolny.view.preypred;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import org.smolny.agent.Grass;
+import org.smolny.agent.PreyPredator.Grass;
 import org.smolny.view.agents.AgentView;
 import org.smolny.view.agents.AgentViewBuilder;
 

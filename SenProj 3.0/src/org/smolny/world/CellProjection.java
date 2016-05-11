@@ -15,7 +15,7 @@ public class CellProjection {
    // public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
 
-    private IntPoint globalPoint = null;
+    //private IntPoint globalPoint = null;
     private Set<AgentProjection> agents;
     private int hCost;
     private int cost;
@@ -39,7 +39,7 @@ public class CellProjection {
             agents.add(AgentProjection.create(a));
 
         }
-        this.globalPoint = cell.getPoint();
+        //this.globalPoint = cell.getPoint();
     }
 
 //    public Point getGlobalPoint() {
@@ -82,9 +82,9 @@ public class CellProjection {
         this.localPoint = point;
     }
 
-    public IntPoint getGlobalPoint() {
-        return globalPoint;
-    }
+    //public IntPoint getGlobalPoint() {
+    //      return globalPoint;
+    //}
 
     public UUID getRelevantAgent(Class c, char s) {
         for (AgentProjection a : agents) {

@@ -3,7 +3,7 @@ package org.smolny.view.preypred;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import org.smolny.agent.Wolf;
+import org.smolny.agent.PreyPredator.Wolf;
 import org.smolny.view.agents.AgentView;
 import org.smolny.view.agents.AgentViewBuilder;
 

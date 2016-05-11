@@ -1,13 +1,13 @@
-package org.smolny.agent;
+package org.smolny.agent.PreyPredator;
 
 import org.smolny.world.CellProjection;
 
 /**
  * Created by dsh on 3/19/16.
  */
-public class Rabbit extends LivingEntity {
+public class Rabbit extends PreyPredator {
 
-    private double frequency = 0.42;
+    private double frequency = 0.1;
     public Rabbit() {
         super();
 

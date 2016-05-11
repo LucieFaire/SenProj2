@@ -1,7 +1,6 @@
 package org.smolny.view;
 
 import javafx.animation.ParallelTransition;
-import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,9 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import org.smolny.agent.Agent;
-import org.smolny.agent.Grass;
-import org.smolny.agent.Rabbit;
-import org.smolny.agent.Wolf;
+import org.smolny.agent.PreyPredator.Grass;
+import org.smolny.agent.PreyPredator.Rabbit;
+import org.smolny.agent.PreyPredator.Wolf;
 import org.smolny.view.agents.AgentView;
 import org.smolny.view.agents.AgentViewFactory;
 import org.smolny.view.preypred.GrassViewBuilder;
@@ -97,7 +96,7 @@ public class MainController implements Initializable {
         });
 
         Thread t = new Thread( () -> {
-            world.start();
+            world.run();
         });
         t.setName("WorldProcessing");
         t.setDaemon(true);
@@ -231,7 +230,7 @@ public class MainController implements Initializable {
 
 
     private World createInitialWorld() {
-        World world = new World(50, 50);
+        World world = new World(70, 70);
 
         //register view builders
         AgentViewFactory.registerView(Grass.class, new GrassViewBuilder());

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class Agent {
 
     protected int MAX = 1000000000;
-    private double freq = 0.0000005;
+    private double freq = 0.000005;
     protected Random rand = new Random();
     protected WorldHandle handle;
 
@@ -91,6 +91,14 @@ public class Agent {
      * @param environment
      */
     public void tick(CellProjection[][] environment) {
+
+    }
+
+    public void onDie() {
+
+    }
+
+    public void onCreate() {
 
     }
 

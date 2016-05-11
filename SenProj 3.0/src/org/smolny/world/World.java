@@ -1,9 +1,11 @@
 package org.smolny.world;
 
 import org.smolny.agent.*;
+import org.smolny.agent.PreyPredator.Grass;
+import org.smolny.agent.PreyPredator.Rabbit;
+import org.smolny.agent.PreyPredator.Wolf;
 import org.smolny.utils.IntPoint;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class World {
 
     private volatile boolean isRunning = true;
 
-    public void start() {
+    public void run() {
         while (isRunning) {
             System.out.println("Tick №: " + currentTick);
             //printState();
@@ -213,6 +215,12 @@ public class World {
         }
 
         @Override
+        public void addAgent(Agent a, int x, int y) {
+            setGlobalAgentLocation(a, x, y);
+            a.onCreate();
+        }
+
+        @Override
         public void die() {
             dead(agent);
         }
@@ -223,7 +231,7 @@ public class World {
                 IntPoint p = agentLocations.get(a).getPoint();
                 Agent agent = c.newInstance();
                 agent.setHandle(new WorldHandleImpl(agent));
-                setGlobalAgentLocation(agent, p.getX(), p.getY());
+                addAgent(agent, p.getX(), p.getY());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -231,7 +239,7 @@ public class World {
         }
 
         @Override
-        public void createGrass(Agent a, IntPoint lp) {
+        public void createMaterial(Agent a, IntPoint lp) {
             IntPoint p = agentLocations.get(a).getPoint().plus(lp);
             Agent agent = new Grass();
             agent.setHandle(new WorldHandleImpl(agent));
@@ -303,7 +311,9 @@ public class World {
         Cell cell = agentLocations.get(a);
         cell.getAgents().remove(a);
         agentLocations.remove(a);
+        a.onDie();
         a = null;
+
 
     }
 

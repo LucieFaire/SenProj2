@@ -1,10 +1,8 @@
 package org.smolny.view.agents;
 
 import org.smolny.agent.Agent;
-import org.smolny.agent.Wolf;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 
 /**
  * Created by Asus on 08.04.2016.

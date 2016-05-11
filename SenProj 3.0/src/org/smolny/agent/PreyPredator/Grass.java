@@ -1,5 +1,6 @@
-package org.smolny.agent;
+package org.smolny.agent.PreyPredator;
 
+import org.smolny.agent.Material;
 import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
 
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class Grass extends Material {
 
-    double spawnProb = 0.18;
+    double spawnProb = 0.2;
 
     public Grass() {
         super();
@@ -48,7 +49,7 @@ public class Grass extends Material {
                         int r = rand.nextInt(size);
                         p = locs.get(r);
                     }
-                    handle.createGrass(this, p);
+                    handle.createMaterial(this, p);
                     }
                 }
             }
