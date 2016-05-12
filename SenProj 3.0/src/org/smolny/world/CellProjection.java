@@ -104,6 +104,15 @@ public class CellProjection {
         return null;
     }
 
+    public boolean IsRelevantAgent(Class c, char s) {
+        for (AgentProjection a : agents) {
+            if (a.getC().equals(c) && a.getSex() != s) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public List<AgentProjection> agentsoOfTheSameClass(Class c) {
         List<AgentProjection> l = new ArrayList<>();
         for (AgentProjection a : agents) {

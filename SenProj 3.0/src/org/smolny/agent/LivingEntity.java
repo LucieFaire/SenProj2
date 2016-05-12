@@ -53,7 +53,7 @@ public class LivingEntity extends Agent {
     /**
      * inner logic of the agent behavior
      */
-    public void randomStep(Memory memory, IntPoint lp) {
+    public void randomStep(Memory memory, IntPoint lp ) {
         List<Integer> options = new ArrayList<>();
         if (memory.get(lp.getX(), lp.getY() - 1) != null) {
             int goUp = 1;
@@ -95,7 +95,7 @@ public class LivingEntity extends Agent {
     /**
      * find the shortest path to the prey using A* search
      */
-    public void pathFindTo(IntPoint start, IntPoint goal, Memory memo) {
+    public void pathFindTo(IntPoint start, IntPoint goal, Memory memo, int steps) {
         PriorityQueue<CellProjection> open = new PriorityQueue<>((Object o1, Object o2) -> {
             CellProjection c1 = (CellProjection)o1;
             CellProjection c2 = (CellProjection)o2;
@@ -170,16 +170,23 @@ public class LivingEntity extends Agent {
             if (path.size() == 1) {
                 return;
             } else {
-                IntPoint c = path.get(0);
-                IntPoint f = path.get(1);
-                if (f.getX() > c.getX()) {
-                    handle.goRight();
-                } else if (f.getX() < c.getX()) {
-                    handle.goLeft();
-                } else if (f.getY() > c.getY()) {
-                    handle.goDown();
-                } else if (f.getY() < c.getY()) {
-                    handle.goUp();
+                if (path.size() < steps) {
+                    steps = path.size() - 1;
+                }
+                int s = 0;
+                while (s < steps) {
+                    IntPoint c = path.get(s);
+                    IntPoint f = path.get(s+1);
+                    if (f.getX() > c.getX()) {
+                        handle.goRight();
+                    } else if (f.getX() < c.getX()) {
+                        handle.goLeft();
+                    } else if (f.getY() > c.getY()) {
+                        handle.goDown();
+                    } else if (f.getY() < c.getY()) {
+                        handle.goUp();
+                    }
+                    s++;
                 }
             }
         }

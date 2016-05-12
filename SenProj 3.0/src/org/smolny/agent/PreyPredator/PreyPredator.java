@@ -20,7 +20,16 @@ public abstract class PreyPredator extends LivingEntity {
     public PreyPredator() {
         super();
     }
-    public void searchForPartner(Memory memory, Class c, char s) {
+
+    @Override
+    public void preTick() {
+        super.preTick();
+        if (lifeTime == 200) {
+            handle.die();
+        }
+    }
+
+    public void searchForPartner(Memory memory, Class c, char s, int steps) {
         IntPoint lp = this.getLocalPosition();
         int count = MAX;
         UUID cid = null;
@@ -41,7 +50,7 @@ public abstract class PreyPredator extends LivingEntity {
             }
         }
         if (found != null) {
-            pathFindTo(lp, found.getLocalPoint(), memory);
+            pathFindTo(lp, found.getLocalPoint(), memory, steps);
             List<AgentProjection> l;
             if (lp.equals(found.getLocalPoint())) {
                 l = found.agentsoOfTheSameClass(c);
@@ -56,7 +65,7 @@ public abstract class PreyPredator extends LivingEntity {
 
     }
 
-    public void searchForFood(Memory memory, Class c) {
+    public void searchForFood(Memory memory, Class c, int steps) {
         IntPoint lp = this.getLocalPosition();
         int count = MAX;
         UUID cid = null;
@@ -77,7 +86,7 @@ public abstract class PreyPredator extends LivingEntity {
             }
         }
         if (found != null) {
-            pathFindTo(lp, found.getLocalPoint(), memory);
+            pathFindTo(lp, found.getLocalPoint(), memory, steps);
 
             if (lp.equals(found.getLocalPoint())) {
                 handle.eat(cid);
@@ -88,7 +97,7 @@ public abstract class PreyPredator extends LivingEntity {
     }
 
 
-    public void runAway(Memory memory, Class c) {
+    public void runAway(Memory memory, Class c, int steps) {
         IntPoint lp = this.getLocalPosition();
         List<IntPoint> locs = new ArrayList<>();
         IntPoint wlf;
@@ -104,7 +113,7 @@ public abstract class PreyPredator extends LivingEntity {
         wlf = superposition(locs, lp);
         if (wlf != null) {
             // wolf found, run away
-            pathFindTo(lp, wlf, memory);
+            pathFindTo(lp, wlf, memory, steps);
         } else {
             randomStep(memory, lp);
         }

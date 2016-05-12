@@ -1,5 +1,7 @@
 package org.smolny.world;
 
+import org.smolny.AI.IntelligentAgent;
+import org.smolny.AI.RFLModule;
 import org.smolny.agent.*;
 import org.smolny.agent.PreyPredator.Grass;
 import org.smolny.agent.PreyPredator.Rabbit;
@@ -344,6 +346,10 @@ public class World {
             setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
         }
 
+        //intelligent agent
+        Agent smart = new IntelligentAgent();
+        ((IntelligentAgent)smart).setRFLModule(new RFLModule(smart));
+        setGlobalAgentLocation(smart, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
     }
 
 

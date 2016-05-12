@@ -19,13 +19,13 @@ public class Wolf extends PreyPredator {
         super.tick(environment);
         if (lifeLevel < 25) {
             // search for food
-            searchForFood(memory, Rabbit.class);
+            searchForFood(memory, Rabbit.class, 1);
             //System.out.println("Wolf searches for food");
         } else if (lifeTime > 35 && rand.nextDouble() < frequency) {
-            searchForPartner(memory, Wolf.class, this.getSex());
+            searchForPartner(memory, Wolf.class, this.getSex(), 1);
             //System.out.println("Wolf searches for love");
         } else {
-                searchForFood(memory, Rabbit.class);
+                searchForFood(memory, Rabbit.class, 1);
             //System.out.println("Wolf again searches for food");
 
         }

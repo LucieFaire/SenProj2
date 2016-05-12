@@ -18,13 +18,13 @@ public class Rabbit extends PreyPredator {
         super.tick(environment);
         double r = rand.nextDouble();
         if (lifeLevel < 15) {
-            searchForFood(memory, Grass.class);
+            searchForFood(memory, Grass.class, 1);
             //System.out.println("Rabbit searches for food");
         } else if (lifeTime > 30 && r < frequency){
-            searchForPartner(memory, Rabbit.class, this.getSex());
+            searchForPartner(memory, Rabbit.class, this.getSex(), 1);
             //System.out.println("Rabbit searches for love");
         } else  {
-            runAway(memory, Wolf.class);
+            runAway(memory, Wolf.class, 1);
             //System.out.println("Rabbit runs away");
         }
 //        ArrayList<Point> locs = new ArrayList<>();
