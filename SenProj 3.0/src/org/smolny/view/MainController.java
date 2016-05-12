@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import org.smolny.AI.IntelligentAgent;
 import org.smolny.agent.Agent;
 import org.smolny.agent.PreyPredator.Grass;
 import org.smolny.agent.PreyPredator.Rabbit;
@@ -41,6 +42,7 @@ public class MainController implements Initializable {
         agentViewOrder.add(Grass.class);
         agentViewOrder.add(Rabbit.class);
         agentViewOrder.add(Wolf.class);
+        agentViewOrder.add(IntelligentAgent.class);
     }
 
 
@@ -173,6 +175,14 @@ public class MainController implements Initializable {
                 circle.setFill(Color.BLUE);
                 pane.getChildren().add(circle);
             }
+            if (agent instanceof IntelligentAgent) {
+                Circle circle = new Circle();
+                circle.setCenterX(cell.getPoint().getX() * xDelta + xDelta / 2);
+                circle.setCenterY(cell.getPoint().getY() * yDelta + yDelta / 2);
+                circle.setRadius(xDelta / 3);
+                circle.setFill(Color.BLACK);
+                pane.getChildren().add(circle);
+            }
 
 
         }
@@ -230,7 +240,7 @@ public class MainController implements Initializable {
 
 
     private World createInitialWorld() {
-        World world = new World(70, 70);
+        World world = new World(50, 50);
 
         //register view builders
         AgentViewFactory.registerView(Grass.class, new GrassViewBuilder());

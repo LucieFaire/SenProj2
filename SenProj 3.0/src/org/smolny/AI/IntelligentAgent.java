@@ -10,16 +10,23 @@ import org.smolny.world.CellProjection;
  */
 public class IntelligentAgent extends PreyPredator {
 
-    public int reward = 0;
-    protected RFLModule module;
-    public Action a = null;
+    private RFLModule module;
+    public static final int max = Integer.MAX_VALUE;
+
     public IntelligentAgent() {
         super();
     }
 
+    public void preTick() {
+        super.preTick();
+        if (lifeTime == max) {
+            handle.die();
+        }
+    }
+
     @Override
     public void onDie() {
-        handle.die(); //?????????
+        this.module.agentDied();
     }
 
     @Override
@@ -34,10 +41,10 @@ public class IntelligentAgent extends PreyPredator {
     @Override
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
-        module.newState(this, memory); // create the state
+        State s = module.newState(this, memory); // create the state
         Action a = module.chooseAction(0.1); // choose the action according to the state
         mapAction(a); // do the action
-        module.learning( 0.5, 0.5); // learn on previous decision
+
 
     }
 
@@ -47,9 +54,9 @@ public class IntelligentAgent extends PreyPredator {
       if (a.equals(Action.DIE)) {
           onDie();
       } else if (a.equals(Action.EAT)) {
-          searchForFood(memory, Grass.class, 2);
+          searchForFood(memory, Grass.class, 1);
       } else {
-          runAway(memory, Wolf.class, 2);
+          runAway(memory, Wolf.class, 1);
       }
 
     }

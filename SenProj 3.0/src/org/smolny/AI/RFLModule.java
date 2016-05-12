@@ -8,6 +8,7 @@ import org.smolny.agent.PreyPredator.Wolf;
 import org.smolny.agent.memory.Memory;
 import org.smolny.utils.IntPoint;
 import org.smolny.world.CellProjection;
+import org.smolny.world.WorldHandle;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,21 +16,36 @@ import java.util.stream.Collectors;
 /**
  * Created by dsh on 4/18/16.
  */
-public class RFLModule implements RFLearning {
+public final class RFLModule implements RFLearning {
 
     private List<AgentHistory> history = new ArrayList<>();
     private Agent agent;
-    protected Action action;
-    protected State st;
-    protected Memory memo;
-    protected State nextSt;
-    protected int reward = 0;
-    public HashMap<State, HashMap<Action, Double>> q = setQ(); // works once???
-    private int count = 0;
+    private long LLevel;
+    private Action action;
+    private State st;
+    private Memory memo;
+    private State nextSt;
+    private int reward = 0;
+    private UUID id;
+    private int localStepReward;
+    private static final double alpha = 0.5;
+    private static final double gamma = 0.5;
+    private HashMap<State, HashMap<Action, Double>> q = setQ();
 
-    public RFLModule(Agent agent) {
-        this.agent = agent;
+    private WorldHandle handle;
+
+    private boolean hasDied = false;
+
+    public RFLModule(Agent agent, WorldHandle handle) {
+        this.agent  = agent;
+        this.handle = handle;
+        this.id = agent.getId();
     }
+
+    public void agentDied() {
+        hasDied = true;
+    }
+
 
     public HashMap<State, HashMap<Action, Double>> setQ() {
 
@@ -50,18 +66,23 @@ public class RFLModule implements RFLearning {
         return reward;
     }
 
-    public int updateReward(Action a) {
-        int r = 0;
-        if (a.equals(Action.EAT) || a.equals(Action.RUNAWAY)) {
-            r = 1;
+    //call this method from the world at the end of a cycle
+    public void updateReward() {
+        int r;
+        if (hasDied) {
+            reset();
+            r = -100;
+        } else if (agent.getLifeLevel() > LLevel) {
+            r = 10;
         } else {
-            r = 100;
+            r = 5;
         }
-        return r;
+        localStepReward = r;
+        learning(alpha, gamma);
     }
 
     // create a new state of the agent
-    public void newState(Agent a, Memory memory) {
+    public State newState(Agent a, Memory memory) {
         memo = memory;
         boolean eat = false;
         boolean enemy = false;
@@ -88,6 +109,7 @@ public class RFLModule implements RFLearning {
         }
         State state = new WRState(eat, enemy, hunger);
         st = state;
+        return state;
 
     }
 
@@ -100,21 +122,25 @@ public class RFLModule implements RFLearning {
     }
 
     public void learning( double alpha, double gamma) {
-        int r = updateReward(action);
-        newState(agent, memo);
+        LLevel = agent.getLifeLevel();
+        nextSt = newState(agent, memo);
         HashMap<Action, Double> qa = q.get(st);
-        Double qav = qa.get(action) + alpha *(r + gamma * (getMaxQAV(q.get(nextSt))) - qa.get(action));
+        Double qav = qa.get(action) + alpha *(localStepReward + gamma * (getMaxQAV(q.get(nextSt))) - qa.get(action));
         qa.put(action, qav); // update value for the taken value in the hashmap qa
         q.put(st, qa); // update the value = hashmap qa for the current state s in q
-        reward += r;
+        reward += localStepReward;
         updateHistory(st, action, reward);
 
         //st = nextSt;
         //System.out.printf(" %s-%s %f\n", st, action, qav);
     }
 
-    public void reset(Agent a) {
-        // if agent is dead reset the reward, action, position, itself
+    private void reset() {
+        this.reward = 0;
+        this.hasDied = false;
+        IntelligentAgent ag = handle.createIntelligence(id);
+        this.agent = ag;
+
     }
 
     public void updateHistory(State state, Action action, int reward) {

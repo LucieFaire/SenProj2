@@ -12,11 +12,11 @@ public interface RFLearning {
 
     HashMap<State, HashMap<Action, Double>> setQ();
 
-    int updateReward(Action a);
+    void updateReward();
 
     void learning( double alpha, double gamma);
 
-    void newState(Agent a, Memory memo);
+    State newState(Agent a, Memory memo);
 
     Action chooseAction(double epsilon);
 

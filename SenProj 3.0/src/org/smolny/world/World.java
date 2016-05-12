@@ -62,6 +62,9 @@ public class World {
                 }
                 agentsToTick.remove(agent);
             }
+            for (RFLModule m : rflModules.values()) {
+                m.updateReward();
+            }
             currentTick++;
             notifyTick();
             //System.out.println("notify tick is done");
@@ -241,6 +244,17 @@ public class World {
         }
 
         @Override
+        public IntelligentAgent createIntelligence(UUID cid) {
+            IntelligentAgent a = new IntelligentAgent();
+            UUID id = a.getId();
+            a.setHandle(new WorldHandleImpl(a));
+            setGlobalAgentLocation(a, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+            a.setRFLModule(rflModules.get(cid));
+            rflModules.replace(a.getId(), rflModules.get(cid));
+            return a;
+        }
+
+        @Override
         public void createMaterial(Agent a, IntPoint lp) {
             IntPoint p = agentLocations.get(a).getPoint().plus(lp);
             Agent agent = new Grass();
@@ -314,7 +328,7 @@ public class World {
         cell.getAgents().remove(a);
         agentLocations.remove(a);
         a.onDie();
-        a = null;
+
 
 
     }
@@ -347,11 +361,18 @@ public class World {
         }
 
         //intelligent agent
-        Agent smart = new IntelligentAgent();
-        ((IntelligentAgent)smart).setRFLModule(new RFLModule(smart));
+        IntelligentAgent smart = new IntelligentAgent();
+        WorldHandle handle = new WorldHandleImpl(smart);
+        smart.setHandle(handle);
+        RFLModule rflm = new RFLModule(smart, handle);
+        smart.setRFLModule(rflm);
+        rflModules.put(smart.getId(), rflm);
         setGlobalAgentLocation(smart, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
     }
 
+    //--Reinforcement-Learning-----------------------------------------------------------------------------------
+
+    private Map<UUID, RFLModule> rflModules = new HashMap<>();
 
     //------------------------------------------------------------------------------------------------------------------
     //--useful-stuff-------------------------------------------------------------------------------------------

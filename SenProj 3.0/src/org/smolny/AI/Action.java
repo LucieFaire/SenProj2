@@ -21,5 +21,19 @@ public class Action {
         return this.action;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Action action1 = (Action) o;
+
+        return !(action != null ? !action.equals(action1.action) : action1.action != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return action != null ? action.hashCode() : 0;
+    }
 }
