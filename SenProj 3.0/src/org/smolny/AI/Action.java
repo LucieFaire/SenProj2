@@ -7,11 +7,11 @@ public class Action {
 
     public static final String EAT = "eat";
     public static final String DIE = "die";
-    //public static final String PARTNER = "partner";
+    public static final String PARTNER = "partner";
     public static final String RUNAWAY = "runAway";
 
     private String action;
-    // add additional information to hold
+
 
     public Action(String a) {
         this.action = a;
@@ -35,5 +35,10 @@ public class Action {
     @Override
     public int hashCode() {
         return action != null ? action.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "action " + action + '\'';
     }
 }

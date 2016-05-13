@@ -26,7 +26,7 @@ public class Grass extends Material {
         if (surrounded(environment, center)) {
             handle.die();
         } else {
-            if (lifeLevel < 7 && rand.nextDouble() < spawnProb) {
+            if (lifeLevel > 6 && rand.nextDouble() < spawnProb) {
                 for (int i = 0; i < environment.length; i++) {
                     for (int j = 0; j < environment[i].length; j++) {
                         CellProjection cp = environment[i][j];

@@ -343,7 +343,7 @@ public class World {
     private void createAgents() {
 
         int count = 0;
-        while (count < 15) {
+        while (count < 20) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
@@ -354,7 +354,7 @@ public class World {
 
             count++;
         }
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             Agent v = new Grass();
             v.setHandle(new WorldHandleImpl(v));
             setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));

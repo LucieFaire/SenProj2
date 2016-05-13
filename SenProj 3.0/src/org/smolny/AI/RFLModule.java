@@ -54,7 +54,7 @@ public final class RFLModule implements RFLearning {
             HashMap<Action, Double> qa = new HashMap<Action, Double>();
             qa.put(new Action("die"), 0.25);
             qa.put(new Action("eat"), 0.25);
-            //qa.put(new Action("partner"), 0.25);
+            qa.put(new Action("partner"), 0.25);
             qa.put(new Action("runAway"), 0.25);
             q.put(new WRState(i), qa);
         }
@@ -74,8 +74,11 @@ public final class RFLModule implements RFLearning {
             r = -100;
         } else if (agent.getLifeLevel() > LLevel) {
             r = 10;
-        } else {
+        } else  if (LLevel > 60 && action.equals(Action.PARTNER)) {
             r = 5;
+        } else {
+            // runs away
+            r = 8;
         }
         localStepReward = r;
         learning(alpha, gamma);
@@ -86,7 +89,7 @@ public final class RFLModule implements RFLearning {
         memo = memory;
         boolean eat = false;
         boolean enemy = false;
-        //boolean partner = false;
+        boolean partner = false;
         boolean hunger = false;
         for (int i = -4; i < 6; i++) {
             for (int j = -4; j < 6; j++) {
@@ -98,16 +101,16 @@ public final class RFLModule implements RFLearning {
                     if (c.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Wolf.class)) {
                         enemy = true;
                     }
-//                    if (c.IsRelevantAgent(Rabbit.class, ((LivingEntity)a).getSex())) {
-//                        partner = true;
-//                    }
+                    if (c.IsRelevantAgent(Rabbit.class, ((LivingEntity)a).getSex())) {
+                        partner = true;
+                    }
                     if (a.getLifeLevel() < 20) {
                         hunger = true;
                     }
                 }
             }
         }
-        State state = new WRState(eat, enemy, hunger);
+        State state = new WRState(eat, enemy, partner, hunger);
         st = state;
         return state;
 

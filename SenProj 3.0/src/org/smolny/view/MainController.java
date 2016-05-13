@@ -240,7 +240,7 @@ public class MainController implements Initializable {
 
 
     private World createInitialWorld() {
-        World world = new World(50, 50);
+        World world = new World(40, 40);
 
         //register view builders
         AgentViewFactory.registerView(Grass.class, new GrassViewBuilder());

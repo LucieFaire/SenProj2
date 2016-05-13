@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Wolf extends PreyPredator {
 
-    double frequency = 0.05;
+    double frequency = 0.230;
 
     public Wolf() {
         super();
