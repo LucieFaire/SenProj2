@@ -15,7 +15,6 @@ public class LivingEntity extends Agent {
 
 
     protected Memory memory = new Memory();
-    protected char sex;
 
 
     //private String age;
@@ -26,24 +25,9 @@ public class LivingEntity extends Agent {
     public LivingEntity() {
         super();
         this.lifeLevel = 100;
-        if (rand.nextBoolean()) {
-            this.sex = 'f';
-        } else {
-            this.sex = 'm';
-        }
+
     }
 
-
-    public char getSex() {
-        return this.sex;
-    }
-
-    public void setSex(char c) {
-        if (c != 'f' || c != 'm') {
-            throw new RuntimeException("Invalid sex value.");
-        }
-        this.sex = c;
-    }
 
     @Override
     public void tick(CellProjection[][] environment) {

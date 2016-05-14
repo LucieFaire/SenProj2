@@ -1,5 +1,7 @@
 package org.smolny.agent;
 
+import org.smolny.agent.PreyPredator.PreyPredator;
+
 import java.util.UUID;
 
 /**
@@ -18,8 +20,9 @@ public class AgentProjection {
         ap.lifeTime = a.getLifeTime();
         ap.c = a.getClass(); // what class does it return: Agent or ?
         ap.id = a.getId();
-        if (a.getClass().getSuperclass().equals(LivingEntity.class)) {
-            ap.sex = ((LivingEntity) a).getSex();
+
+        if (PreyPredator.class.isAssignableFrom(a.getClass())) {
+            ap.sex = ((PreyPredator) a).getSex();
         } else {
             ap.sex = ' ';
         }

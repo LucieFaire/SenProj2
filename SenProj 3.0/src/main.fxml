@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
@@ -55,6 +56,12 @@
                               <Blend />
                            </effect>
                         </Button>
+                        <TextField />
+                        <TextArea prefHeight="200.0" prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets top="70.0" />
+                           </VBox.margin>
+                        </TextArea>
                      </children>
                   </VBox>
                </children>

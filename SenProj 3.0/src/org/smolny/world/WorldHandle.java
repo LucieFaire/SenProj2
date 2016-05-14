@@ -2,6 +2,7 @@ package org.smolny.world;
 
 import org.smolny.AI.IntelligentAgent;
 import org.smolny.agent.Agent;
+import org.smolny.agent.Material;
 import org.smolny.utils.IntPoint;
 
 import java.awt.*;
@@ -31,5 +32,7 @@ public interface WorldHandle {
     void addAgent(Agent a, int x, int y);
 
     IntelligentAgent createIntelligence(UUID id);
+
+
 
 }

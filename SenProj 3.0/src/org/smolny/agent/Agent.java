@@ -14,11 +14,11 @@ import java.util.UUID;
 public class Agent {
 
     protected int MAX = 1000000000;
-    private double freq = 0.0000005;
+    private double freq = 0.00000005;
     protected Random rand = new Random();
     protected WorldHandle handle;
 
-    private UUID id;
+    protected UUID id;
     protected int sight;
     protected double initiative;
     protected int lifeLevel;
@@ -81,7 +81,8 @@ public class Agent {
     public void preTick() {
         lifeTime++; // counts ticks in game
         lifeLevel -= 2;
-        if (lifeLevel < 1 || rand.nextDouble() < freq) {
+        // || rand.nextDouble() < freq
+        if (lifeLevel < 1) {
             this.handle.die();
         }
     }

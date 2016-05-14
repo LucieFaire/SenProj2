@@ -16,9 +16,15 @@ import java.util.stream.Collectors;
  */
 public abstract class PreyPredator extends LivingEntity {
 
+    protected char sex;
 
     public PreyPredator() {
         super();
+        if (rand.nextBoolean()) {
+            this.sex = 'f';
+        } else {
+            this.sex = 'm';
+        }
     }
 
     @Override
@@ -27,6 +33,17 @@ public abstract class PreyPredator extends LivingEntity {
         if (lifeTime == 200) {
             handle.die();
         }
+    }
+
+    public char getSex() {
+        return this.sex;
+    }
+
+    public void setSex(char c) {
+        if (c != 'f' || c != 'm') {
+            throw new RuntimeException("Invalid sex value.");
+        }
+        this.sex = c;
     }
 
     public void searchForPartner(Memory memory, Class c, char s, int steps) {

@@ -6,7 +6,6 @@ package org.smolny.AI;
 public class Action {
 
     public static final String EAT = "eat";
-    public static final String DIE = "die";
     public static final String PARTNER = "partner";
     public static final String RUNAWAY = "runAway";
 

@@ -51,6 +51,7 @@ public class WRState implements State {
     }
 
     public static int numberOfStates() {
-        return (EAT | ENEMY | PARTNER | HUNGRY) + 1;
+       return (EAT | ENEMY | PARTNER | HUNGRY) + 1;
+
     }
 }

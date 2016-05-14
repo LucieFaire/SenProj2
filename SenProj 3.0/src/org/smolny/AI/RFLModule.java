@@ -3,6 +3,7 @@ package org.smolny.AI;
 import org.smolny.agent.Agent;
 import org.smolny.agent.LivingEntity;
 import org.smolny.agent.PreyPredator.Grass;
+import org.smolny.agent.PreyPredator.PreyPredator;
 import org.smolny.agent.PreyPredator.Rabbit;
 import org.smolny.agent.PreyPredator.Wolf;
 import org.smolny.agent.memory.Memory;
@@ -11,6 +12,7 @@ import org.smolny.world.CellProjection;
 import org.smolny.world.WorldHandle;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -52,7 +54,6 @@ public final class RFLModule implements RFLearning {
         HashMap<State, HashMap<Action, Double>> q = new HashMap<State, HashMap<Action, Double>>();
         for (int i = 0; i < WRState.numberOfStates(); i++) {
             HashMap<Action, Double> qa = new HashMap<Action, Double>();
-            qa.put(new Action("die"), 0.25);
             qa.put(new Action("eat"), 0.25);
             qa.put(new Action("partner"), 0.25);
             qa.put(new Action("runAway"), 0.25);
@@ -73,8 +74,8 @@ public final class RFLModule implements RFLearning {
             reset();
             r = -100;
         } else if (agent.getLifeLevel() > LLevel) {
-            r = 10;
-        } else  if (LLevel > 60 && action.equals(Action.PARTNER)) {
+            r = 12;
+        } else if (action.equals(Action.PARTNER)) {
             r = 5;
         } else {
             // runs away
@@ -87,6 +88,7 @@ public final class RFLModule implements RFLearning {
     // create a new state of the agent
     public State newState(Agent a, Memory memory) {
         memo = memory;
+        LLevel = agent.getLifeLevel();
         boolean eat = false;
         boolean enemy = false;
         boolean partner = false;
@@ -101,7 +103,7 @@ public final class RFLModule implements RFLearning {
                     if (c.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Wolf.class)) {
                         enemy = true;
                     }
-                    if (c.IsRelevantAgent(Rabbit.class, ((LivingEntity)a).getSex())) {
+                    if (c.IsRelevantAgent(Rabbit.class, ((PreyPredator)a).getSex())) {
                         partner = true;
                     }
                     if (a.getLifeLevel() < 20) {
@@ -125,7 +127,6 @@ public final class RFLModule implements RFLearning {
     }
 
     public void learning( double alpha, double gamma) {
-        LLevel = agent.getLifeLevel();
         nextSt = newState(agent, memo);
         HashMap<Action, Double> qa = q.get(st);
         Double qav = qa.get(action) + alpha *(localStepReward + gamma * (getMaxQAV(q.get(nextSt))) - qa.get(action));

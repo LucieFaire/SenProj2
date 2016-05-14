@@ -19,8 +19,7 @@ public class IntelligentAgent extends PreyPredator {
     }
 
     public void preTick() {
-        super.preTick();
-        if (lifeTime == max) {
+        if (lifeLevel < 1 || lifeTime == max) {
             handle.die();
         }
         lifeLevel -= 4;
@@ -44,18 +43,16 @@ public class IntelligentAgent extends PreyPredator {
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
         State s = module.newState(this, memory); // create the state
-        Action a = module.chooseAction(0.1); // choose the action according to the state
+        Action a = module.chooseAction(0.4); // choose the action according to the state
         mapAction(a); // do the action
-        System.out.println("Smarty took the " + a.toString());
+        System.out.println("Smarty has lifelevel "  + lifeLevel + "and took the action "+ a.toString());
 
     }
 
     //mapping high-level actions to the game ones
     private void mapAction(Action a) {
 
-      if (a.equals(Action.DIE)) {
-          onDie();
-      } else if (a.equals(Action.EAT)) {
+      if (a.equals(Action.EAT)) {
           searchForFood(memory, Grass.class, 1);
       } else if (a.equals(Action.PARTNER)) {
           searchForPartner(memory, Rabbit.class, this.getSex(), 1);
