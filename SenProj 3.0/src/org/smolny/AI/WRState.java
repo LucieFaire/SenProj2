@@ -46,12 +46,19 @@ public class WRState implements State {
     }
 
     @Override
+    public String toString() {
+        return "WRState{" +
+                state +
+                '}';
+    }
+
+    @Override
     public int hashCode() {
         return state;
     }
 
     public static int numberOfStates() {
-       return (EAT | ENEMY | PARTNER | HUNGRY) + 1;
+       return (EAT | ENEMY | PARTNER | HUNGRY ) + 1;
 
     }
 }

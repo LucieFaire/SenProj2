@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Wolf extends PreyPredator {
 
-    double frequency = 0.230;
+    double frequency = 0.5;
 
     public Wolf() {
         super();
@@ -17,16 +17,16 @@ public class Wolf extends PreyPredator {
     @Override
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
-        if (lifeLevel < 25) {
+        if (lifeLevel < 40) {
             // search for food
-            searchForFood(memory, Rabbit.class, 1);
+            searchForFood(memory, Prey.class, 1);
             //System.out.println("Wolf searches for food");
-        } else if (lifeTime > 35 && rand.nextDouble() < frequency) {
+        } else if (lifeTime > 30 && rand.nextDouble() < frequency) {
             searchForPartner(memory, Wolf.class, this.getSex(), 1);
             //System.out.println("Wolf searches for love");
         } else {
                 searchForFood(memory, Rabbit.class, 1);
-            //System.out.println("Wolf again searches for food");
+           //System.out.println("Wolf again searches for food");
 
         }
 //

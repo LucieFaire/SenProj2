@@ -97,7 +97,7 @@ public class CellProjection {
 
     public UUID getRelevantAgent(Class c) {
         for (AgentProjection a : agents) {
-            if (a.getC().equals(c)) {
+            if (c.isAssignableFrom(a.getC()) || a.getC().equals(c)) {
                 return a.getId();
             }
         }

@@ -5,9 +5,9 @@ import org.smolny.world.CellProjection;
 /**
  * Created by dsh on 3/19/16.
  */
-public class Rabbit extends PreyPredator {
+public class Rabbit extends PreyPredator implements Prey {
 
-    private double frequency = 0.2002;
+    private double frequency = 0.50;
     public Rabbit() {
         super();
 
@@ -17,14 +17,14 @@ public class Rabbit extends PreyPredator {
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
         double r = rand.nextDouble();
-        if (lifeLevel < 15) {
+        if (lifeLevel < 30) {
             searchForFood(memory, Grass.class, 1);
             //System.out.println("Rabbit searches for food");
         } else if (lifeTime > 30 && r < frequency){
             searchForPartner(memory, Rabbit.class, this.getSex(), 1);
             //System.out.println("Rabbit searches for love");
         } else  {
-            runAway(memory, Wolf.class, 1);
+            runAway(memory, Wolf.class, 1, 0);
             //System.out.println("Rabbit runs away");
         }
 //        ArrayList<Point> locs = new ArrayList<>();

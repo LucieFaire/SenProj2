@@ -27,7 +27,7 @@ public interface WorldHandle {
 
     void createMaterial(Agent a, IntPoint lp);
 
-    <T extends Agent> void createAgent(Class<T> c, Agent a);
+    <T extends Agent> void createAgent(Class<T> c, Agent a, int number);
 
     void addAgent(Agent a, int x, int y);
 

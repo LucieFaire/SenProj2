@@ -81,7 +81,7 @@ public class World {
     }
 
     private Agent chooseAgentToTick(Set<Agent> agents) {
-        //in future we will add an initiative parameter, but right now do just stupid random
+        //in future we will add an initiative parameter, but right now do just random
         int toReturn = rand.nextInt(agents.size());
         int counter = 0;
         Iterator<Agent> it = agents.iterator();
@@ -100,7 +100,7 @@ public class World {
 
         List<Double> ps = new ArrayList<>();
         for (Agent a : agents) {
-            if (!(a.getClass().equals(Grass.class))) {
+            if (!(a.getClass().getSuperclass().equals(Material.class))) {
                 sum += a.getInitiative();
             }
         }
@@ -214,7 +214,7 @@ public class World {
         public void eat(UUID id) {
             if (id != null) {
                 Agent a = getAgentById(id);
-                agent.setLifeLevel(10);
+                agent.setLifeLevel(30);
                 dead(a);
             }
         }
@@ -231,12 +231,14 @@ public class World {
         }
 
         @Override
-        public <T extends Agent> void createAgent(Class<T> c, Agent a) {
+        public <T extends Agent> void createAgent(Class<T> c, Agent a, int number) {
             try {
-                IntPoint p = agentLocations.get(a).getPoint();
-                Agent agent = c.newInstance();
-                agent.setHandle(new WorldHandleImpl(agent));
-                addAgent(agent, p.getX(), p.getY());
+                for (int t = 0; t < number; t++) {
+                    IntPoint p = agentLocations.get(a).getPoint();
+                    Agent agent = c.newInstance();
+                    agent.setHandle(new WorldHandleImpl(agent));
+                    addAgent(agent, p.getX(), p.getY());
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -325,11 +327,10 @@ public class World {
 
     private void dead(Agent a) {
         Cell cell = agentLocations.get(a);
+        Class c = a.getClass();
         cell.getAgents().remove(a);
         agentLocations.remove(a);
         a.onDie();
-
-
 
     }
 
@@ -343,17 +344,20 @@ public class World {
     private void createAgents() {
 
         int count = 0;
-        while (count < 20) {
+        while (count < 25) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
+            count++;
+        }
 
+        for (int i = 0; i < 50; i++) {
             Agent r = new Rabbit();
             r.setHandle(new WorldHandleImpl(r));
             setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
-
-            count++;
         }
+
+
         for (int i = 0; i < 30; i++) {
             Agent v = new Grass();
             v.setHandle(new WorldHandleImpl(v));

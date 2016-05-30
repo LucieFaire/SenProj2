@@ -24,14 +24,19 @@ public final class RFLModule implements RFLearning {
     private Agent agent;
     private long LLevel;
     private Action action;
+    private boolean p;
+    private boolean f;
+    private boolean h;
+    private boolean e;
     private State st;
     private Memory memo;
     private State nextSt;
-    private int reward = 0;
+    private int reward;
     private UUID id;
     private int localStepReward;
     private static final double alpha = 0.5;
     private static final double gamma = 0.5;
+    private List<Integer> totalRew = new ArrayList<>();
     private HashMap<State, HashMap<Action, Double>> q = setQ();
 
     private WorldHandle handle;
@@ -75,11 +80,13 @@ public final class RFLModule implements RFLearning {
             r = -100;
         } else if (agent.getLifeLevel() > LLevel) {
             r = 12;
-        } else if (action.equals(Action.PARTNER)) {
+        } else if (action.equals(Action.PARTNER) && p) {
+            r = 3;
+        } else  if (action.equals(Action.RUNAWAY) && e){
+            // runs away
             r = 5;
         } else {
-            // runs away
-            r = 8;
+            r = 0;
         }
         localStepReward = r;
         learning(alpha, gamma);
@@ -93,21 +100,25 @@ public final class RFLModule implements RFLearning {
         boolean enemy = false;
         boolean partner = false;
         boolean hunger = false;
-        for (int i = -4; i < 6; i++) {
-            for (int j = -4; j < 6; j++) {
-                CellProjection c = memory.get(i, j);
+        for (int i = -2; i < 3; i++) {
+            for (int j = -2; j < 3; j++) {
+                CellProjection c = memory.get(agent.getLocalPosition().getX() + i, agent.getLocalPosition().getY() + j);
                 if (c != null) {
-                    if (c.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Grass.class)) {
+                    if (c.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Grass.class) ) {
                         eat = true;
+                        f = eat;
                     }
                     if (c.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(Wolf.class)) {
                         enemy = true;
+                        e = enemy;
                     }
                     if (c.IsRelevantAgent(Rabbit.class, ((PreyPredator)a).getSex())) {
                         partner = true;
+                        p = partner;
                     }
-                    if (a.getLifeLevel() < 20) {
+                    if (a.getLifeLevel() < 50) {
                         hunger = true;
+                        h = hunger;
                     }
                 }
             }
@@ -133,13 +144,15 @@ public final class RFLModule implements RFLearning {
         qa.put(action, qav); // update value for the taken value in the hashmap qa
         q.put(st, qa); // update the value = hashmap qa for the current state s in q
         reward += localStepReward;
-        updateHistory(st, action, reward);
+        updateHistory(st, action, localStepReward);
 
         //st = nextSt;
-        //System.out.printf(" %s-%s %f\n", st, action, qav);
+        System.out.printf("Q-function: %s-%s %f\n", st.toString(), action.getAction(), qav);
     }
 
     private void reset() {
+        totalRew.add(reward);
+        System.out.println("His total reward is " + reward);
         this.reward = 0;
         this.hasDied = false;
         IntelligentAgent ag = handle.createIntelligence(id);

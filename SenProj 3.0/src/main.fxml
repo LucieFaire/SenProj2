@@ -57,9 +57,9 @@
                            </effect>
                         </Button>
                         <TextField />
-                        <TextArea prefHeight="200.0" prefWidth="200.0">
+                        <TextArea prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                            <VBox.margin>
-                              <Insets top="70.0" />
+                              <Insets />
                            </VBox.margin>
                         </TextArea>
                      </children>

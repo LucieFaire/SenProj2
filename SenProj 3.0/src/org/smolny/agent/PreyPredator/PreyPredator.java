@@ -30,9 +30,7 @@ public abstract class PreyPredator extends LivingEntity {
     @Override
     public void preTick() {
         super.preTick();
-        if (lifeTime == 200) {
-            handle.die();
-        }
+
     }
 
     public char getSex() {
@@ -72,7 +70,7 @@ public abstract class PreyPredator extends LivingEntity {
             if (lp.equals(found.getLocalPoint())) {
                 l = found.agentsoOfTheSameClass(c);
                 if (l.size() < 3) {
-                    handle.createAgent(c, this);
+                    handle.createAgent(c, this, 3);
                     //System.out.println("Worked");
                 }
             }
@@ -107,6 +105,7 @@ public abstract class PreyPredator extends LivingEntity {
 
             if (lp.equals(found.getLocalPoint())) {
                 handle.eat(cid);
+                System.out.println("Ate it");
             }
         } else {
             randomStep(memory, lp);
@@ -114,16 +113,30 @@ public abstract class PreyPredator extends LivingEntity {
     }
 
 
-    public void runAway(Memory memory, Class c, int steps) {
+    public void runAway(Memory memory, Class c, int steps, int cells) {
         IntPoint lp = this.getLocalPosition();
         List<IntPoint> locs = new ArrayList<>();
         IntPoint wlf;
-        for (IntPoint p : memory.getKSet()) {
-            CellProjection cp = memory.get(p);
-            if (cp != null) {
-                if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
-                    wlf = cp.getLocalPoint(); // collect all the locs of wolves
-                    locs.add(wlf);
+        if (cells != 0) {
+            for (int i = -2; i < 2; i++) {
+                for (int j = -2; j < 2; j++) {
+                    CellProjection cp = memory.get(i, j);
+                    if (cp != null) {
+                        if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
+                            wlf = cp.getLocalPoint(); // collect all the locs of wolves
+                            locs.add(wlf);
+                        }
+                    }
+                }
+            }
+        } else {
+            for (IntPoint p : memory.getKSet()) {
+                CellProjection cp = memory.get(p);
+                if (cp != null) {
+                    if (cp.getAgents().stream().map(ap -> ap.getC()).collect(Collectors.toSet()).contains(c)) {
+                        wlf = cp.getLocalPoint(); // collect all the locs of wolves
+                        locs.add(wlf);
+                    }
                 }
             }
         }
@@ -157,4 +170,7 @@ public abstract class PreyPredator extends LivingEntity {
         IntPoint target = IntPoint.create(Math.round(lp.getX() + x), Math.round(lp.getY() + y));
         return target;
     }
+
+
+
 }

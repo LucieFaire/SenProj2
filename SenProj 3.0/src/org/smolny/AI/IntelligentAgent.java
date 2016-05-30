@@ -1,15 +1,12 @@
 package org.smolny.AI;
 
-import org.smolny.agent.PreyPredator.Grass;
-import org.smolny.agent.PreyPredator.PreyPredator;
-import org.smolny.agent.PreyPredator.Rabbit;
-import org.smolny.agent.PreyPredator.Wolf;
+import org.smolny.agent.PreyPredator.*;
 import org.smolny.world.CellProjection;
 
 /**
  * Created by dsh on 4/30/16.
  */
-public class IntelligentAgent extends PreyPredator {
+public class IntelligentAgent extends PreyPredator implements Prey {
 
     private RFLModule module;
     public static final int max = Integer.MAX_VALUE;
@@ -21,6 +18,7 @@ public class IntelligentAgent extends PreyPredator {
     public void preTick() {
         if (lifeLevel < 1 || lifeTime == max) {
             handle.die();
+            System.out.println("Smarty has died cause he is hungry");
         }
         lifeLevel -= 4;
     }
@@ -28,6 +26,9 @@ public class IntelligentAgent extends PreyPredator {
     @Override
     public void onDie() {
         this.module.agentDied();
+        if (getLifeLevel() > 1) {
+            System.out.println("Wolf ate smarty");
+        }
     }
 
     @Override
@@ -42,10 +43,10 @@ public class IntelligentAgent extends PreyPredator {
     @Override
     public void tick(CellProjection[][] environment) {
         super.tick(environment);
-        State s = module.newState(this, memory); // create the state
-        Action a = module.chooseAction(0.4); // choose the action according to the state
+        module.newState(this, memory); // create the state
+        Action a = module.chooseAction(0.5); // choose the action according to the state
         mapAction(a); // do the action
-        System.out.println("Smarty has lifelevel "  + lifeLevel + "and took the action "+ a.toString());
+        System.out.println("Smarty has lifelevel "  + lifeLevel + " and took the "+ a.toString());
 
     }
 
@@ -57,7 +58,8 @@ public class IntelligentAgent extends PreyPredator {
       } else if (a.equals(Action.PARTNER)) {
           searchForPartner(memory, Rabbit.class, this.getSex(), 1);
       } else {
-          runAway(memory, Wolf.class, 1);
+           runAway(memory, Wolf.class, 1, 5);
+
       }
 
     }
