@@ -104,6 +104,7 @@ public class World {
                 sum += a.getInitiative();
             }
         }
+
         double count = 0;
         Map<Double, Agent> initiative = new HashMap<>();
         List<Agent> material = new ArrayList<>();
@@ -338,27 +339,27 @@ public class World {
     //--initialize------------------------------------------------------------------------------------------------------
 
     private void initialize() {
-        createAgents();
+        createAgents(20, 60, 40);
     }
 
-    private void createAgents() {
+    private void createAgents(int q1, int q2, int q3) {
 
         int count = 0;
-        while (count < 25) {
+        while (count < q1) {
             Agent w = new Wolf();
             w.setHandle(new WorldHandleImpl(w));
             setGlobalAgentLocation(w, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
             count++;
         }
 
-        for (int i = 0; i < 60; i++) {
+        for (int i = 0; i < q2; i++) {
             Agent r = new Rabbit();
             r.setHandle(new WorldHandleImpl(r));
             setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
         }
 
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < q3; i++) {
             Agent v = new Grass();
             v.setHandle(new WorldHandleImpl(v));
             setGlobalAgentLocation(v, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));
