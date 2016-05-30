@@ -27,7 +27,7 @@ public class Action {
 
         Action action1 = (Action) o;
 
-        return !(action != null ? !action.equals(action1.action) : action1.action != null);
+        return action.equals(action1.action);
 
     }
 

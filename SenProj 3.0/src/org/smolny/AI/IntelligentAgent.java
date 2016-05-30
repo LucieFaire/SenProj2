@@ -20,7 +20,7 @@ public class IntelligentAgent extends PreyPredator implements Prey {
             handle.die();
             System.out.println("Smarty has died cause he is hungry");
         }
-        lifeLevel -= 4;
+        lifeLevel -= 2;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class IntelligentAgent extends PreyPredator implements Prey {
         module.newState(this, memory); // create the state
         Action a = module.chooseAction(0.5); // choose the action according to the state
         mapAction(a); // do the action
-        System.out.println("Smarty has lifelevel "  + lifeLevel + " and took the "+ a.toString());
+        //System.out.println("Smarty has lifelevel "  + lifeLevel + " and took the "+ a.toString());
 
     }
 

@@ -351,7 +351,7 @@ public class World {
             count++;
         }
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 60; i++) {
             Agent r = new Rabbit();
             r.setHandle(new WorldHandleImpl(r));
             setGlobalAgentLocation(r, rand.nextInt(getGrid().length), rand.nextInt(getGrid().length));

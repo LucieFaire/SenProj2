@@ -105,7 +105,7 @@ public abstract class PreyPredator extends LivingEntity {
 
             if (lp.equals(found.getLocalPoint())) {
                 handle.eat(cid);
-                System.out.println("Ate it");
+                //System.out.println("Ate it");
             }
         } else {
             randomStep(memory, lp);

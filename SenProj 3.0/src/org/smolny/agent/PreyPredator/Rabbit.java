@@ -7,7 +7,7 @@ import org.smolny.world.CellProjection;
  */
 public class Rabbit extends PreyPredator implements Prey {
 
-    private double frequency = 0.50;
+    private double frequency = 0.6;
     public Rabbit() {
         super();
 

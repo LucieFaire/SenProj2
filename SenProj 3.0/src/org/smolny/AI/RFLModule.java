@@ -31,7 +31,7 @@ public final class RFLModule implements RFLearning {
     private State st;
     private Memory memo;
     private State nextSt;
-    private int reward;
+    private int reward = 0;
     private UUID id;
     private int localStepReward;
     private static final double alpha = 0.5;
@@ -79,12 +79,14 @@ public final class RFLModule implements RFLearning {
             reset();
             r = -100;
         } else if (agent.getLifeLevel() > LLevel) {
-            r = 12;
-        } else if (action.equals(Action.PARTNER) && p) {
+            r = 15;
+        } else if (action.getAction().equals(Action.EAT)) {
+            r = 10;
+        } else if (action.getAction().equals(Action.PARTNER) && p) {
             r = 3;
-        } else  if (action.equals(Action.RUNAWAY) && e){
+        } else  if (action.getAction().equals(Action.RUNAWAY) && e){
             // runs away
-            r = 5;
+            r = 7;
         } else {
             r = 0;
         }
@@ -143,7 +145,8 @@ public final class RFLModule implements RFLearning {
         Double qav = qa.get(action) + alpha *(localStepReward + gamma * (getMaxQAV(q.get(nextSt))) - qa.get(action));
         qa.put(action, qav); // update value for the taken value in the hashmap qa
         q.put(st, qa); // update the value = hashmap qa for the current state s in q
-        reward += localStepReward;
+        reward = reward + localStepReward;
+        System.out.println("His total reward is " + reward);
         updateHistory(st, action, localStepReward);
 
         //st = nextSt;
@@ -152,7 +155,7 @@ public final class RFLModule implements RFLearning {
 
     private void reset() {
         totalRew.add(reward);
-        System.out.println("His total reward is " + reward);
+        //System.out.println("His total reward is " + reward);
         this.reward = 0;
         this.hasDied = false;
         IntelligentAgent ag = handle.createIntelligence(id);
@@ -160,11 +163,11 @@ public final class RFLModule implements RFLearning {
 
     }
 
-    public void updateHistory(State state, Action action, int reward) {
+    public void updateHistory(State state, Action action, int rew) {
         AgentHistory event = new AgentHistory();
         event.setState(state);
         event.setAction(action);
-        event.setReward(reward);
+        event.setReward(rew);
         history.add(event);
     }
 

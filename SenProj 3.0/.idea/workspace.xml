@@ -2,18 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c04eaaf6-b29f-4538-b171-a57102fd4aa5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Prey.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/CellProjection.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/CellProjection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/AI/Action.java" afterPath="$PROJECT_DIR$/src/org/smolny/AI/Action.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java" afterPath="$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/view/MainController.java" afterPath="$PROJECT_DIR$/src/org/smolny/view/MainController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java" afterPath="$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Rabbit.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Rabbit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/AI/WRState.java" afterPath="$PROJECT_DIR$/src/org/smolny/AI/WRState.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Wolf.java" afterPath="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Wolf.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/World.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/World.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/smolny/world/WorldHandle.java" afterPath="$PROJECT_DIR$/src/org/smolny/world/WorldHandle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.fxml" afterPath="$PROJECT_DIR$/src/main.fxml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="SenProj 3.0.iws" />
@@ -36,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="World.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/smolny/world/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="352" column="0" selection-start-line="352" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.7266289">
+              <caret line="360" column="38" selection-start-line="360" selection-start-column="38" selection-end-line="360" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#5385#5386#0" expanded="true" />
@@ -62,12 +56,40 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Rabbit.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="RFLModule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+              <folding>
+                <element signature="e#1462#1463#0" expanded="true" />
+                <element signature="e#1492#1493#0" expanded="true" />
+                <element signature="e#2035#2036#0" expanded="true" />
+                <element signature="e#2064#2065#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Rabbit.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Rabbit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.038243625">
-              <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Action.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/Action.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding>
+                <element signature="e#355#356#0" expanded="true" />
+                <element signature="e#389#390#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,19 +104,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CellProjection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/smolny/world/CellProjection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="99" column="40" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
-              <folding>
-                <element signature="e#1590#1591#0" expanded="true" />
-                <element signature="e#1623#1624#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Agent.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/Agent.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -105,21 +114,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WRState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/WRState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PreyPredator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+              <caret line="107" column="18" selection-start-line="107" selection-start-column="18" selection-end-line="107" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -127,11 +126,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LivingEntity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java">
+      <file leaf-file-name="IntelligentAgent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+              <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -202,19 +201,19 @@
         <option value="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Grass.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/Material.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/Agent.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/AI/Action.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/LivingEntity.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/AgentProjection.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/world/CellProjection.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/AI/WRState.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/world/WorldHandle.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/view/MainController.java" />
-        <option value="$PROJECT_DIR$/src/org/smolny/world/World.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Wolf.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/AI/Action.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java" />
         <option value="$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Rabbit.java" />
+        <option value="$PROJECT_DIR$/src/org/smolny/world/World.java" />
       </list>
     </option>
   </component>
@@ -1020,7 +1019,13 @@
       <option name="project" value="LOCAL" />
       <updated>1463239561395</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="&quot;Reinforcement Learning Module implemented&quot;">
+      <created>1464635377288</created>
+      <option name="number" value="00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1464635377288</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1052,7 +1057,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4356223" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43541667" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1073,7 +1078,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23333333" sideWeight="0.48932764" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23333333" sideWeight="0.48932764" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32916668" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14941302" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1083,7 +1088,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4356223" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43541667" sideWeight="0.49786553" order="6" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1140,7 +1145,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="106" />
+      <option name="time" value="111" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1432,34 +1437,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#327#328#0" expanded="true" />
-            <element signature="e#350#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/Action.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="61" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/smolny/world/CellProjection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1505,35 +1482,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/smolny/view/MainController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="242" column="34" selection-start-line="242" selection-start-column="34" selection-end-line="242" selection-end-column="34" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/smolny/world/World.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="352" column="0" selection-start-line="352" selection-start-column="0" selection-end-line="352" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5385#5386#0" expanded="true" />
-            <element signature="e#5427#5428#0" expanded="true" />
-            <element signature="e#7475#7476#0" expanded="true" />
-            <element signature="e#7510#7511#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1545,11 +1498,69 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/PreyPredator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="107" column="18" selection-start-line="107" selection-start-column="18" selection-end-line="107" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/Action.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#355#356#0" expanded="true" />
+            <element signature="e#389#390#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/IntelligentAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="22" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/AI/RFLModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="17" selection-start-line="85" selection-start-column="17" selection-end-line="85" selection-end-column="17" />
+          <folding>
+            <element signature="e#1462#1463#0" expanded="true" />
+            <element signature="e#1492#1493#0" expanded="true" />
+            <element signature="e#2035#2036#0" expanded="true" />
+            <element signature="e#2064#2065#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/smolny/agent/PreyPredator/Rabbit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.038243625">
-          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/smolny/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7266289">
+          <caret line="360" column="38" selection-start-line="360" selection-start-column="38" selection-end-line="360" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5385#5386#0" expanded="true" />
+            <element signature="e#5427#5428#0" expanded="true" />
+            <element signature="e#7475#7476#0" expanded="true" />
+            <element signature="e#7510#7511#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
